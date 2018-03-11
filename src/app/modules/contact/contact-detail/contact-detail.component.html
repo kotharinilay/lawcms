@@ -1,0 +1,116 @@
+<div>
+  <div class="panel mb25">
+    <div class="panel-heading border">
+      {{ (paramId !='new') ? 'Modify':'Add' }} Contact
+    </div>
+    <div class=panel-body>
+      <div class="row no-margin">
+        <div class=col-lg-12>
+          <form name="contactForm" (ngSubmit)="contactForm.form.valid && save()" #contactForm="ngForm" novalidate>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Title">Title</label>
+                  <input type="text" maxlength="50" id="Title" name="Title" required class="form-control" [(ngModel)]="model.Title" #Title="ngModel"
+                  />
+                  <label *ngIf="contactForm.submitted && !Title.valid" class="err-label">
+                    Please enter Title
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ContactType">Contact Type</label>
+                  <select class="form-control" [(ngModel)]="model.ContactType" id="ContactType" name="ContactType" #ContactType="ngModel">
+                    <option *ngFor="let contactType of ContactTypeDropDown" value={{contactType.Id}}>
+                      {{contactType.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="FirstName">First Name</label>
+                  <input type="text" maxlength="50" id="FirstName" name="FirstName" required class="form-control" [(ngModel)]="model.FirstName"
+                    #FirstName="ngModel" />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="">Last Name</label>
+                  <input type="text" maxlength="50" name="LastName" required class="form-control" [(ngModel)]="model.LastName" #LastName="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="EmailId">Email Address</label>
+                  <input class="form-control" type="email" id="EmailId" name="EmailId" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$"
+                    [(ngModel)]="model.EmailId" #EmailId="ngModel" required />
+                  <label *ngIf="(contactForm.submitted || EmailId.dirty) && EmailId.errors && EmailId.errors['required']" class="err-label">
+                    Please enter Email Address</label>
+                  <label *ngIf="(contactForm.submitted || EmailId.dirty) && EmailId.errors && EmailId.errors['pattern']" class="err-label">
+                    Email Address must be in email format</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="MobileNumber">Mobile number</label>
+                  <input type="text" id="MobileNumber" name="MobileNumber" maxlength="25" class="form-control" [(ngModel)]="model.MobileNumber"
+                    #MobileNumber="ngModel" />
+                  <label *ngIf="contactForm.submitted && !MobileNumber.valid" class="err-label">
+                    Please enter Mobile number
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CompanyName">CompanyName</label>
+                  <input type="text" name="CompanyName" maxlength="50" class="form-control" [(ngModel)]="model.CompanyName" #CompanyName="ngModel"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Website">Website</label>
+                  <input type="text" name="Website" maxlength="50" class="form-control" [(ngModel)]="model.Website" #Website="ngModel" />
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="form-row">
+              <div class="form-group col-sm-6">
+                <label for="DealOn">Deal On</label>
+                <input type="text" name="DealOn" maxlength="50" class="form-control" [(ngModel)]="model.DealOn" #DealOn="ngModel" />
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="CompanySize">Company Size</label>
+                <input type="text" name="CompanySize" maxlength="50" class="form-control" [(ngModel)]="model.CompanySize" #CompanySize="ngModel"
+                />
+              </div>
+            </div> 
+            <div class="form-row">
+              <div class="form-group col-sm-6">
+                <label for="Court">Court</label>
+                <input type="text" name="Court" maxlength="50" class="form-control" [(ngModel)]="model.Court" #Court="ngModel" />
+              </div>
+            </div>-->
+            <div class="row">
+              <button type="button" class="btn btn-default" kendoButton (click)="onCancleClick()">Cancel</button>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary" kendoButton>{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="clr"></div>
+</div>

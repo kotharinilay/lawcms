@@ -1,0 +1,45 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">Contacts</span>
+    <div class="pb30">
+      <button type="button" class="btn btn-success pull-right" kendoButton (click)="router.navigate(['/case/new'])">Create</button>
+    </div>
+
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
+      [columns]="columns" [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Case Number" sortable="true" prop="CaseNumber">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Start Date" sortable="true" prop="StartDate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="End Date" sortable="true" prop="EndDate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Status" sortable="true" prop="Status">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" sortable="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
