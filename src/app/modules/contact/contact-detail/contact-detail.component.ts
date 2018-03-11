@@ -25,6 +25,8 @@ export class ContactDetailComponent implements OnInit {
     { Id: "Opponent", Name: "Opponent" },
     { Id: "Associates", Name: "Associates" }];
 
+  addressSet = [{ Address1: '', State: '', City: '', PostCode: '' }];
+
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
     private _notify: NotificationService) { }
 
@@ -43,28 +45,37 @@ export class ContactDetailComponent implements OnInit {
     }
   }
 
-  save() {
-    this.isLoading = true;
-    this.contactService.addOrUpdate(this.model).subscribe(
-      response => {
-        this.isLoading = false;
-        debugger;
-        if (response) {
-          if (this.paramId === 'new') {
-            this._notify.success("Contact added successfully.");
-          }
-          else {
-            this._notify.success("Contact updated successfully.");
-          }
+  addAddress() {
+    this.addressSet.push({ Address1: '', State: '', City: '', PostCode: '' });
+  }
 
-          setTimeout(() => {
-            this.router.navigate(['/contact']);
-          });
-        }
-      }, err => {
-        debugger;
-        this._notify.error(err.Result);
-      });
+  removeForm(index) {
+    this.addressSet.splice(index, 1);
+  };
+
+  save() {
+    debugger;
+    this.isLoading = true;
+    // this.contactService.addOrUpdate(this.model).subscribe(
+    //   response => {
+    //     this.isLoading = false;
+    //     debugger;
+    //     if (response) {
+    //       if (this.paramId === 'new') {
+    //         this._notify.success("Contact added successfully.");
+    //       }
+    //       else {
+    //         this._notify.success("Contact updated successfully.");
+    //       }
+
+    //       setTimeout(() => {
+    //         this.router.navigate(['/contact']);
+    //       });
+    //     }
+    //   }, err => {
+    //     debugger;
+    //     this._notify.error(err.Result);
+    //   });
   }
 
   onCancleClick() {

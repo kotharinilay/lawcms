@@ -5,6 +5,7 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
 import { ContactService } from './contact.service';
 import { contactRouting } from './contact.routing';
 import { SharedModule } from 'app/shared/shared.module';
+import { AddressComponent } from './address/address.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { SharedModule } from 'app/shared/shared.module';
   ],
   declarations: [
     ContactListComponent,
-    ContactDetailComponent
+    ContactDetailComponent,
+    AddressComponent
   ],
   providers: [ContactService]
 })
