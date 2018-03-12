@@ -111,7 +111,7 @@
                   </div>
                 </div>
                 <button type="button" class="btn-danger btn btn-md" (click)="removeForm(control)">
-                  <i>-</i> Remove Form
+                  <i>-</i> Remove Address
                 </button>
               </div>
             </div>
@@ -120,31 +120,57 @@
               <div class="col-sm-12 add-form">
 
                 <p (click)="addAddress()">
-                  <i>+</i> Add More</p>
-
+                  <i>+</i> Add Address</p>
               </div>
-
             </div>
-            <!-- <div class="form-row">
-              <div class="form-group col-sm-6">
-                <label for="DealOn">Deal On</label>
-                <input type="text" name="DealOn" maxlength="50" class="form-control" [(ngModel)]="model.DealOn" #DealOn="ngModel" />
+
+            <div class="row" *ngFor="let control of officeAddressSet let i = index">
+              <div *ngIf="!control.IsDeleted">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="Address1{{addressSet.length + i}}">Office Address</label>
+                    <input type="text" name="Address1{{addressSet.length + i}}" maxlength="250" class="form-control" [(ngModel)]="control.Address1"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="State{{addressSet.length + i}}">Office State</label>
+                    <input type="text" name="State{{addressSet.length + i}}" maxlength="50" class="form-control" [(ngModel)]="control.State"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="City{{addressSet.length + i}}">Office City</label>
+                    <input type="text" name="City{{addressSet.length + i}}" maxlength="250" class="form-control" [(ngModel)]="control.City" />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="PostCode{{addressSet.length + i}}">Office PostCode</label>
+                    <input type="text" name="PostCode{{addressSet.length + i}}" maxlength="50" class="form-control" [(ngModel)]="control.PostCode"
+                    />
+                  </div>
+                </div>
+                <button type="button" class="btn-danger btn btn-md" (click)="removeOfficeForm(control)">
+                  <i>-</i> Remove Office Address
+                </button>
               </div>
-              <div class="form-group col-sm-6">
-                <label for="CompanySize">Company Size</label>
-                <input type="text" name="CompanySize" maxlength="50" class="form-control" [(ngModel)]="model.CompanySize" #CompanySize="ngModel"
-                />
+            </div>
+            <div class="form-group row text-right" style="margin: 0;">
+
+              <div class="col-sm-12 add-form">
+
+                <p (click)="addOfficeAddress()">
+                  <i>+</i> Add Office Address</p>
               </div>
-            </div> 
-            <div class="form-row">
-              <div class="form-group col-sm-6">
-                <label for="Court">Court</label>
-                <input type="text" name="Court" maxlength="50" class="form-control" [(ngModel)]="model.Court" #Court="ngModel" />
-              </div>
-            </div>-->
+            </div>
+
+
             <div class="row">
               <button type="button" class="btn btn-default" kendoButton (click)="onCancleClick()">Cancel</button>
-              <button type="submit" [disabled]="isLoading" class="btn btn-primary" kendoButton>{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
             </div>
           </form>
         </div>

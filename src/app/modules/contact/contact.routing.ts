@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
+import { ContactDashboardComponent } from './contact-dashboard/contact-dashboard.component';
 
 const routes: Routes = [
     // {
@@ -12,7 +13,9 @@ const routes: Routes = [
     //         { path: 'zzzz', component: DriverDetailComponent }
     //     ]
     // }
-    { path: '', component: ContactListComponent },
+
+    { path: '', component: ContactDashboardComponent },
+    { path: 'list', component: ContactListComponent },
     { path: ':id', component: ContactDetailComponent }
 ];
 

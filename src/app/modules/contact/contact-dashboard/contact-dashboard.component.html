@@ -1,0 +1,67 @@
+<div class="row" class="p10">
+  <button type="button" class="btn btn-default" kendoButton (click)='router.navigate(["/contact/list"])'>Goto List</button>
+  <button type="button" class="btn btn-success" (click)='router.navigate(["/contact/new"])'>Add Contact</button>
+</div>
+<div class="row">
+  <div class=col-md-2>
+    <div class="widget bg-white">
+      <div class=overflow-hidden>
+        <span class=widget-title>{{dashboardData.TotalContact}}</span>
+        <span class=widget-subtitle>Total Contact</span>
+      </div>
+    </div>
+  </div>
+  <div class=col-md-2>
+    <div class="widget bg-white">
+      <div class=overflow-hidden>
+        <span class=widget-title>{{dashboardData.TotalAdvocate}}</span>
+        <span class=widget-subtitle>Total Advocate</span>
+      </div>
+    </div>
+  </div>
+  <div class=col-md-2>
+    <div class="widget bg-white">
+      <div class=overflow-hidden>
+        <span class=widget-title>{{dashboardData.TotalClient}}</span>
+        <span class=widget-subtitle>Total Client</span>
+      </div>
+    </div>
+  </div>
+  <div class=col-md-2>
+    <div class="widget bg-white">
+      <div class=overflow-hidden>
+        <span class=widget-title>{{dashboardData.TotalLawFirm}}</span>
+        <span class=widget-subtitle>Total LawFirm</span>
+      </div>
+    </div>
+  </div>
+  <div class=col-md-2>
+    <div class="widget bg-white">
+      <div class=overflow-hidden>
+        <span class=widget-title>{{dashboardData.TotalOther}}</span>
+        <span class=widget-subtitle>Total Other</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mb25">
+  <div class=col-md-12>
+    <tabset [pills]="true" (onSelect)="tabSelect($event)">
+      <tab title="Newly Added" [disabled]="false">
+        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+      </tab>
+      <tab title="Client" [disabled]="false">
+        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+      </tab>
+      <tab title="Advocate" [disabled]="false">
+        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+      </tab>
+      <tab title="Law Firm" [disabled]="false">
+        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+      </tab>
+      <tab title="Other" [disabled]="false">
+        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+      </tab>
+    </tabset>
+  </div>
+</div>

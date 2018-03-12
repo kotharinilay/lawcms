@@ -6,18 +6,24 @@ import { ContactService } from './contact.service';
 import { contactRouting } from './contact.routing';
 import { SharedModule } from 'app/shared/shared.module';
 import { AddressComponent } from './address/address.component';
+import { ContactDashboardComponent } from './contact-dashboard/contact-dashboard.component';
 
+import { TabsModule } from "ng2-tabs";
+import { ContactGridComponent } from './contact-grid/contact-grid.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    contactRouting
+    contactRouting,
+    TabsModule
   ],
   declarations: [
     ContactListComponent,
     ContactDetailComponent,
-    AddressComponent
+    AddressComponent,
+    ContactDashboardComponent,
+    ContactGridComponent
   ],
   providers: [ContactService]
 })

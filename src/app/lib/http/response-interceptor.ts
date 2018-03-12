@@ -41,7 +41,6 @@ export class ResponseInterceptor implements HttpInterceptor {
       }
     }).catch((err: any) => {
       if (err instanceof HttpErrorResponse) {
-        debugger;
         switch ((<HttpErrorResponse>err).status) {
           case 400:
             return this.handle400Error(err);

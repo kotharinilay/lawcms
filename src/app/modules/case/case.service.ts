@@ -20,7 +20,6 @@ export class CaseService {
 
   getCases() {
     return this.httpService.get('case/getall').map((res: any) => {
-      debugger;
       if (res.Success) {
         return res.Result;
       }
@@ -31,12 +30,10 @@ export class CaseService {
   }
 
   addOrUpdate(caseModel: Case) {
-    debugger;
     let url = ''
     if (caseModel.Id) {
       url = 'case/update';
       return this.httpService.put(url, caseModel).map((res: any) => {
-        debugger;
         if (res.Success) {
           return res.Result;
         }
@@ -50,7 +47,6 @@ export class CaseService {
     } else {
       url = 'case/create';
       return this.httpService.post(url, caseModel).map((res: any) => {
-        debugger;
         if (res.Success) {
           return res.Result;
         }
@@ -65,14 +61,12 @@ export class CaseService {
   }
 
   deleteCase(id: number) {
-    debugger;
     return this.httpService.delete('case/delete/' + id).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
       throw 'We are facing some issue with server, Plesae try after some time.';
     }).catch((err: any) => {
-      debugger;
       throw err;
     });
   }

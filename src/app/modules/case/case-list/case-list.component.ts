@@ -32,7 +32,6 @@ export class CaseListComponent implements OnInit {
     if (confirm('Are you sure you want to delete ')) {
       this.caseService.deleteCase(id).subscribe(
         response => {
-          debugger;
           this.rows = this.rows.filter(row => {
             return row.Id != id;
           });

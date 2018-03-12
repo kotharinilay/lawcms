@@ -31,7 +31,6 @@ export class ContactService {
 
   getContacts() {
     return this.httpService.get('contact/getall').map((res: any) => {
-      debugger;
       if (res.Success) {
         return res.Result;
       }
@@ -42,12 +41,10 @@ export class ContactService {
   }
 
   addOrUpdate(contactModel: Contact) {
-    debugger;
     let url = ''
     if (contactModel.Id) {
       url = 'contact/update';
       return this.httpService.put(url, contactModel).map((res: any) => {
-        debugger;
         if (res.Success) {
           return res.Result;
         }
@@ -61,7 +58,6 @@ export class ContactService {
     } else {
       url = 'contact/create';
       return this.httpService.post(url, contactModel).map((res: any) => {
-        debugger;
         if (res.Success) {
           return res.Result;
         }
@@ -76,12 +72,10 @@ export class ContactService {
   }
 
   addOrUpdateAddress(addressModel: Address) {
-    debugger;
     let url = ''
     if (addressModel.Id) {
       url = 'address/update';
       return this.httpService.put(url, addressModel).map((res: any) => {
-        debugger;
         if (res.Success) {
           return res.Result;
         }
@@ -95,7 +89,6 @@ export class ContactService {
     } else {
       url = 'address/create';
       return this.httpService.post(url, addressModel).map((res: any) => {
-        debugger;
         if (res.Success) {
           return res.Result;
         }
@@ -110,28 +103,57 @@ export class ContactService {
   }
 
   deleteContact(id: number) {
-    debugger;
     return this.httpService.delete('contact/delete/' + id).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
       throw 'We are facing some issue with server, Plesae try after some time.';
     }).catch((err: any) => {
-      debugger;
       throw err;
     });
   }
 
   deleteAddress(id: number) {
-    debugger;
     return this.httpService.delete('address/delete/' + id).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
       throw 'We are facing some issue with server, Plesae try after some time.';
     }).catch((err: any) => {
-      debugger;
       throw err;
     });
+  }
+
+  getDashboardData() {
+    return this.httpService.get('Contact/GetDashboardData').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  getNewlyAddedContacts() {
+    return this.httpService.get('contact/GetNewAdded').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getContactsByType(type: string) {
+    return this.httpService.get('contact/GetContactByType?type=' + type).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    })
   }
 }
