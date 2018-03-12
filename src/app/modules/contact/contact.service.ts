@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Contact } from '../../models/contact';
-
-import { } from '@anguler/common/http'
+import { Contact, Address } from 'app/models/contact';
 
 @Injectable()
 export class ContactService {
@@ -11,6 +9,17 @@ export class ContactService {
 
   getContactById(id: number) {
     return this.httpService.get('contact/GetContactById/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  getAddressByContactId(contactId: number) {
+    return this.httpService.get('address/GetAddresssByContactId?contactId=' + contactId).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
@@ -66,9 +75,56 @@ export class ContactService {
     }
   }
 
+  addOrUpdateAddress(addressModel: Address) {
+    debugger;
+    let url = ''
+    if (addressModel.Id) {
+      url = 'address/update';
+      return this.httpService.put(url, addressModel).map((res: any) => {
+        debugger;
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    } else {
+      url = 'address/create';
+      return this.httpService.post(url, addressModel).map((res: any) => {
+        debugger;
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    }
+  }
+
   deleteContact(id: number) {
     debugger;
     return this.httpService.delete('contact/delete/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      debugger;
+      throw err;
+    });
+  }
+
+  deleteAddress(id: number) {
+    debugger;
+    return this.httpService.delete('address/delete/' + id).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }

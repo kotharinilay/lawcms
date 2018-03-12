@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { OrderByPipe } from 'app/pipes/order-by.pipe';
 
 @NgModule({
   imports: [
@@ -9,7 +10,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [],
+  declarations: [
+    OrderByPipe
+  ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
