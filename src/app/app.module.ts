@@ -19,6 +19,9 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 // datepicker module
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
+// Import your library
+import { AutocompleteModule } from 'ng2-input-autocomplete';
+
 // datatable module
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
@@ -70,7 +73,8 @@ import { HeaderComponent } from 'app/containers/layout/components/header/header.
     ToastModule.forRoot(),
     PerfectScrollbarModule,
     NgxMyDatePickerModule.forRoot(),
-    NgxDatatableModule
+    NgxDatatableModule,
+    AutocompleteModule.forRoot()
   ],
   providers: [
     CommonService,

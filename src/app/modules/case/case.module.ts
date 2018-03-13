@@ -6,6 +6,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { CaseService } from './case.service';
 import { caseRouting } from 'app/modules/case/case.routing';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { CaseAddComponent } from './case-add/case-add.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
   ],
   declarations: [
     CaseListComponent,
-    CaseDetailComponent
+    CaseDetailComponent,
+    CaseAddComponent
   ],
   providers: [
     CaseService

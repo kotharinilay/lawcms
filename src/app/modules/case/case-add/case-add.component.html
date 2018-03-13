@@ -1,0 +1,197 @@
+<div>
+  <div class="panel mb25">
+    <div class="panel-heading border">
+      {{ (paramId !='new') ? 'Modify':'Add' }} Case
+    </div>
+    <div class=panel-body>
+      <div class="row no-margin">
+        <div class=col-lg-12>
+          <form name="caseForm" (ngSubmit)="caseForm.form.valid && save()" #caseForm="ngForm" novalidate>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CaseNo">Case No</label>
+                  <input type="text" maxlength="50" id="CaseNo" name="CaseNo" required class="form-control" [(ngModel)]="model.CaseNo" #CaseNo="ngModel"
+                  />
+                  <label *ngIf="caseForm.submitted && !CaseNo.valid" class="err-label">
+                    Please enter Case number
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ClientId">Client</label>
+                  <input autocomplete class="form-control" [items]="contacts" (inputChangedEvent)="contactSearch($event)" (selectEvent)="onSelectClient($event)"
+                    required>
+                  <label *ngIf="caseForm.submitted && !model.ClientId" class="err-label">
+                    Please select Client
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CaseType">Case Type</label>
+                  <select class="form-control" [(ngModel)]="model.CaseType" id="CaseType" name="CaseType" #CaseType="ngModel">
+                    <option *ngFor="let caseType of CaseTypeDropDown" value={{caseType.Id}}>
+                      {{caseType.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CaseYear">Case Year</label>
+                  <input type="text" maxlength="4" name="CaseYear" id="CaseYear" class="form-control" [(ngModel)]="model.CaseYear" #CaseYear="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CaseAppealType">Case Appeal Type</label>
+                  <select class="form-control" [(ngModel)]="model.CaseAppealType" id="CaseAppealType" name="CaseAppealType" #CaseAppealType="ngModel">
+                    <option *ngFor="let caseAppealType of CaseAppealTypeDropDown" value={{caseAppealType.Id}}>
+                      {{caseAppealType.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="City">City</label>
+                  <input type="text" id="City" name="City" maxlength="25" class="form-control" [(ngModel)]="model.City" #City="ngModel" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CourtId">Court</label>
+                  <select class="form-control" [(ngModel)]="model.CourtId" id="CourtId" name="CourtId" #CourtId="ngModel">
+                    <option *ngFor="let court of courts" value={{courts.Id}}>
+                      {{courts.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="JudgeId">Judge</label>
+                  <select class="form-control" [(ngModel)]="model.JudgeId" id="JudgeId" name="JudgeId" #JudgeId="ngModel">
+                    <option *ngFor="let judge of judges" value={{judges.Id}}>
+                      {{judges.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Description">Description</label>
+                  <input type="text" id="Description" name="Description" maxlength="250" class="form-control" [(ngModel)]="model.Description"
+                    #Description="ngModel" />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="AppearedFor">Appeared For</label>
+                  <input type="text" id="AppearedFor" name="AppearedFor" maxlength="250" class="form-control" [(ngModel)]="model.AppearedFor"
+                    #AppearedFor="ngModel" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="OpponentContactId">Opponent Contact</label>
+                  <input autocomplete class="form-control" [items]="contacts" (inputChangedEvent)="contactSearch($event)" (selectEvent)="onSelectOponent($event)"
+                    required>
+                  <label *ngIf="caseForm.submitted && !model.OpponentContactId" class="err-label">
+                    Please select Opponent
+                  </label>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="OppnentAdvocateId">Oppnent Advocate</label>
+                    <input autocomplete class="form-control" [items]="advocates" (inputChangedEvent)="advocateSearch($event)" (selectEvent)="onSelectOponentAdvocate($event)">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="WitnessContactId">Witness Contact</label>
+                  <input autocomplete class="form-control" [items]="contacts" (inputChangedEvent)="contactSearch($event)" (selectEvent)="onSelectWitness($event)">
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="Priority">Priority</label>
+                    <select class="form-control" [(ngModel)]="model.Priority" id="Priority" name="Priority" #Priority="ngModel">
+                      <option *ngFor="let priority of PriorityDropDown" value={{priority.Id}}>
+                        {{priority.Name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="OpenDate">OpenDate</label>
+                  <div class="input-group">
+                    <input class="form-control" style="float:none" placeholder="Select OpenDate" ngx-mydatepicker name="OpenDate" id="OpenDate"
+                      [(ngModel)]="model.OpenDate" #OpenDate="ngModel" [options]="myOptions" #dp="ngx-mydatepicker" (click)="dp.openCalendar()"
+                    />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" (click)="dp.clearDate()">
+                        <i class="glyphicon glyphicon-remove"></i>
+                      </button>
+                      <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="EndDate">End Date</label>
+                  <div class="input-group">
+                    <input class="form-control" style="float:none" placeholder="Select a End Date" ngx-mydatepicker name="EndDate" [(ngModel)]="model.EndDate"
+                      [options]="myOptions" #dp1="ngx-mydatepicker" />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" (click)="dp1.clearDate()">
+                        <i class="glyphicon glyphicon-remove"></i>
+                      </button>
+                      <button type="button" class="btn btn-default" (click)="dp1.toggleCalendar()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <button type="button" class="btn btn-default" (click)="onCancleClick()">Cancel</button>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="clr"></div>
+</div>

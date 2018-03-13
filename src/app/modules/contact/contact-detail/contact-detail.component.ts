@@ -17,7 +17,7 @@ export class ContactDetailComponent implements OnInit {
   model: Contact = new Contact();
   isLoading: boolean = false;
   public paramId: any;
-  public ContactTypeDropDown: Array<DropDownModel> = ContactType;
+  ContactTypeDropDown: Array<DropDownModel> = ContactType;
 
   addressSet = [{ Id: undefined, Address1: '', State: '', City: '', PostCode: '', IsPrimary: true, IsDeleted: false }];
   officeAddressSet = [{ Id: undefined, Address1: '', State: '', City: '', PostCode: '', IsPrimary: true, IsDeleted: false }];

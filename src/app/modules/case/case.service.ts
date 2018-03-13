@@ -70,4 +70,26 @@ export class CaseService {
       throw err;
     });
   }
+
+  getCourtsDD() {
+    return this.httpService.get('Court/GetAll').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    })
+  }
+
+  getJudgesDD() {
+    return this.httpService.get('Judge/GetAll').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    })
+  }
 }
