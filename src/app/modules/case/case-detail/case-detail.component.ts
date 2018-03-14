@@ -3,7 +3,6 @@ import { Case } from 'app/models/case';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/modules/case/case.service';
 import { NotificationService } from 'app/shared/services/notification.service';
-import { INgxMyDpOptions, IMyDateModel } from 'ngx-mydatepicker';
 
 @Component({
   selector: 'app-case-detail',
@@ -14,10 +13,6 @@ export class CaseDetailComponent implements OnInit {
   isLoading: boolean = false;
   public paramId: any;
   date: any = { date: { year: 2018, month: 10, day: 9 } };;
-  myOptions: INgxMyDpOptions = {
-    // other options...
-    dateFormat: 'yyyy-mm-dd',
-  };
 
   constructor(private route: ActivatedRoute, private caseService: CaseService, private router: Router,
     private _notify: NotificationService) { }

@@ -3,12 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { OrderByPipe } from 'app/pipes/order-by.pipe';
+// import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NguiAutoCompleteModule,
+    NguiDatetimePickerModule
   ],
   declarations: [
     OrderByPipe
@@ -16,7 +21,9 @@ import { OrderByPipe } from 'app/pipes/order-by.pipe';
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NguiAutoCompleteModule,
+    NguiDatetimePickerModule
   ]
 })
 export class SharedModule { }

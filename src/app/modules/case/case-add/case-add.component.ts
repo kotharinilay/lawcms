@@ -4,26 +4,32 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { ContactService } from '../../contact/contact.service';
 import { Case } from '../../../models/case';
 import { DropDownModel } from 'app/models/dropDownModel';
-import { CaseType, CaseAppealType, CasePriority } from 'app/shared/constants';
+import { CaseType, CaseAppealType, CasePriority, WorkedAs } from 'app/shared/constants';
+
+import { Observable } from 'rxjs/Observable';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-case-add',
   templateUrl: './case-add.component.html'
 })
 export class CaseAddComponent implements OnInit {
+  public paramId: any;
   courts: any[] = [];
   judges: any[] = [];
-  contacts: any[] = [];
-  advocates: any[] = [];
+  offices: any[] = [];
   model: Case = new Case();
   CaseTypeDropDown: Array<DropDownModel> = CaseType;
   CaseAppealTypeDropDown: Array<DropDownModel> = CaseAppealType;
   PriorityDropDown: Array<DropDownModel> = CasePriority;
+  WorkedAsDropDown: Array<DropDownModel> = WorkedAs;
 
-  constructor(private caseService: CaseService, private _notify: NotificationService,
-    private contactService: ContactService) { }
+  constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
+    private contactService: ContactService, private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.route.params.subscribe(param => this.paramId = param["id"]);
     this.caseService.getCourtsDD().subscribe(res => {
       this.courts = res;
     }, err => {
@@ -36,17 +42,25 @@ export class CaseAddComponent implements OnInit {
     })
   }
 
-  contactSearch(term: string) {
-    this.contactService.contactSearch(term).subscribe(res => {
-      this.contacts = res;
-    }, err => {
-      this._notify.error(err.Result);
-    });
+  autocompleListFormatter = (data: any) => {
+    let html = `<span>${data.Name} - ${data.ContactType} </span>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  contactSearch(term: string): Observable<any[]> {
+    return this.contactService.contactSearch(term);
   }
 
   advocateSearch(term: string) {
-    this.contactService.advocateSearch(term).subscribe(res => {
-      this.advocates = res;
+    return this.contactService.advocateSearch(term);
+  }
+
+  getOfficeAddresses() {
+    this.contactService.getAddressByContactId(1).subscribe(res => {
+      res.forEach(element => {
+        if (element.AddressType === 'Office')
+          this.offices.push(element);
+      });
     }, err => {
       this._notify.error(err.Result);
     });
@@ -54,22 +68,36 @@ export class CaseAddComponent implements OnInit {
 
   onSelectClient(item: any) {
     debugger;
-    this.model.ClientId = item;
-    this.contacts = [];
+    if (item) {
+      this.model.ClientId = item.Id;
+    } else {
+      this.model.ClientId = undefined;
+    }
+
   }
 
   onSelectOponent(item: any) {
-    this.model.OpponentContactId = item;
-    this.contacts = [];
+    if (item) {
+      this.model.OpponentContactId = item.Id;
+    } else {
+      this.model.OpponentContactId = undefined;
+    }
   }
 
   onSelectOponentAdvocate(item: any) {
-    this.model.OppnentAdvocateId = item;
-    this.advocates = [];
+    if (item) {
+      this.model.OppnentAdvocateId = item;
+    } else {
+      this.model.OppnentAdvocateId = undefined;
+    }
+
   }
 
   onSelectWitness(item: any) {
-    this.model.WitnessContactId = item;
-    this.contacts = [];
+    if (item) {
+      this.model.WitnessContactId = item;
+    } else {
+      this.model.WitnessContactId = undefined;
+    }
   }
 }
