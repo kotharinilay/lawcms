@@ -29,7 +29,7 @@ export class CaseListComponent implements OnInit {
   }
 
   deleteClick(id) {
-    if (confirm('Are you sure you want to delete ')) {
+    if (confirm('Are you sure you want to delete case?')) {
       this.caseService.deleteCase(id).subscribe(
         response => {
           this.rows = this.rows.filter(row => {
@@ -40,5 +40,4 @@ export class CaseListComponent implements OnInit {
         });
     }
   }
-
 }

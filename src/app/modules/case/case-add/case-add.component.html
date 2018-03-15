@@ -35,6 +35,7 @@
                 <div class="form-group">
                   <label for="CaseType">Case Type</label>
                   <select class="form-control" [(ngModel)]="model.CaseType" id="CaseType" name="CaseType" #CaseType="ngModel">
+                    <option [value]='undefined'>Select Case Type</option>
                     <option *ngFor="let caseType of CaseTypeDropDown" value={{caseType.Id}}>
                       {{caseType.Name}}
                     </option>
@@ -54,6 +55,7 @@
                 <div class="form-group">
                   <label for="CaseAppealType">Case Appeal Type</label>
                   <select class="form-control" [(ngModel)]="model.CaseAppealType" id="CaseAppealType" name="CaseAppealType" #CaseAppealType="ngModel">
+                    <option [value]='undefined'>Select CaseAppeal Type</option>
                     <option *ngFor="let caseAppealType of CaseAppealTypeDropDown" value={{caseAppealType.Id}}>
                       {{caseAppealType.Name}}
                     </option>
@@ -72,7 +74,8 @@
                 <div class="form-group">
                   <label for="CourtId">Court</label>
                   <select class="form-control" [(ngModel)]="model.CourtId" id="CourtId" name="CourtId" #CourtId="ngModel">
-                    <option *ngFor="let court of courts" value={{court.Id}}>
+                    <option [value]='undefined'>Select Court</option>
+                    <option *ngFor="let court of courts" [value]='court.Id'>
                       {{court.CourtName}}
                     </option>
                   </select>
@@ -82,7 +85,8 @@
                 <div class="form-group">
                   <label for="JudgeId">Judge</label>
                   <select class="form-control" [(ngModel)]="model.JudgeId" id="JudgeId" name="JudgeId" #JudgeId="ngModel">
-                    <option *ngFor="let judge of judges" value={{judge.Id}}>
+                    <option [value]='undefined'>Select Judge</option>
+                    <option *ngFor="let judge of judges" [value]='judge.Id'>
                       {{judge.FirstName}} {{judge.LastName}}
                     </option>
                   </select>
@@ -144,6 +148,7 @@
                 <div class="form-group">
                   <label for="Priority">Priority</label>
                   <select class="form-control" [(ngModel)]="model.Priority" id="Priority" name="Priority" #Priority="ngModel">
+                    <option [value]='undefined'>Select Priority</option>
                     <option *ngFor="let priority of PriorityDropDown" value={{priority.Id}}>
                       {{priority.Name}}
                     </option>
@@ -174,7 +179,7 @@
                 <div class="form-group">
                   <label for="WorkedAs">Worked As</label>
                   <select class="form-control" [(ngModel)]="model.WorkedAs" id="WorkedAs" name="WorkedAs" #WorkedAs="ngModel">
-                    <option selected="selected">Select Worked As</option>
+                    <option [value]='undefined'>Select Worked As</option>
                     <option *ngFor="let wa of WorkedAsDropDown" value={{wa.Id}}>
                       {{wa.Name}}
                     </option>
@@ -195,6 +200,7 @@
                 <div class="form-group">
                   <label for="OfficeAddressId">Office Address</label>
                   <select class="form-control" [(ngModel)]="model.OfficeAddressId" id="OfficeAddressId" name="OfficeAddressId" #OfficeAddressId="ngModel">
+                    <option [value]='undefined'>Select Office Address</option>
                     <option *ngFor="let office of offices" value={{office.Id}}>
                       {{office.Address1}}
                     </option>

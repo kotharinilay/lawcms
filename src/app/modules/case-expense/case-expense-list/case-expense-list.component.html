@@ -1,41 +1,31 @@
 <div class=panel>
   <div class="panel-heading border">
-    <span class="pull-left">Cases</span>
+    <span class="pull-left">Case Expenses</span>
     <div class="pb30">
-      <button type="button" class="btn btn-success pull-right" kendoButton (click)="router.navigate(['/case/new'])">Create</button>
+      <button type="button" class="btn btn-success pull-right" kendoButton (click)="router.navigate(['/case-expense/new'])">Create</button>
     </div>
 
   </div>
   <div class=panel-body>
     <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
       [rowHeight]="'auto'" [columnMode]="'force'">
-      <ngx-datatable-column name="Case Number" sortable="true" prop="CaseNo">
+      <ngx-datatable-column name="Expense Name" sortable="true" prop="ExpenseName">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Case Type" sortable="true" prop="CaseType">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Start Date" sortable="true" prop="OpenDate">
+      <ngx-datatable-column name="Expense Date" sortable="true" prop="ExpenseDate">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value | date: 'dd/MM/yyyy'}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="End Date" sortable="true" prop="EndDate">
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value | date: 'dd/MM/yyyy'}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Refference Number" sortable="true" prop="RefferenceNumber">
+      <ngx-datatable-column name="Category" sortable="true" prop="Category">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Status" sortable="true" prop="CaseStatus">
+      <ngx-datatable-column name="Amount" sortable="true" prop="Amount">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>

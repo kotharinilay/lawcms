@@ -38,11 +38,24 @@ export class CaseAddComponent implements OnInit {
       this._notify.error(err.Result);
     });
     this.caseService.getJudgesDD().subscribe(res => {
-      debugger;
       this.judges = res;
     }, err => {
       this._notify.error(err.Result);
-    })
+    });
+    if (this.paramId.toString() != "new") {
+      this.caseService.getCaseById(this.paramId).subscribe(
+        response => {
+          debugger;
+          this.model = <Case>response;
+          // if (this.model.ClientId) {
+          //   this.contactService.getContactById(this.model.ClientId).subscribe(res => {
+
+          //   })
+          // }
+        }, err => {
+          this._notify.error(err.Result);
+        });
+    }
   }
 
   autocompleListFormatter = (data: any) => {

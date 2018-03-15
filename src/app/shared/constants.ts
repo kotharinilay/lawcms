@@ -72,3 +72,32 @@ export const WorkedAs = [
     { Id: "Consultant", Name: "Consultant" },
     { Id: "FirstMeeting", Name: "First meeting" }
 ];
+
+export const ExpenseCategory = [
+    { Id: "Copying", Name: "Copying" },
+    { Id: "Printing", Name: "Printing" },
+    { Id: "Documentation", Name: "Documentation" },
+    { Id: "Phone Call", Name: "Phone Call" },
+    { Id: "Research", Name: "Research" },
+    { Id: "Delivery", Name: "Delivery" },
+    { Id: "Services", Name: "Services" },
+    { Id: "Postage", Name: "Postage" },
+    { Id: "Courier", Name: "Courier" },
+    { Id: "Local Travel", Name: "Local Travel" },
+    { Id: "Out of town travel", Name: "Out of town travel" },
+    { Id: "Meals", Name: "Meals" },
+    { Id: "Court Fees", Name: "Court Fees" },
+    { Id: "Witness Summons Fees", Name: "Witness Summons Fees" },
+    { Id: "Witness Fees", Name: "Witness Fees" },
+    { Id: "Deposition Transcripts", Name: "Deposition Transcripts" },
+    { Id: "Trial Transcripts", Name: "Trial Transcripts" },
+    { Id: "Trial Exhibits", Name: "Trial Exhibits" },
+    { Id: "Litigation Support Vendors", Name: "Litigation Support Vendors" },
+    { Id: "Experts", Name: "Experts" },
+    { Id: "Private Ivestigators", Name: "Private Ivestigators" },
+    { Id: "Informer", Name: "Informer" },
+    { Id: "Mediators", Name: "Mediators" },
+    { Id: "Other Professionals", Name: "Other Professionals" },
+    { Id: "Local Advisory", Name: "Local Advisory" },
+    { Id: "Other", Name: "Other" }
+];

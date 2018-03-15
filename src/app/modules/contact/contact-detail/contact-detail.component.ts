@@ -174,7 +174,9 @@ export class ContactDetailComponent implements OnInit {
                 PostCode: address.PostCode,
                 AddressType: AddressType.Home
               }
-              this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+              if (addressModel.Address1 && addressModel.State) {
+                this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+              }
             });
             this.officeAddressSet.forEach(address => {
               const addressModel: Address = {
@@ -187,7 +189,9 @@ export class ContactDetailComponent implements OnInit {
                 PostCode: address.PostCode,
                 AddressType: AddressType.Office
               }
-              this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+              if (addressModel.Address1 && addressModel.State) {
+                this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+              }
             });
             this._notify.success("Contact added successfully.");
           }

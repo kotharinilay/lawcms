@@ -17,8 +17,6 @@ export class ContactGridComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     const data: SimpleChange = changes.data;
-    // console.log('prev value: ', data.previousValue);
-    // console.log('got name: ', data.currentValue);
     this._data = data.currentValue;
   }
 
@@ -30,10 +28,10 @@ export class ContactGridComponent implements OnInit {
   }
 
   deleteClick(id) {
-    if (confirm('Are you sure you want to delete ')) {
+    if (confirm('Are you sure you want to delete contact?')) {
       this.contactService.deleteContact(id).subscribe(
         response => {
-          this.data = this.data.filter(row => {
+          this._data = this.data.filter(row => {
             return row.Id != id;
           });
         }, err => {
