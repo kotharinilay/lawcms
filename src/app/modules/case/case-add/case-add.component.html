@@ -72,8 +72,8 @@
                 <div class="form-group">
                   <label for="CourtId">Court</label>
                   <select class="form-control" [(ngModel)]="model.CourtId" id="CourtId" name="CourtId" #CourtId="ngModel">
-                    <option *ngFor="let court of courts" value={{courts.Id}}>
-                      {{courts.Name}}
+                    <option *ngFor="let court of courts" value={{court.Id}}>
+                      {{court.CourtName}}
                     </option>
                   </select>
                 </div>
@@ -82,8 +82,8 @@
                 <div class="form-group">
                   <label for="JudgeId">Judge</label>
                   <select class="form-control" [(ngModel)]="model.JudgeId" id="JudgeId" name="JudgeId" #JudgeId="ngModel">
-                    <option *ngFor="let judge of judges" value={{judges.Id}}>
-                      {{judges.Name}}
+                    <option *ngFor="let judge of judges" value={{judge.Id}}>
+                      {{judge.FirstName}} {{judge.LastName}}
                     </option>
                   </select>
                 </div>

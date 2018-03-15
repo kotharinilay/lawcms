@@ -8,7 +8,7 @@ import { CaseType, CaseAppealType, CasePriority, WorkedAs } from 'app/shared/con
 
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-case-add',
@@ -25,8 +25,10 @@ export class CaseAddComponent implements OnInit {
   PriorityDropDown: Array<DropDownModel> = CasePriority;
   WorkedAsDropDown: Array<DropDownModel> = WorkedAs;
 
+  isLoading: boolean = false;
+
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
-    private contactService: ContactService, private _sanitizer: DomSanitizer) { }
+    private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param["id"]);
@@ -35,7 +37,8 @@ export class CaseAddComponent implements OnInit {
     }, err => {
       this._notify.error(err.Result);
     });
-    this.caseService.getCourtsDD().subscribe(res => {
+    this.caseService.getJudgesDD().subscribe(res => {
+      debugger;
       this.judges = res;
     }, err => {
       this._notify.error(err.Result);
@@ -86,18 +89,40 @@ export class CaseAddComponent implements OnInit {
 
   onSelectOponentAdvocate(item: any) {
     if (item) {
-      this.model.OppnentAdvocateId = item;
+      this.model.OppnentAdvocateId = item.Id;
     } else {
       this.model.OppnentAdvocateId = undefined;
     }
-
   }
 
   onSelectWitness(item: any) {
     if (item) {
-      this.model.WitnessContactId = item;
+      this.model.WitnessContactId = item.Id;
     } else {
       this.model.WitnessContactId = undefined;
     }
+  }
+
+  save() {
+    debugger;
+    this.isLoading = true;
+    this.caseService.addOrUpdate(this.model).subscribe(
+      response => {
+        this.isLoading = false;
+        if (response) {
+          if (this.paramId === 'new') {
+            this._notify.success("Case added successfully.");
+          }
+          else {
+            this._notify.success("Case updated successfully.");
+          }
+
+          setTimeout(() => {
+            this.router.navigate(['/case']);
+          });
+        }
+      }, err => {
+        this._notify.error(err.Result);
+      });
   }
 }
