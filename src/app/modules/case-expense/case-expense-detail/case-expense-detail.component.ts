@@ -84,4 +84,16 @@ export class CaseExpenseDetailComponent implements OnInit {
         this._notify.error(err.Result);
       });
   }
+
+  onFileChange(event: any) {
+    const target = event.target || event.srcElement;
+    const files = target.files;
+    if (files.length > 0) {
+      const file = files[0];
+    }
+  }
+
+  onCancelClick() {
+    this.router.navigate(['/case-expense']);
+  }
 }

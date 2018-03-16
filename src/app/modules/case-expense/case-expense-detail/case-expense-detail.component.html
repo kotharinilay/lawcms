@@ -81,11 +81,16 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="CaseId">Bill Document</label>
+                  <div class="filename" *ngFor="let item of uploadedFiles">{{item?.name || 'Select File'}}</div>
+                  <a href="javascript:void(0);" class="change" (click)="openFileDialog()">Browse</a>
+                  <input type="file" class="fileUpload" #fileUpload style="display:none" #fileUpload style="display:none" (change)="onFileChange($event)"
+                  />
                 </div>
               </div>
             </div>
             <div class="row">
-              <button type="button" class="btn btn-default" (click)="onCancleClick()">Cancel</button>
+              <button type="button" class="btn btn-default" (click)="onCancelClick()">Cancel</button>
               <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
             </div>
           </form>
