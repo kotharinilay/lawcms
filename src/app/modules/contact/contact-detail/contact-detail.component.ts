@@ -93,6 +93,7 @@ export class ContactDetailComponent implements OnInit {
   };
 
   save() {
+    debugger;
     this.isLoading = true;
     if (this.model.Id) {
       this.addressSet.forEach(address => {

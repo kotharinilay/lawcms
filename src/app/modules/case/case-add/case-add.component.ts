@@ -138,4 +138,8 @@ export class CaseAddComponent implements OnInit {
         this._notify.error(err.Result);
       });
   }
+
+  onCancelClick() {
+    this.router.navigate(['/case']);
+  }
 }

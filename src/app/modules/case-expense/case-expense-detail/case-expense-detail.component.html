@@ -74,7 +74,7 @@
                   <select class="form-control" [(ngModel)]="model.CaseId" id="CaseId" name="CaseId" #CaseId="ngModel">
                     <option [value]='undefined'>Select Case</option>
                     <option *ngFor="let case of cases" value={{case.Id}}>
-                      {{case.Name}}
+                      {{case.CaseNo}}
                     </option>
                   </select>
                 </div>
@@ -82,8 +82,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseId">Bill Document</label>
-                  <div class="filename" *ngFor="let item of uploadedFiles">{{item?.name || 'Select File'}}</div>
-                  <a href="javascript:void(0);" class="change" (click)="openFileDialog()">Browse</a>
+                  <div>{{fileToUpload?.name || 'Select File'}}</div>
+                  <a href="javascript:void(0);" class="change" (click)="fileUpload.click()">Browse</a>
                   <input type="file" class="fileUpload" #fileUpload style="display:none" #fileUpload style="display:none" (change)="onFileChange($event)"
                   />
                 </div>

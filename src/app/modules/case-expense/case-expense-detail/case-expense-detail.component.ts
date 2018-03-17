@@ -21,7 +21,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   CategoryDropDown: Array<DropDownModel> = ExpenseCategory;
 
   isLoading: boolean = false;
-
+  fileToUpload: File = null;
   constructor(private route: ActivatedRoute, private caseExpenseService: CaseExpenseService, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private contactService: ContactService, private caseService: CaseService,
     private router: Router) { }
@@ -86,10 +86,11 @@ export class CaseExpenseDetailComponent implements OnInit {
   }
 
   onFileChange(event: any) {
+    debugger;
     const target = event.target || event.srcElement;
-    const files = target.files;
+    const files: FileList = target.files;
     if (files.length > 0) {
-      const file = files[0];
+      this.fileToUpload = files[0];
     }
   }
 
