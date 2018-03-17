@@ -10,23 +10,23 @@
     </a>
   </div>
 
-  <nav role=navigation>
+  <nav role="navigation">
     <perfect-scrollbar>
-      <ul class=nav>
-        <li>
-          <a (click)='router.navigate(["/contact"])'>
+      <ul class="nav">
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/contact"]'>
             <i class="fa fa-flask"></i>
             <span>Contact</span>
           </a>
         </li>
-        <li>
-          <a (click)='router.navigate(["/case"])'>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/case"]'>
             <i class="fa fa-toggle-on"></i>
             <span>Case</span>
           </a>
         </li>
-        <li>
-          <a (click)='router.navigate(["/case-expense"])'>
+        <li [routerLinkActive]="['active']">
+          <a [routerLink]='["/case-expense"]'>
             <i class="fa fa-toggle-on"></i>
             <span>Case Expense</span>
           </a>
