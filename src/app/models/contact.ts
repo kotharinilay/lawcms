@@ -20,11 +20,14 @@ export class Contact {
 export class Address {
     Id: number;
     Address1: string;
-    State: string;
-    City: string;
+    State: number;
+    CountryId: number;
+    CityId: string;
     PostCode: string;
     AddressType: string;
     IsPrimary: boolean;
+    IsActive: boolean;
+    UpdatedTime?: string;
     ContactId: number;
 }
 

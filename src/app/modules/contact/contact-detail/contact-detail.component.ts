@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { DropDownModel } from 'app/models/DropDownModel';
-import { Contact, Address } from 'app/models/contact';
+import { Contact, Address, Email, Mobile } from 'app/models/contact';
 import { ContactService } from '../contact.service';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { ContactType, AddressType, DealOn } from 'app/shared/constants';
@@ -23,9 +23,9 @@ export class ContactDetailComponent implements OnInit {
   states: any[] = [];
   cities: any[] = [];
   companies: any[] = [];
-
-  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: true, IsDeleted: false }];
-  officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: true, IsDeleted: false }];
+  fileToUpload: File = null;
+  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: true, IsDeleted: false, Country: undefined }];
+  officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: true, IsDeleted: false, Country: undefined }];
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
   visibleEmail: number = 0;
   mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false }];
@@ -64,7 +64,8 @@ export class ContactDetailComponent implements OnInit {
                 IsDeleted: false,
                 IsPrimary: element.IsPrimary,
                 PostCode: element.PostCode,
-                State: element.State
+                State: element.State,
+                Country: element.CountryId
               });
             } else {
               this.officeAddressSet.push({
@@ -74,7 +75,8 @@ export class ContactDetailComponent implements OnInit {
                 IsDeleted: false,
                 IsPrimary: element.IsPrimary,
                 PostCode: element.PostCode,
-                State: element.State
+                State: element.State,
+                Country: element.CountryId
               });
             }
           });
@@ -101,11 +103,11 @@ export class ContactDetailComponent implements OnInit {
   }
 
   addAddress() {
-    this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: false, IsDeleted: false });
+    this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: false, IsDeleted: false, Country: undefined });
   }
 
   addOfficeAddress() {
-    this.officeAddressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: false, IsDeleted: false });
+    this.officeAddressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: false, IsDeleted: false, Country: undefined });
   }
 
   addEmail() {
@@ -119,70 +121,99 @@ export class ContactDetailComponent implements OnInit {
   save() {
     debugger;
     this.isLoading = true;
-    if (this.model.Id) {
-      this.addressSet.forEach(address => {
-        if (address.Id) {
-          if (address.IsDeleted) {
-            this.contactService.deleteAddress(address.Id).subscribe(res => { });
-          } else {
-            const addressModel: Address = {
-              Id: address.Id,
-              Address1: address.Address1,
-              City: address.City,
-              ContactId: this.model.Id,
-              IsPrimary: address.IsPrimary,
-              State: address.State,
-              PostCode: address.PostCode,
-              AddressType: AddressType.Home
-            }
-            this.model.Address.push(addressModel);
-          }
+    this.model.Address = [];
+    this.model.EmailAddress = [];
+    this.model.MobileNumbers = [];
+    this.emailSet.forEach(email => {
+      const emailModel: Email = {
+        ContactId: this.model.Id,
+        Id: email.Id || undefined,
+        IsPrimary: email.IsPrimary.toString(),
+        EmailId: email.EmailId
+      };
+      this.model.EmailAddress.push(emailModel);
+    });
+
+    this.mobileSet.forEach(mobileSet => {
+      const mobileModel: Mobile = {
+        ContactId: this.model.Id,
+        Id: mobileSet.Id || undefined,
+        IsPrimary: mobileSet.IsPrimary.toString(),
+        MobileNumber: mobileSet.MobileNumber
+      }
+    });
+
+    this.addressSet.forEach(address => {
+      if (address.Id) {
+        if (address.IsDeleted) {
+          this.contactService.deleteAddress(address.Id).subscribe(res => { });
         } else {
           const addressModel: Address = {
-            Id: undefined,
+            Id: address.Id,
             Address1: address.Address1,
-            City: address.City,
+            CityId: address.City,
             ContactId: this.model.Id,
             IsPrimary: address.IsPrimary,
             State: address.State,
             PostCode: address.PostCode,
-            AddressType: AddressType.Home
+            AddressType: AddressType.Home,
+            IsActive: true,
+            CountryId: address.Country
           }
           this.model.Address.push(addressModel);
         }
-      });
-      this.officeAddressSet.forEach(address => {
-        if (address.Id) {
-          if (address.IsDeleted) {
-            this.contactService.deleteAddress(address.Id).subscribe(res => { });
-          } else {
-            const addressModel: Address = {
-              Id: address.Id,
-              Address1: address.Address1,
-              City: address.City,
-              ContactId: this.model.Id,
-              IsPrimary: address.IsPrimary,
-              State: address.State,
-              PostCode: address.PostCode,
-              AddressType: AddressType.Office
-            }
-            this.model.Address.push(addressModel);
-          }
+      } else {
+        const addressModel: Address = {
+          Id: undefined,
+          Address1: address.Address1,
+          CityId: address.City,
+          ContactId: this.model.Id,
+          IsPrimary: address.IsPrimary,
+          State: address.State,
+          PostCode: address.PostCode,
+          AddressType: AddressType.Home,
+          IsActive: true,
+          CountryId: address.Country
+        }
+        this.model.Address.push(addressModel);
+      }
+    });
+    this.officeAddressSet.forEach(address => {
+      if (address.Id) {
+        if (address.IsDeleted) {
+          this.contactService.deleteAddress(address.Id).subscribe(res => { });
         } else {
           const addressModel: Address = {
-            Id: undefined,
+            Id: address.Id,
             Address1: address.Address1,
-            City: address.City,
+            CityId: address.City,
             ContactId: this.model.Id,
             IsPrimary: address.IsPrimary,
             State: address.State,
             PostCode: address.PostCode,
-            AddressType: AddressType.Office
+            AddressType: AddressType.Office,
+            IsActive: true,
+            CountryId: address.Country
           }
           this.model.Address.push(addressModel);
         }
-      });
-    }
+      } else {
+        const addressModel: Address = {
+          Id: undefined,
+          Address1: address.Address1,
+          CityId: address.City,
+          ContactId: this.model.Id,
+          IsPrimary: address.IsPrimary,
+          State: address.State,
+          PostCode: address.PostCode,
+          AddressType: AddressType.Office,
+          IsActive: true,
+          CountryId: address.Country
+        }
+        this.model.Address.push(addressModel);
+      }
+    });
+
     this.contactService.addOrUpdate(this.model).subscribe(
       response => {
         this.isLoading = false;
@@ -192,12 +223,14 @@ export class ContactDetailComponent implements OnInit {
               const addressModel: Address = {
                 Id: undefined,
                 Address1: address.Address1,
-                City: address.City,
+                CityId: address.City,
                 ContactId: response.Id,
                 IsPrimary: address.IsPrimary,
                 State: address.State,
                 PostCode: address.PostCode,
-                AddressType: AddressType.Home
+                AddressType: AddressType.Home,
+                IsActive: true,
+                CountryId: address.Country
               }
               if (addressModel.Address1 && addressModel.State) {
                 this.model.Address.push(addressModel);
@@ -207,12 +240,14 @@ export class ContactDetailComponent implements OnInit {
               const addressModel: Address = {
                 Id: undefined,
                 Address1: address.Address1,
-                City: address.City,
+                CityId: address.City,
                 ContactId: response.Id,
                 IsPrimary: address.IsPrimary,
                 State: address.State,
                 PostCode: address.PostCode,
-                AddressType: AddressType.Office
+                AddressType: AddressType.Office,
+                IsActive: true,
+                CountryId: address.Country
               }
               if (addressModel.Address1 && addressModel.State) {
                 this.model.Address.push(addressModel);
@@ -236,4 +271,25 @@ export class ContactDetailComponent implements OnInit {
   onCancleClick() {
     this.router.navigate(['/contact']);
   }
+
+  onFileChange(event: any) {
+    debugger;
+    const target = event.target || event.srcElement;
+    const files: FileList = target.files;
+    if (files.length > 0) {
+      this.fileToUpload = files[0];
+      const formData = new FormData();
+      formData.append('Photo', this.fileToUpload, this.fileToUpload.name);
+      this.contactService.uploadFile(3, formData).subscribe(response => {
+        debugger
+      }, error => {
+        debugger
+        this._notify.error(error.result);
+        throw error;
+      })
+    }
+
+
+  }
+
 }

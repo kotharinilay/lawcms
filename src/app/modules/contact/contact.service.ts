@@ -233,4 +233,11 @@ export class ContactService {
       throw err;
     });
   }
+
+  uploadFile(id:number,formData){
+    return this.httpService.postFormData(`Contact/UploadPhoto/${id}`,formData).map((res:any)=>{
+      debugger
+    });
+  }
+
 }

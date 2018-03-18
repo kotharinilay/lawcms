@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IHttpOptions, IRequestOptions } from 'app/shared/interfaces/http-interface';
 import { environment } from 'environments/environment';
+import { RequestOptions } from '@angular/http';
 
 @Injectable()
 export class HttpClientService {
@@ -31,6 +32,14 @@ export class HttpClientService {
       });
   }
 
+  postFormData(url: string, body: any, headers?: any, params?: any, options?: IHttpOptions) {
+    debugger
+    url = this.updateUrl(url);
+    headers = new Headers();
+    let newOptions = new RequestOptions({ headers: headers });
+    return this.http.post(url, body, <any>newOptions);
+  }
+
   private updateUrl(req: string) {
     if (req.indexOf('http://') == -1)
       return environment.origin + req;
@@ -38,12 +47,15 @@ export class HttpClientService {
       return req;
   }
 
-  private getRequestOptions(headers?: any, params?: any, options?: IHttpOptions): IRequestOptions {
+  private getRequestOptions(headers?: any, params?: any, options?: IHttpOptions, isFormData?: boolean): IRequestOptions {
     headers = headers || {};
     params = params || {};
     options = options || {};
 
-    if (!headers['Content-Type']) {
+    if (isFormData) {
+      //headers['Content-Type'] = undefined;
+      headers = new Headers();
+    } else if (!headers['Content-Type']) {
       headers['Content-Type'] = 'application/json';
     }
     const customHeader = new HttpHeaders(headers);

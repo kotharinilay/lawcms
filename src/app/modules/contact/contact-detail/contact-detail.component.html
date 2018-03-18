@@ -110,6 +110,17 @@
                   </select>
                 </div>
               </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CaseId">Bill Document</label>
+                  <div>{{fileToUpload?.name || 'Select File'}}</div>
+                  <a href="javascript:void(0);" class="change" (click)="fileUpload.click()">Browse</a>
+                  <input type="file" class="fileUpload" #fileUpload style="display:none" #fileUpload style="display:none" (change)="onFileChange($event)"
+                  />
+                </div>
+              </div>
+
             </div>
 
             <div class="panel-heading border">
