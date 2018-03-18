@@ -5,7 +5,7 @@ import { DropDownModel } from 'app/models/DropDownModel';
 import { Contact, Address } from 'app/models/contact';
 import { ContactService } from '../contact.service';
 import { NotificationService } from 'app/shared/services/notification.service';
-import { ContactType, AddressType } from 'app/shared/constants';
+import { ContactType, AddressType, DealOn } from 'app/shared/constants';
 
 
 @Component({
@@ -18,8 +18,11 @@ export class ContactDetailComponent implements OnInit {
   isLoading: boolean = false;
   public paramId: any;
   ContactTypeDropDown: Array<DropDownModel> = ContactType;
+  DealOnDropDown: Array<DropDownModel> = DealOn;
+  countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
+  companies: any[] = [];
 
   addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: true, IsDeleted: false }];
   officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: true, IsDeleted: false }];
@@ -33,8 +36,12 @@ export class ContactDetailComponent implements OnInit {
   ngOnInit() {
     this.model.ContactType = this.ContactTypeDropDown[0].Id;
     this.route.params.subscribe(param => this.paramId = param["id"]);
-    this.contactService.getStates().subscribe(res => {
-      this.states = res;
+    this.contactService.getCountries().subscribe(res => {
+      this.countries = res;
+    });
+
+    this.contactService.getCompanies().subscribe(res => {
+      this.companies = res;
     });
 
     if (this.paramId.toString() != "new") {
@@ -80,6 +87,12 @@ export class ContactDetailComponent implements OnInit {
   // increaseEmailCnt() {
   //   this.visibleEmail++;
   // }
+
+  CountryChanges(countryId: number) {
+    this.contactService.getStates(countryId).subscribe(res => {
+      this.states = res;
+    });
+  }
 
   StateChanges(stateId: number) {
     this.contactService.getCities(stateId).subscribe(res => {

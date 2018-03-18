@@ -4,8 +4,12 @@ export class Contact {
     FirstName: string;
     LastName: string;
     ContactType: string;
-    CompanyName: string;
-    Website: string;
+    CompanyId: number;
+    IsImportant: boolean;
+    Reference: string;
+    DealOn: string;
+    PriceRate: number;
+    BasePrice: number;
     IsActive: boolean;
     UpdatedTime: Date;
     Address: Address[];

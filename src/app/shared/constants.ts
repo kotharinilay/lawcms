@@ -101,3 +101,10 @@ export const ExpenseCategory = [
     { Id: "Local Advisory", Name: "Local Advisory" },
     { Id: "Other", Name: "Other" }
 ];
+
+export const DealOn = [
+    { Id: "Crime", Name: "Crime" },
+    { Id: "Civil", Name: "Civil" },
+    { Id: "Family", Name: "Family" },
+    { Id: "Forgery", Name: "Forgery" }
+]

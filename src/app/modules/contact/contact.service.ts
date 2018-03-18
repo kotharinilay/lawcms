@@ -190,8 +190,19 @@ export class ContactService {
     });
   }
 
-  getStates() {
-    return this.httpService.get('state/getall').map((res: any) => {
+  getCountries() {
+    return this.httpService.get('country/getall').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getStates(countryId: number) {
+    return this.httpService.get('state/GetStateByCountryId/' + countryId).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
@@ -203,6 +214,17 @@ export class ContactService {
 
   getCities(stateId: number) {
     return this.httpService.get('City/GetCityStateById/' + stateId).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getCompanies() {
+    return this.httpService.get('Companies/getall').map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
