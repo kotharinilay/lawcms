@@ -18,9 +18,14 @@ export class ContactDetailComponent implements OnInit {
   isLoading: boolean = false;
   public paramId: any;
   ContactTypeDropDown: Array<DropDownModel> = ContactType;
+  states: any[] = [];
+  cities: any[] = [];
 
-  addressSet = [{ Id: undefined, Address1: '', State: '', City: '', PostCode: '', IsPrimary: true, IsDeleted: false }];
-  officeAddressSet = [{ Id: undefined, Address1: '', State: '', City: '', PostCode: '', IsPrimary: true, IsDeleted: false }];
+  addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: true, IsDeleted: false }];
+  officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: true, IsDeleted: false }];
+  emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
+  visibleEmail: number = 0;
+  mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false }];
 
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
     private _notify: NotificationService) { }
@@ -28,6 +33,10 @@ export class ContactDetailComponent implements OnInit {
   ngOnInit() {
     this.model.ContactType = this.ContactTypeDropDown[0].Id;
     this.route.params.subscribe(param => this.paramId = param["id"]);
+    this.contactService.getStates().subscribe(res => {
+      this.states = res;
+    });
+
     if (this.paramId.toString() != "new") {
       this.contactService.getContactById(this.paramId).subscribe(
         response => {
@@ -68,29 +77,31 @@ export class ContactDetailComponent implements OnInit {
     }
   }
 
+  // increaseEmailCnt() {
+  //   this.visibleEmail++;
+  // }
+
+  StateChanges(stateId: number) {
+    this.contactService.getCities(stateId).subscribe(res => {
+      this.cities = res;
+    });
+  }
+
   addAddress() {
-    this.addressSet.push({ Id: undefined, Address1: '', State: '', City: '', PostCode: '', IsPrimary: false, IsDeleted: false });
+    this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: false, IsDeleted: false });
   }
 
   addOfficeAddress() {
-    this.officeAddressSet.push({ Id: undefined, Address1: '', State: '', City: '', PostCode: '', IsPrimary: false, IsDeleted: false });
+    this.officeAddressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', IsPrimary: false, IsDeleted: false });
   }
 
-  removeForm(addressForm) {
-    if (!addressForm.IsPrimary) {
-      addressForm.IsDeleted = true;
-    } else {
-      this._notify.error('Cannot delete primary address');
-    }
-  };
+  addEmail() {
+    this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false });
+  }
 
-  removeOfficeForm(officeAddressForm) {
-    if (!officeAddressForm.IsPrimary) {
-      officeAddressForm.IsDeleted = true;
-    } else {
-      this._notify.error('Cannot delete primary address');
-    }
-  };
+  addMobile() {
+    this.mobileSet.push({ Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false });
+  }
 
   save() {
     debugger;
@@ -111,7 +122,7 @@ export class ContactDetailComponent implements OnInit {
               PostCode: address.PostCode,
               AddressType: AddressType.Home
             }
-            this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+            this.model.Address.push(addressModel);
           }
         } else {
           const addressModel: Address = {
@@ -124,7 +135,7 @@ export class ContactDetailComponent implements OnInit {
             PostCode: address.PostCode,
             AddressType: AddressType.Home
           }
-          this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+          this.model.Address.push(addressModel);
         }
       });
       this.officeAddressSet.forEach(address => {
@@ -142,7 +153,7 @@ export class ContactDetailComponent implements OnInit {
               PostCode: address.PostCode,
               AddressType: AddressType.Office
             }
-            this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+            this.model.Address.push(addressModel);
           }
         } else {
           const addressModel: Address = {
@@ -155,7 +166,7 @@ export class ContactDetailComponent implements OnInit {
             PostCode: address.PostCode,
             AddressType: AddressType.Office
           }
-          this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+          this.model.Address.push(addressModel);
         }
       });
     }
@@ -176,7 +187,7 @@ export class ContactDetailComponent implements OnInit {
                 AddressType: AddressType.Home
               }
               if (addressModel.Address1 && addressModel.State) {
-                this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+                this.model.Address.push(addressModel);
               }
             });
             this.officeAddressSet.forEach(address => {
@@ -191,7 +202,7 @@ export class ContactDetailComponent implements OnInit {
                 AddressType: AddressType.Office
               }
               if (addressModel.Address1 && addressModel.State) {
-                this.contactService.addOrUpdateAddress(addressModel).subscribe(res => { });
+                this.model.Address.push(addressModel);
               }
             });
             this._notify.success("Contact added successfully.");

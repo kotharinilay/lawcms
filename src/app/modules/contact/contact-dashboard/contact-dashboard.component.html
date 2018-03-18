@@ -46,22 +46,41 @@
 </div>
 <div class="row mb25">
   <div class=col-md-12>
-    <tabset [pills]="true" (onSelect)="tabSelect($event)">
-      <tab title="Newly Added" [disabled]="false">
-        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
-      </tab>
-      <tab title="Client" [disabled]="false">
-        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
-      </tab>
-      <tab title="Advocate" [disabled]="false">
-        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
-      </tab>
-      <tab title="Law Firm" [disabled]="false">
-        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
-      </tab>
-      <tab title="Other" [disabled]="false">
-        <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
-      </tab>
-    </tabset>
+    <div class=box-tab>
+      <ul class="nav nav-tabs">
+        <li class=active>
+          <a href=#new data-toggle=tab (click)="getNewlyAddedData()">Newly Added</a>
+        </li>
+        <li>
+          <a href=#client data-toggle=tab (click)="tabSelect(1)">Client</a>
+        </li>
+        <li>
+          <a href=#advocate data-toggle=tab (click)="tabSelect(2)">Advocate</a>
+        </li>
+        <li>
+          <a href=#law data-toggle=tab (click)="tabSelect(3)">Law Firm</a>
+        </li>
+        <li>
+          <a href=#other data-toggle=tab (click)="tabSelect(4)">Other</a>
+        </li>
+      </ul>
+      <div class=tab-content>
+        <div class="tab-pane active in" id='new'>
+          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='client'>
+          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='advocate'>
+          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='law'>
+          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+        <div class=tab-pane id='other'>
+          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

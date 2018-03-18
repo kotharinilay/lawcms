@@ -25,6 +25,7 @@ export class ContactDashboardComponent implements OnInit {
   }
 
   getNewlyAddedData() {
+    this.rows = [];
     this.contactService.getNewlyAddedContacts().subscribe(res => {
       this.rows = res;
     }, err => {
@@ -33,15 +34,12 @@ export class ContactDashboardComponent implements OnInit {
   }
 
   tabSelect(event) {
-    if (event === 0) {
-      this.getNewlyAddedData();
-    } else {
-      this.contactService.getContactsByType(contactDashboardTab[event]).subscribe(res => {
-        this.rows = res;
-      }, err => {
-        this._notify.error(err.Result);
-      });
-    }
+    this.rows = [];
+    this.contactService.getContactsByType(contactDashboardTab[event]).subscribe(res => {
+      this.rows = res;
+    }, err => {
+      this._notify.error(err.Result);
+    });
   }
 
 }
