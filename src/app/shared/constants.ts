@@ -39,27 +39,6 @@ export const CaseType = [
     { Id: "Litigation", Name: "Litigation" }
 ];
 
-export const CaseAppealType = [
-    { Id: "Business", Name: "Corporate / Business" },
-    { Id: "IP", Name: "Intellectual Property (IP)" },
-    { Id: "IT", Name: "Information Technology" },
-    { Id: "CLB", Name: "Company / CLB" },
-    { Id: "Securities", Name: "Securities" },
-    { Id: "Media", Name: "Media and Entertainment" },
-    { Id: "Family", Name: "Family" },
-    { Id: "Criminal", Name: "Criminal" },
-    { Id: "Civil", Name: "Civil" },
-    { Id: "Construction", Name: "Real Estate/Construction" },
-    { Id: "Environmental", Name: "Environmental" },
-    { Id: "Immigration", Name: "Immigration " },
-    { Id: "Insurance", Name: "Insurance" },
-    { Id: "International", Name: "International" },
-    { Id: "Labour", Name: "Labour" },
-    { Id: "Constitutional", Name: "Constitutional" },
-    { Id: "Antitrust", Name: "Antitrust" },
-    { Id: "Aviation", Name: "Aviation" }
-];
-
 export const CasePriority = [
     { Id: "Low", Name: "Low" },
     { Id: "Normal", Name: "Normal" },

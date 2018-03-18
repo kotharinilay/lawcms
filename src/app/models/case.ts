@@ -4,10 +4,10 @@ export class Case {
     ClientId: number;
     CaseType: string;
     CaseYear: number;
-    CaseAppealType: string;
+    CaseAppealType: number;
     City: string;
     CourtId: number;
-    JudgeId: number;
+    //JudgeId: number;
     Description: string;
     AppearedFor: string;
     OpponentContactId: number;
@@ -22,4 +22,17 @@ export class Case {
     RefferenceNumber: string;
     IsActive: boolean;
     UpdateTime: Date;
+    IsClose: boolean;
+    CloseDate: Date;
+    JugmentFavourTo: number;
+    FilledDate: Date;
+    NotifyMe: boolean;
+    NotifyMeWhen: string;
+    NotifyMeValue: number;
+    AdvanceFees: number;
+    PricingType: string;
+    CourtFees: number;
+    BillingFrequency: string;
+    BillingDate: Date;
+    TrustAccount: number;
 }

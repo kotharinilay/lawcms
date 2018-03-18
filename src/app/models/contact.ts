@@ -20,24 +20,22 @@ export class Contact {
 export class Address {
     Id: number;
     Address1: string;
-    State: string;
-    City: string;
+    CountryId: number;
+    State: number;
+    CityId: number;
     PostCode: string;
     AddressType: string;
     IsPrimary: boolean;
-    ContactId: number;
 }
 
 export class Mobile {
     Id: number;
     MobileNumber: string;
-    IsPrimary: string;
-    ContactId: number;
+    IsPrimary: boolean;
 }
 
 export class Email {
     Id: number;
     EmailId: string;
-    IsPrimary: string;
-    ContactId: number;
+    IsPrimary: boolean;
 }

@@ -57,7 +57,7 @@
                   <select class="form-control" [(ngModel)]="model.CaseAppealType" id="CaseAppealType" name="CaseAppealType" #CaseAppealType="ngModel">
                     <option [value]='undefined'>Select CaseAppeal Type</option>
                     <option *ngFor="let caseAppealType of CaseAppealTypeDropDown" value={{caseAppealType.Id}}>
-                      {{caseAppealType.Name}}
+                      {{caseAppealType.AppealTypeName}}
                     </option>
                   </select>
                 </div>
@@ -84,12 +84,16 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="JudgeId">Judge</label>
-                  <select class="form-control" [(ngModel)]="model.JudgeId" id="JudgeId" name="JudgeId" #JudgeId="ngModel">
+                  <!-- <select class="form-control" [(ngModel)]="model.JudgeId" id="JudgeId" name="JudgeId" #JudgeId="ngModel">
                     <option [value]='undefined'>Select Judge</option>
                     <option *ngFor="let judge of judges" [value]='judge.Id'>
                       {{judge.FirstName}} {{judge.LastName}}
                     </option>
-                  </select>
+                  </select> -->
+                  <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [settings]="settings" (onSelect)="onJudgeSelect($event)"
+                    class="form-control" #Judges='ngModel' name="Judges" (onDeSelect)="OnJudgeDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                    (onDeSelectAll)="onDeSelectAll($event)">
+                  </angular2-multiselect>
                 </div>
               </div>
             </div>
@@ -216,6 +220,132 @@
               </div>
             </div>
 
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" #IsClose="ngModel"> Is Close
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CloseDate">Close Date</label>
+                  <input class="form-control" [(ngModel)]="model.CloseDate" ngui-datetime-picker date-only="true" name="CloseDate" id="CloseDate"
+                    #CloseDate="ngModel" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="JugmentFavourTo">Jugment Favour To</label>
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="JugmentFavourId" name="JugmentFavourId" [source]="contactSearch.bind(this)"
+                    min-chars="3" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectJugmentFavourTo($event)"
+                    value-property-name="Id" display-property-name="Name" />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="FilledDate">Filled Date</label>
+                  <input class="form-control" [(ngModel)]="model.FilledDate" ngui-datetime-picker date-only="true" name="FilledDate" id="FilledDate"
+                    #FilledDate="ngModel" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel"> Notify Me
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="NotifyMeWhen">NotifyMe When</label>
+                  <input class="form-control" [(ngModel)]="model.NotifyMeWhen" name="NotifyMeWhen" id="NotifyMeWhen" #NotifyMeWhen="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="AdvanceFees">Advance Fees</label>
+                  <input class="form-control" type="number" id="AdvanceFees" name="AdvanceFees" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.AdvanceFees"
+                    #AdvanceFees="ngModel" />
+                  <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="err-label">
+                    Enter Valid Advance Fees</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="PricingType">Pricing Type</label>
+                  <input class="form-control" [(ngModel)]="model.PricingType" name="PricingType" id="PricingType" #PricingType="ngModel" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CourtFees">Court Fees</label>
+                  <input class="form-control" type="number" id="CourtFees" name="CourtFees" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.CourtFees"
+                    #CourtFees="ngModel" />
+                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="err-label">
+                    Enter Valid Court Fees</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="BillingFrequency">Billing Frequency</label>
+                  <input class="form-control" [(ngModel)]="model.BillingFrequency" name="BillingFrequency" id="BillingFrequency" #BillingFrequency="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CourtFees">Court Fees</label>
+                  <input class="form-control" type="number" id="CourtFees" name="CourtFees" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.CourtFees"
+                    #CourtFees="ngModel" />
+                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="err-label">
+                    Enter Valid Court Fees</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="BillingFrequency">Billing Frequency</label>
+                  <input class="form-control" [(ngModel)]="model.BillingFrequency" name="BillingFrequency" id="BillingFrequency" #BillingFrequency="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="BillingDate">Billing Date</label>
+                  <input class="form-control" [(ngModel)]="model.BillingDate" ngui-datetime-picker date-only="true" name="BillingDate" id="BillingDate"
+                    #BillingDate="ngModel" />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="TrustAccount">Trust Account</label>
+                  <input class="form-control" type="number" id="TrustAccount" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.TrustAccount"
+                    #TrustAccount="ngModel" />
+                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="err-label">
+                    Enter Valid Trust Account</label>
+                </div>
+              </div>
+            </div>
 
             <div class="row">
               <button type="button" class="btn btn-default" (click)="onCancelClick()">Cancel</button>

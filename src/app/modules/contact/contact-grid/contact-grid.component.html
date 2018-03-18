@@ -22,23 +22,6 @@
     </ng-template>
   </ngx-datatable-column>
 
-  <ngx-datatable-column name="Mobile Number" sortable="true" prop="MobileNumber">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Email Id" sortable="true" prop="EmailId">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Company Name" sortable="true" prop="CompanyName">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
   <ngx-datatable-column *ngIf="showAction" name="Actions" sortable="false" prop="Id">
     <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
       <button (click)="editClick(value)" md-icon-button>

@@ -4,7 +4,7 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { ContactService } from '../../contact/contact.service';
 import { Case } from '../../../models/case';
 import { DropDownModel } from 'app/models/dropDownModel';
-import { CaseType, CaseAppealType, CasePriority, WorkedAs } from 'app/shared/constants';
+import { CaseType, CasePriority, WorkedAs } from 'app/shared/constants';
 
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -19,19 +19,30 @@ export class CaseAddComponent implements OnInit {
   courts: any[] = [];
   judges: any[] = [];
   offices: any[] = [];
+  selectedJudges: any[] = [];
+  CaseAppealTypeDropDown: any[] = [];
   model: Case = new Case();
   CaseTypeDropDown: Array<DropDownModel> = CaseType;
-  CaseAppealTypeDropDown: Array<DropDownModel> = CaseAppealType;
   PriorityDropDown: Array<DropDownModel> = CasePriority;
   WorkedAsDropDown: Array<DropDownModel> = WorkedAs;
-
+  ClientId; OpponentContactId; OppnentAdvocateId; WitnessContactId; JugmentFavourId;
   isLoading: boolean = false;
+  settings = {
+    text: "Select Judges",
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All'
+  };
 
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
     private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param["id"]);
+    this.model.NotifyMe = true;
+
+    this.caseService.getCaseAppealTypes().subscribe(res => {
+      this.CaseAppealTypeDropDown = res;
+    });
     this.caseService.getCourtsDD().subscribe(res => {
       this.courts = res;
     }, err => {
@@ -47,11 +58,15 @@ export class CaseAddComponent implements OnInit {
         response => {
           debugger;
           this.model = <Case>response;
-          // if (this.model.ClientId) {
-          //   this.contactService.getContactById(this.model.ClientId).subscribe(res => {
-
-          //   })
-          // }
+          this.OpponentContactId = response.OpponentContactName;
+          this.OppnentAdvocateId = response.OppnentAdvocateName;
+          this.WitnessContactId = response.WitnessContactName;
+          this.JugmentFavourId = response.JugmentFavourToName;
+          if (this.model.ClientId) {
+            this.contactService.getContactById(this.model.ClientId).subscribe(res => {
+              this.ClientId = res.FirstName + ' ' + res.LastName;
+            })
+          }
         }, err => {
           this._notify.error(err.Result);
         });
@@ -59,7 +74,7 @@ export class CaseAddComponent implements OnInit {
   }
 
   autocompleListFormatter = (data: any) => {
-    let html = `<span>${data.Name} - ${data.ContactType} </span>`;
+    let html = `<span>${data.Name} - ${data.ContactType ? data.ContactType : ''} </span>`;
     return this._sanitizer.bypassSecurityTrustHtml(html);
   }
 
@@ -114,6 +129,31 @@ export class CaseAddComponent implements OnInit {
     } else {
       this.model.WitnessContactId = undefined;
     }
+  }
+
+  onSelectJugmentFavourTo(item: any) {
+    if (item) {
+      this.model.JugmentFavourTo = item.Id;
+    } else {
+      this.model.JugmentFavourTo = undefined;
+    }
+  }
+
+  onJudgeSelect(item: any) {
+    // console.log(item);
+    // console.log(this.selectedItems);
+    this.selectedJudges.push(item);
+  }
+  OnJudgeDeSelect(item: any) {
+    // console.log(item);
+    // console.log(this.selectedItems);
+    this.selectedJudges.splice(this.selectedJudges.indexOf(item), 1);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+  onDeSelectAll(items: any) {
+    console.log(items);
   }
 
   save() {

@@ -13,6 +13,12 @@ import { AuthService } from 'app/shared/services/auth.service';
 import { HttpClientService } from 'app/lib/http/http-client.service';
 import { NotificationService } from './shared/services/notification.service';
 
+// Modal popup
+import {
+  ModalModule, OverlayRenderer, DOMOverlayRenderer, Overlay
+} from 'angular2-modal';
+import { Modal, BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+
 // toastr module
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
@@ -66,7 +72,9 @@ import { HeaderComponent } from 'app/containers/layout/components/header/header.
     FormsModule,
     ToastModule.forRoot(),
     PerfectScrollbarModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ModalModule.forRoot(),
+    BootstrapModalModule
   ],
   providers: [
     CommonService,

@@ -7,17 +7,21 @@ import { CaseService } from './case.service';
 import { caseRouting } from 'app/modules/case/case.routing';
 import { CaseAddComponent } from './case-add/case-add.component';
 import { ContactService } from '../contact/contact.service';
+import { CaseChangeStatusComponent } from './case-change-status/case-change-status.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    caseRouting
+    caseRouting,
+    AngularMultiSelectModule
   ],
   declarations: [
     CaseListComponent,
     CaseDetailComponent,
-    CaseAddComponent
+    CaseAddComponent,
+    CaseChangeStatusComponent
   ],
   providers: [
     CaseService,

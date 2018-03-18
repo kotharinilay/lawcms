@@ -124,6 +124,28 @@ export class ContactService {
     });
   }
 
+  deleteMobile(id: number) {
+    return this.httpService.delete('mobile/delete/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  deleteEmail(id: number) {
+    return this.httpService.delete('EmailAddress/delete/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
   getDashboardData() {
     return this.httpService.get('Contact/GetDashboardData').map((res: any) => {
       if (res.Success) {
@@ -212,8 +234,30 @@ export class ContactService {
     });
   }
 
+  getAllStates() {
+    return this.httpService.get('state/GetAll').map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
   getCities(stateId: number) {
     return this.httpService.get('City/GetCityStateById/' + stateId).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getAllCities() {
+    return this.httpService.get('City/GetAll').map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
