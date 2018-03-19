@@ -36,7 +36,7 @@
                   <input type="text" maxlength="50" id="FirstName" name="FirstName" required class="form-control" [(ngModel)]="model.FirstName"
                     #FirstName="ngModel" />
                   <label *ngIf="contactForm.submitted && !FirstName.valid" class="err-label">
-                    Please enter Firstname
+                    Please enter First name
                   </label>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                   <input type="text" maxlength="50" name="LastName" required class="form-control" [(ngModel)]="model.LastName" #LastName="ngModel"
                   />
                   <label *ngIf="contactForm.submitted && !LastName.valid" class="err-label">
-                    Please enter Lastname
+                    Please enter Last name
                   </label>
                 </div>
               </div>
