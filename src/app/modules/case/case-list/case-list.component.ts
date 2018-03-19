@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/modules/case/case.service';
+import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { CaseChangeStatusComponent } from '../case-change-status/case-change-status.component';
+import { overlayConfigFactory } from 'ngx-modialog';
 
 @Component({
   selector: 'app-case-list',
@@ -12,7 +15,8 @@ export class CaseListComponent implements OnInit {
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
 
-  constructor(private caseService: CaseService, private router: Router, private _notify: NotificationService) { }
+  constructor(private caseService: CaseService, private router: Router, private _notify: NotificationService,
+    private modal: Modal) { }
 
   ngOnInit() {
     this.caseService.getCases().subscribe(
@@ -39,5 +43,9 @@ export class CaseListComponent implements OnInit {
           this._notify.error(err.Result);
         });
     }
+  }
+
+  changeStatus() {
+    this.modal.open(CaseChangeStatusComponent, overlayConfigFactory({}, BSModalContext));
   }
 }

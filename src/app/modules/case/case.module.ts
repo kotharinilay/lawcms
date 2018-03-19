@@ -9,13 +9,15 @@ import { CaseAddComponent } from './case-add/case-add.component';
 import { ContactService } from '../contact/contact.service';
 import { CaseChangeStatusComponent } from './case-change-status/case-change-status.component';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     caseRouting,
-    AngularMultiSelectModule
+    AngularMultiSelectModule,
+    BootstrapModalModule
   ],
   declarations: [
     CaseListComponent,
@@ -25,7 +27,9 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2
   ],
   providers: [
     CaseService,
-    ContactService
-  ]
+    ContactService,
+    Modal
+  ],
+  entryComponents: [CaseChangeStatusComponent]
 })
 export class CaseModule { }

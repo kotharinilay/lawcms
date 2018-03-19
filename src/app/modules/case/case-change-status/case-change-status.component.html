@@ -1,43 +1,96 @@
-<div class="custom-modal-container px-4">
+<div class="container-fluid custom-modal-container" style="padding: 15px 30px;">
   <div class="row custom-modal-header">
     <div class="col">
-      <h2 class="my-3">Add Site</h2>
+      <h2 class="my-3">Change Case Status</h2>
     </div>
   </div>
-  <form [formGroup]="siteForm" (ngSubmit)="addSite()" novalidate>
+  <form name="changeStatusForm" (ngSubmit)="changeStatusForm.form.valid && changeStatus()" #changeStatusForm='ngForm' novalidate>
     <div class="row">
-      <div class="col">
-        <div class="form-group" [ngClass]="{ 'has-error': siteForm.controls.name.touched && siteForm.controls.name.invalid }">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" [zwimloPlaceholder]="'Site Name *'" formControlName="name" />
-          <control-messages [name]="'Name'" [control]="siteForm.controls.name" [isFormSubmitted]="isFormSubmitted"></control-messages>
-        </div>
-        <div class="form-group" [ngClass]="{ 'has-error': siteForm.controls.description.touched && siteForm.controls.description.invalid }">
-          <label for="description">Description</label>
-          <textarea type="text" class="form-control" [zwimloPlaceholder]="'Site Description *'" formControlName="description"></textarea>
-          <control-messages [name]="'Description'" [control]="siteForm.controls.description" [isFormSubmitted]="isFormSubmitted"></control-messages>
-        </div>
-        <div class="form-group" [ngClass]="{ 'has-error': siteForm.controls.defaultLocale.touched && siteForm.controls.defaultLocale.invalid }">
-          <label for="defaultLocale">Default Locale</label>
-          <input type="text" class="form-control" [zwimloPlaceholder]="'Default Locale *'" formControlName="defaultLocale" />
-          <control-messages [name]="'Default Locale'" [control]="siteForm.controls.defaultLocale" [isFormSubmitted]="isFormSubmitted"></control-messages>
-        </div>
-
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" formControlName="siteSecured"> Secure content with access token?
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="CaseId">Case</label>
+          <select class="form-control" required [(ngModel)]="model.CaseId" id="CaseId" name="CaseId" #CaseId="ngModel">
+            <option [value]='undefined'>Select Case</option>
+            <option *ngFor="let case of cases" value={{case.Id}}>
+              {{case.CaseNo}}
+            </option>
+          </select>
+          <label *ngIf="changeStatusForm.submitted && !CaseId.valid" class="err-label">
+            Please enter Case
           </label>
         </div>
       </div>
-
-    </div>
-    <div class="row">
-
-      <div class="col-6 d-flex align-items-center justify-content-end">
+      <div class="col-sm-6">
         <div class="form-group">
-          <button [disabled]="loading" class="btn btn-success">Add site</button>
+          <label for="StageID">Stage</label>
+          <select class="form-control" [(ngModel)]="model.StageID" id="StageID" name="StageID" #StageID="ngModel">
+            <option [value]='undefined'>Select Stage</option>
+            <option *ngFor="let stage of stages" value={{stage.Id}}>
+              {{stages.StageName}}
+            </option>
+          </select>
         </div>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="CourtId">Court</label>
+          <select class="form-control" [(ngModel)]="model.CourtId" id="CourtId" name="CourtId" #CourtId="ngModel">
+            <option [value]='undefined'>Select Court</option>
+            <option *ngFor="let court of courts" value={{court.Id}}>
+              {{court.CourtName}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="HearingDate">Hearing Date</label>
+          <input class="form-control" [(ngModel)]="model.HearingDate" ngui-datetime-picker date-only="true" name="HearingDate" id="HearingDate"
+            #HearingDate="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="NextDate">Next Date</label>
+          <input class="form-control" [(ngModel)]="model.NextDate" ngui-datetime-picker date-only="true" name="NextDate" id="NextDate"
+            #NextDate="ngModel" />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="Description">Description</label>
+          <input type="text" maxlength="250" class="form-control" [(ngModel)]="model.Description" name="Description" id="Description"
+            #Description="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="DefendantRemark">Defendant Remark</label>
+          <input type="text" maxlength="250" class="form-control" [(ngModel)]="model.DefendantRemark" name="DefendantRemark" id="DefendantRemark"
+            #DefendantRemark="ngModel" />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="NextActivity">Next Activity</label>
+          <input type="text" maxlength="250" class="form-control" [(ngModel)]="model.NextActivity" name="NextActivity" id="NextActivity"
+            #NextActivity="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <button type="button" class="btn btn-default" (click)="closeClick()">Cancel</button>
+      <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
     </div>
   </form>
   <div class="row custom-modal-footer">

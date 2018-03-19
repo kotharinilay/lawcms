@@ -14,10 +14,7 @@ import { HttpClientService } from 'app/lib/http/http-client.service';
 import { NotificationService } from './shared/services/notification.service';
 
 // Modal popup
-import {
-  ModalModule, OverlayRenderer, DOMOverlayRenderer, Overlay
-} from 'angular2-modal';
-import { Modal, BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { ModalModule } from 'ngx-modialog';
 
 // toastr module
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
@@ -73,8 +70,7 @@ import { HeaderComponent } from 'app/containers/layout/components/header/header.
     ToastModule.forRoot(),
     PerfectScrollbarModule,
     NgxDatatableModule,
-    ModalModule.forRoot(),
-    BootstrapModalModule
+    ModalModule.forRoot()
   ],
   providers: [
     CommonService,
