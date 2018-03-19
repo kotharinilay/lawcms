@@ -64,11 +64,19 @@ export class ContactDetailComponent implements OnInit {
         response => {
           debugger;
           this.model = <Contact>response;
+          if (this.model.Address.some(x => x.AddressType === AddressType.Home)) {
+            this.addressSet = [];
+          }
+          if (this.model.Address.some(x => x.AddressType === AddressType.Office)) {
+            this.officeAddressSet = [];
+          }
+          if (this.model.MobileNumbers.length) {
+            this.mobileSet = [];
+          }
+          if (this.model.EmailAddress.length) {
+            this.emailSet = [];
+          }
 
-          this.addressSet = [];
-          this.officeAddressSet = [];
-          this.mobileSet = [];
-          this.emailSet = [];
 
           this.model.Address.forEach(element => {
             if (element.AddressType === AddressType.Home) {
@@ -95,6 +103,7 @@ export class ContactDetailComponent implements OnInit {
               });
             }
           });
+
           this.model.EmailAddress.forEach(element => {
             this.emailSet.push({
               Id: element.Id,
@@ -112,7 +121,6 @@ export class ContactDetailComponent implements OnInit {
               MobileNumber: element.MobileNumber
             });
           });
-
         }, err => {
           this._notify.error(err.Result);
         });
@@ -165,7 +173,9 @@ export class ContactDetailComponent implements OnInit {
             PostCode: address.PostCode,
             AddressType: AddressType.Home
           }
-          this.model.Address.push(addressModel);
+          if (address.City && address.State && address.Country) {
+            this.model.Address.push(addressModel);
+          }
         }
       } else {
         const addressModel: Address = {
@@ -178,7 +188,9 @@ export class ContactDetailComponent implements OnInit {
           PostCode: address.PostCode,
           AddressType: AddressType.Home
         }
-        this.model.Address.push(addressModel);
+        if (address.City && address.State && address.Country) {
+          this.model.Address.push(addressModel);
+        }
       }
     });
     this.officeAddressSet.forEach(address => {
@@ -196,7 +208,9 @@ export class ContactDetailComponent implements OnInit {
             PostCode: address.PostCode,
             AddressType: AddressType.Office
           }
-          this.model.Address.push(addressModel);
+          if (address.City && address.State && address.Country) {
+            this.model.Address.push(addressModel);
+          }
         }
       } else {
         const addressModel: Address = {
@@ -209,7 +223,9 @@ export class ContactDetailComponent implements OnInit {
           PostCode: address.PostCode,
           AddressType: AddressType.Office
         }
-        this.model.Address.push(addressModel);
+        if (address.City && address.State && address.Country) {
+          this.model.Address.push(addressModel);
+        }
       }
     });
     this.mobileSet.forEach(mobile => {
@@ -222,7 +238,9 @@ export class ContactDetailComponent implements OnInit {
             MobileNumber: mobile.MobileNumber,
             IsPrimary: mobile.IsPrimary
           }
-          this.model.MobileNumbers.push(mobileModel);
+          if (mobileModel.MobileNumber) {
+            this.model.MobileNumbers.push(mobileModel);
+          }
         }
       } else {
         const mobileModel: Mobile = {
@@ -230,7 +248,9 @@ export class ContactDetailComponent implements OnInit {
           MobileNumber: mobile.MobileNumber,
           IsPrimary: mobile.IsPrimary
         }
-        this.model.MobileNumbers.push(mobileModel);
+        if (mobileModel.MobileNumber) {
+          this.model.MobileNumbers.push(mobileModel);
+        }
       }
     });
 
@@ -244,7 +264,9 @@ export class ContactDetailComponent implements OnInit {
             EmailId: email.EmailId,
             IsPrimary: email.IsPrimary
           }
-          this.model.EmailAddress.push(emailModel);
+          if (emailModel.EmailId) {
+            this.model.EmailAddress.push(emailModel);
+          }
         }
       } else {
         const emailModel: Email = {
@@ -252,7 +274,9 @@ export class ContactDetailComponent implements OnInit {
           EmailId: email.EmailId,
           IsPrimary: email.IsPrimary
         }
-        this.model.EmailAddress.push(emailModel);
+        if (emailModel.EmailId) {
+          this.model.EmailAddress.push(emailModel);
+        }
       }
     });
 
