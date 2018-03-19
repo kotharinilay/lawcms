@@ -1,3 +1,5 @@
+import { DropDownModel } from "../models/dropDownModel";
+
 export const httpResponseTypes = {
     BLOB: 'blob',
     JSON: 'json',
@@ -20,6 +22,8 @@ export const ContactType = [
     { Id: "Opponent", Name: "Opponent" },
     { Id: "Associates", Name: "Associates" }
 ];
+
+
 
 export const AddressType = {
     Home: 'Home',
@@ -87,3 +91,13 @@ export const DealOn = [
     { Id: "Family", Name: "Family" },
     { Id: "Forgery", Name: "Forgery" }
 ]
+
+export const ContactTitle = [{
+    Id: "Mr.", Name: "Mr."
+},
+{
+    Id: "Miss", Name: "Miss"
+},
+{
+    Id: "Mrs.", Name: "Mrs."
+}]

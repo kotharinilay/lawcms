@@ -1,7 +1,12 @@
 <div>
   <div class="panel mb25">
     <div class="panel-heading border">
-      {{ (paramId !='new') ? 'Modify':'Add' }} Contact
+      <div> {{ (paramId !='new') ? 'Modify':'Add' }} Contact
+        <span class="pull-right pointer-cursor" (click)="toggleIsImportant()">
+          <i class="big-icon fa {{ (model.IsImportant) ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
+        </span>
+      </div>
+
     </div>
     <div class=panel-body>
       <div class="row no-margin">
@@ -11,8 +16,11 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Title">Title</label>
-                  <input type="text" maxlength="50" id="Title" name="Title" required class="form-control" [(ngModel)]="model.Title" #Title="ngModel"
-                  />
+                  <select class="form-control" required [(ngModel)]="model.Title" id="Title" name="Title" #Title="ngModel">
+                    <option *ngFor="let title of TitleDropDown" value={{title.Id}}>
+                      {{title.Name}}
+                    </option>
+                  </select>
                   <label *ngIf="contactForm.submitted && !Title.valid" class="err-label">
                     Please enter Title
                   </label>
@@ -64,15 +72,6 @@
                 </div>
               </div>
               <div class="col-sm-6">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="IsImportant" [(ngModel)]="model.IsImportant" #IsImportant="ngModel"> Is Important
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
                 <div class="form-group">
                   <label for="PriceRate">Price Rate</label>
                   <input class="form-control" type="number" id="PriceRate" name="PriceRate" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.PriceRate"
@@ -81,6 +80,8 @@
                     Enter Valid Price Rate</label>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="BasePrice">Base Price</label>
@@ -90,8 +91,6 @@
                     Enter Valid Base Price</label>
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Reference">Reference</label>
@@ -99,6 +98,8 @@
                   />
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-sm-6" *ngIf="model.ContactType ==='Advocate' || model.ContactType ==='Associates'">
                 <div class="form-group">
                   <label for="DealOn">Deal On</label>

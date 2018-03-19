@@ -5,7 +5,8 @@ import { DropDownModel } from 'app/models/DropDownModel';
 import { Contact, Address, Mobile, Email } from 'app/models/contact';
 import { ContactService } from '../contact.service';
 import { NotificationService } from 'app/shared/services/notification.service';
-import { ContactType, AddressType, DealOn } from 'app/shared/constants';
+import { ContactType, AddressType, DealOn, ContactTitle } from 'app/shared/constants';
+
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ContactDetailComponent implements OnInit {
   model: Contact = new Contact();
   isLoading: boolean = false;
   public paramId: any;
+  TitleDropDown: Array<DropDownModel> = ContactTitle;
   ContactTypeDropDown: Array<DropDownModel> = ContactType;
   DealOnDropDown: Array<DropDownModel> = DealOn;
   countries: any[] = [];
@@ -35,6 +37,8 @@ export class ContactDetailComponent implements OnInit {
 
   ngOnInit() {
     this.model.ContactType = this.ContactTypeDropDown[0].Id;
+    this.model.Title = this.TitleDropDown[0].Id;
+    this.model.IsImportant = false;
     this.model.Address = [];
     this.model.EmailAddress = [];
     this.model.MobileNumbers = [];
@@ -304,5 +308,9 @@ export class ContactDetailComponent implements OnInit {
 
   onCancleClick() {
     this.router.navigate(['/contact']);
+  }
+
+  toggleIsImportant() {
+    this.model.IsImportant = !this.model.IsImportant;
   }
 }
