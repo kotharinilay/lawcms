@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
+  layoutMenu: any;
   constructor() { }
-
   ngOnInit() {
   }
 

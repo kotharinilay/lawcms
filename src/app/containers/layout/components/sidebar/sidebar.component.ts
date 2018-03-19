@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,9 +7,14 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() layoutMenu: any;
   constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  toggleMenu() {
+    this.layoutMenu.classList.toggle("layout-small-menu");
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { AuthService } from 'app/shared/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
   @Output()
   toggleSidebarClick: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSidebarOpen: boolean;
-
+  @Input() layoutMenu: any;
   constructor(private router: Router, private authService: AuthService) {
     this.isSidebarOpen = false;
   }
@@ -20,6 +20,11 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar() {
     this.toggleSidebarClick.emit(!this.isSidebarOpen);
+  }
+
+  toggleMenu() {
+    this.layoutMenu.classList.toggle("offscreen");
+    this.layoutMenu.classList.toggle("move-left");
   }
 
   logout() {
