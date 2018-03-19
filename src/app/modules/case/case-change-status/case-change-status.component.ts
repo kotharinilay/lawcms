@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CloseGuard, ModalComponent, DialogRef } from 'angular2-modal';
 
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { CaseStatus } from 'app/models/case';
 
 @Component({
   selector: 'app-case-change-status',
@@ -12,6 +13,7 @@ export class CaseChangeStatusComponent implements OnInit, OnDestroy, CloseGuard,
   loading: boolean = false;
 
   constructor(public dialog: DialogRef<BSModalContext>) { }
+  model: CaseStatus = new CaseStatus();
 
   ngOnInit() {
   }

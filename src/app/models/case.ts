@@ -36,3 +36,18 @@ export class Case {
     BillingDate: Date;
     TrustAccount: number;
 }
+
+export class CaseStatus {
+    Id: number;
+    CaseId: number;
+    StageID: number;
+    CourtId: number;
+    HearingDate: Date;
+    NextDate: Date;
+    Description: string;
+    DefendantRemark: string;
+    NextActivity: string;
+    Attachment: string;
+    IsActive: boolean;
+    UpdatedTime: Date;
+}
