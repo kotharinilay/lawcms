@@ -122,6 +122,16 @@ export class ContactDetailComponent implements OnInit {
         }, err => {
           this._notify.error(err.Result);
         });
+
+      this.contactService.getContactPhoto(this.paramId).subscribe(
+        response => {
+          if (response) {
+            this.url = "data:image/png;base64," + response;
+          }
+        }, error => {
+          this._notify.error(error.result);
+        });
+
     }
   }
 
@@ -362,6 +372,16 @@ export class ContactDetailComponent implements OnInit {
           this.url = event.target.result;
         }
         reader.readAsDataURL(event.target.files[0]);
+
+        if (this.paramId !== "new") {
+          const formData = new FormData();
+          formData.append("Photo", this.fileToUpload);
+          this.contactService.uploadFileWithData(this.paramId, formData).subscribe(response => {
+            if (response) {
+              this._notify.success("Conact photo uploaded successfully");
+            }
+          }, error => { this._notify.error(error.result); })
+        }
       } else {
         this.validFileType = false;
       }
