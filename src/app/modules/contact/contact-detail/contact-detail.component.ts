@@ -7,14 +7,11 @@ import { ContactService } from '../contact.service';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { ContactType, AddressType, DealOn, ContactTitle } from 'app/shared/constants';
 
-
-
 @Component({
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html'
 })
 export class ContactDetailComponent implements OnInit {
-
   model: Contact = new Contact();
   isLoading: boolean = false;
   public paramId: any;
@@ -25,13 +22,14 @@ export class ContactDetailComponent implements OnInit {
   states: any[] = [];
   cities: any[] = [];
   companies: any[] = [];
-
+  fileToUpload: File = null;
+  url: any;
   addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
   officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
   visibleEmail: number = 0;
   mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false }];
-
+  validFileType: boolean = true;
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
     private _notify: NotificationService) { }
 
@@ -284,6 +282,20 @@ export class ContactDetailComponent implements OnInit {
       response => {
         this.isLoading = false;
         if (response) {
+          if (this.fileToUpload && this.fileToUpload.name) {
+            const formData = new FormData();
+            formData.append("Photo", this.fileToUpload);
+            return this.contactService.uploadFileWithData(response.Id, formData).subscribe(res => {
+              this._notify.success(` Contact ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
+              if (this.paramId !== "new") {
+                setTimeout(() => {
+                  this.router.navigate(['/contact']);
+                });
+              }
+            }, error => {
+              this._notify.error(error.Result);
+            });
+          }
           if (this.paramId === 'new') {
             // this.addressSet.forEach(address => {
             //   const addressModel: Address = {
@@ -336,5 +348,23 @@ export class ContactDetailComponent implements OnInit {
 
   toggleIsImportant() {
     this.model.IsImportant = !this.model.IsImportant;
+  }
+
+  onFileChange(event: any) {
+    const target = event.target || event.srcElement;
+    const files: FileList = target.files;
+    if (files.length > 0) {
+      if (files[0].type == "image/jpg" || files[0].type == "image/jpeg" || files[0].type == "image/png") {
+        this.validFileType = true;
+        this.fileToUpload = files[0];
+        var reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.url = event.target.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      } else {
+        this.validFileType = false;
+      }
+    }
   }
 }

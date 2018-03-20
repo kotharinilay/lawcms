@@ -111,6 +111,21 @@
                   </select>
                 </div>
               </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="CaseId">Profile Image</label>
+                  <div>
+                    <img [src]="url" class="contact-image-preview">
+                  </div>
+                  <div>{{fileToUpload?.name || 'Select Image'}}</div>
+                  <div *ngIf="!validFileType">
+                    <label class="err-label"> Invalid File Type </label>
+                  </div>
+                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
+                  <input type="file" class="fileUpload" accept="image/*" #fileUpload style="display:none" #fileUpload style="display:none"
+                    (change)="onFileChange($event)" />
+                </div>
+              </div>
             </div>
 
             <div class="panel-heading border">

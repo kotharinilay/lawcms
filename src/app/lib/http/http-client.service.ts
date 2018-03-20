@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IHttpOptions, IRequestOptions } from 'app/shared/interfaces/http-interface';
 import { environment } from 'environments/environment';
+import { RequestOptions } from '@angular/http';
 
 @Injectable()
 export class HttpClientService {
@@ -29,6 +30,13 @@ export class HttpClientService {
       .catch((err: any) => {
         throw err;
       });
+  }
+
+  postFormData(url: string, body: any, headers?: any, params?: any) {
+    url = this.updateUrl(url);
+    headers = new Headers();
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(url, body, <any>options);
   }
 
   private updateUrl(req: string) {
