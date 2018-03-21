@@ -40,6 +40,9 @@
                       {{caseType.Name}}
                     </option>
                   </select>
+                  <label *ngIf="caseForm.submitted && !model.CaseType" class="err-label">
+                    Please select Case Type
+                  </label>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -73,12 +76,15 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CourtId">Court</label>
-                  <select class="form-control" [(ngModel)]="model.CourtId" id="CourtId" name="CourtId" #CourtId="ngModel">
+                  <select class="form-control" required [(ngModel)]="model.CourtId" id="CourtId" name="CourtId" #CourtId="ngModel">
                     <option [value]='undefined'>Select Court</option>
                     <option *ngFor="let court of courts" [value]='court.Id'>
                       {{court.CourtName}}
                     </option>
                   </select>
+                  <label *ngIf="caseForm.submitted && !model.CourtId" class="err-label">
+                    Please select Court
+                  </label>
                 </div>
               </div>
               <div class="col-sm-6">

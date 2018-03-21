@@ -176,6 +176,7 @@ export class CaseAddComponent implements OnInit {
           });
         }
       }, err => {
+        this.isLoading = false;
         this._notify.error(err.Result);
       });
   }
