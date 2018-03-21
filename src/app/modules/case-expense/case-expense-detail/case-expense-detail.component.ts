@@ -19,7 +19,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   model: CaseExpense = new CaseExpense();
   cases: any[] = [];
   CategoryDropDown: any[] = [];
-
+  url: string;
   isLoading: boolean = false;
   fileToUpload: File = null;
   constructor(private route: ActivatedRoute, private caseExpenseService: CaseExpenseService, private _notify: NotificationService,
@@ -71,14 +71,27 @@ export class CaseExpenseDetailComponent implements OnInit {
     this.caseExpenseService.addOrUpdate(this.model).subscribe(
       response => {
         this.isLoading = false;
+
         if (response) {
-          if (this.paramId === 'new') {
+          if (this.paramId === 'new' && this.fileToUpload && this.fileToUpload.name) {
+            const formData = new FormData();
+            formData.append("Caseexpense", this.fileToUpload);
+            return this.caseExpenseService.uploadFileWithData(response.Id, this.model.CaseId, formData).subscribe(res => {
+              this._notify.success(`Case Expense  ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
+              if (this.paramId !== "new") {
+                setTimeout(() => {
+                  this.router.navigate(['/case-expense']);
+                });
+              }
+            }, error => {
+              this._notify.error(error.Result);
+            });
+          } else if (this.paramId === 'new') {
             this._notify.success("Case Expense added successfully.");
           }
           else {
             this._notify.success("Case Expense updated successfully.");
           }
-
           setTimeout(() => {
             this.router.navigate(['/case-expense']);
           });
@@ -94,10 +107,29 @@ export class CaseExpenseDetailComponent implements OnInit {
     const files: FileList = target.files;
     if (files.length > 0) {
       this.fileToUpload = files[0];
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+      if (this.paramId !== "new") {
+        const formData = new FormData();
+        formData.append("Caseexpense", this.fileToUpload);
+        this.caseExpenseService.uploadFileWithData(this.paramId, this.model.CaseId, formData).subscribe(response => {
+          if (response) {
+            this._notify.success("Bill Document uploaded successfully");
+          }
+        }, error => { this._notify.error(error.result); })
+      }
     }
   }
 
   onCancelClick() {
     this.router.navigate(['/case-expense']);
+  }
+
+  showDocument() {
+    var win = window.open();
+    win.document.write('<iframe src="' + this.url + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>')
   }
 }

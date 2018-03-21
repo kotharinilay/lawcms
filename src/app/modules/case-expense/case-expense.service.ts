@@ -81,4 +81,16 @@ export class CaseExpenseService {
       throw err;
     });
   }
+
+  uploadFileWithData(id: number, caseId:number, formData: FormData) {
+    return this.httpService.postFormData(`CaseExpense/UploadBillDocument/${id}?caseId=${caseId}`,formData).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
 }

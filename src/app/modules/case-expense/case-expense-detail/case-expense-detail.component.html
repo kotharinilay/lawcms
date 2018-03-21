@@ -82,8 +82,9 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseId">Bill Document</label>
-                  <div>{{fileToUpload?.name || 'Select File'}}</div>
-                  <a href="javascript:void(0);" class="change" (click)="fileUpload.click()">Browse</a>
+                  <div>{{fileToUpload?.name || 'Select File'}} <button *ngIf="url!== null && url!== undefined" (click)="showDocument()" class="btn btn-primary" style="
+                    margin-left: 5px;">See Document</button></div>
+                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
                   <input type="file" class="fileUpload" #fileUpload style="display:none" #fileUpload style="display:none" (change)="onFileChange($event)"
                   />
                 </div>
