@@ -91,8 +91,12 @@
                     </option>
                   </select> -->
                   <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [settings]="settings" (onSelect)="onJudgeSelect($event)"
-                    class="form-control" #Judges='ngModel' name="Judges" (onDeSelect)="OnJudgeDeSelect($event)" (onSelectAll)="onSelectAll($event)"
-                    (onDeSelectAll)="onDeSelectAll($event)">
+                    (onDeSelect)="OnJudgeDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+                    <c-badge>
+                      <ng-template let-item="item">
+                        <span>{{item.FirstName}} {{item.LastName}}</span>
+                      </ng-template>
+                    </c-badge>
                   </angular2-multiselect>
                 </div>
               </div>

@@ -18,7 +18,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   public paramId: any;
   model: CaseExpense = new CaseExpense();
   cases: any[] = [];
-  CategoryDropDown: Array<DropDownModel> = ExpenseCategory;
+  CategoryDropDown: any[] = [];
 
   isLoading: boolean = false;
   fileToUpload: File = null;
@@ -32,6 +32,9 @@ export class CaseExpenseDetailComponent implements OnInit {
       this.cases = res;
     }, err => {
       this._notify.error(err.Result);
+    });
+    this.caseExpenseService.getCaseExpenseCategories().subscribe(res => {
+      this.CategoryDropDown = res;
     });
     if (this.paramId.toString() != "new") {
       this.caseExpenseService.getCaseExpenseById(this.paramId).subscribe(

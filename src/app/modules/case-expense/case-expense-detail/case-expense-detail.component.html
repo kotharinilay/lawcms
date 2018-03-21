@@ -33,7 +33,7 @@
                   <select class="form-control" [(ngModel)]="model.Category" id="Category" name="Category" #Category="ngModel">
                     <option [value]='undefined'>Select Expense Category</option>
                     <option *ngFor="let category of CategoryDropDown" value={{category.Id}}>
-                      {{category.Name}}
+                      {{category.ExpenseTypeName}}
                     </option>
                   </select>
                 </div>

@@ -27,16 +27,21 @@ export class CaseAddComponent implements OnInit {
   WorkedAsDropDown: Array<DropDownModel> = WorkedAs;
   ClientId; OpponentContactId; OppnentAdvocateId; WitnessContactId; JugmentFavourId;
   isLoading: boolean = false;
-  settings = {
-    text: "Select Judges",
-    selectAllText: 'Select All',
-    unSelectAllText: 'UnSelect All'
-  };
+  settings = {};
+
+
 
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
     private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router) { }
 
   ngOnInit() {
+    this.settings = {
+      singleSelection: false,
+      text: "Select Judges",
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      badgeShowLimit: 3
+    }
     this.route.params.subscribe(param => this.paramId = param["id"]);
     this.model.NotifyMe = true;
 
@@ -49,6 +54,7 @@ export class CaseAddComponent implements OnInit {
       this._notify.error(err.Result);
     });
     this.caseService.getJudgesDD().subscribe(res => {
+      debugger;
       this.judges = res;
     }, err => {
       this._notify.error(err.Result);
@@ -142,7 +148,8 @@ export class CaseAddComponent implements OnInit {
   onJudgeSelect(item: any) {
     // console.log(item);
     // console.log(this.selectedItems);
-    this.selectedJudges.push(item);
+    //debugger;
+    //this.selectedJudges.push(item);
   }
   OnJudgeDeSelect(item: any) {
     // console.log(item);

@@ -26,7 +26,7 @@
           <select class="form-control" [(ngModel)]="model.StageID" id="StageID" name="StageID" #StageID="ngModel">
             <option [value]='undefined'>Select Stage</option>
             <option *ngFor="let stage of stages" value={{stage.Id}}>
-              {{stages.StageName}}
+              {{stage.StageName}}
             </option>
           </select>
         </div>

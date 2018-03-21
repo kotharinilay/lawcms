@@ -15,6 +15,7 @@ export class CaseChangeStatusComponent implements OnInit, OnDestroy, CloseGuard,
   cases: any[] = [];
   stages: any[] = [];
   courts: any[] = [];
+  isLoading: boolean = false;
 
   constructor(public dialog: DialogRef<BSModalContext>, private caseService: CaseService) {
     dialog.context.dialogClass = "modal-dialog modal-lg";
