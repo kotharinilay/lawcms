@@ -36,8 +36,8 @@ export class ComplainAddComponent implements OnInit {
       this.complainService.getComplainById(this.paramId).subscribe(
         response => {
           this.model = <Complain>response;
-          // this.ComplainById = response.OpponentContactName;
-          // this.ComplainOfId = response.OppnentAdvocateName;
+          this.ComplainById = response.ComplainByName;
+          this.ComplainOfId = response.ComplainOfName;
         }, err => {
           this._notify.error(err.Result);
         });

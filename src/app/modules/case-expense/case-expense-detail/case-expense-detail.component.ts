@@ -22,6 +22,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   url: string;
   isLoading: boolean = false;
   fileToUpload: File = null;
+  AssociateContactId;
   constructor(private route: ActivatedRoute, private caseExpenseService: CaseExpenseService, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private contactService: ContactService, private caseService: CaseService,
     private router: Router) { }
@@ -42,14 +43,15 @@ export class CaseExpenseDetailComponent implements OnInit {
           debugger;
           this.model = <CaseExpense>response;
           debugger
-          if(this.model.BillDocument){
-          this.caseExpenseService.getBillDocument(this.model.Id).subscribe(res=>{
-            if(res && res !=="No Data Found"){
-              this.url = res;
-            }
-          },error =>{
-            this._notify.error(error.result);
-          })
+          this.AssociateContactId = response.AssociateContactName;
+          if (this.model.BillDocument) {
+            this.caseExpenseService.getBillDocument(this.model.Id).subscribe(res => {
+              if (res && res !== "No Data Found") {
+                this.url = res;
+              }
+            }, error => {
+              this._notify.error(error.result);
+            })
           }
         }, err => {
           this._notify.error(err.Result);
