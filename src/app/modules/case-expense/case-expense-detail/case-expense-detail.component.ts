@@ -41,6 +41,16 @@ export class CaseExpenseDetailComponent implements OnInit {
         response => {
           debugger;
           this.model = <CaseExpense>response;
+          debugger
+          if(this.model.BillDocument){
+          this.caseExpenseService.getBillDocument(this.model.Id).subscribe(res=>{
+            if(res && res !=="No Data Found"){
+              this.url = res;
+            }
+          },error =>{
+            this._notify.error(error.result);
+          })
+          }
         }, err => {
           this._notify.error(err.Result);
         });
@@ -106,6 +116,12 @@ export class CaseExpenseDetailComponent implements OnInit {
     const target = event.target || event.srcElement;
     const files: FileList = target.files;
     if (files.length > 0) {
+      let fileType: string = files[0].type.toString();
+      if (fileType.toString() !== "application/msword" && fileType.toString() !== "application/pdf"
+        && fileType.toString() !== "image/jpg" && fileType.toString() !== "image/jpeg" && fileType.toString() !== "image/png") {
+        return false;
+      }
+
       this.fileToUpload = files[0];
       var reader = new FileReader();
       reader.onload = (event: any) => {
