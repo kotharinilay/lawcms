@@ -5,8 +5,7 @@ import { DropDownModel } from 'app/models/DropDownModel';
 import { Contact, Address, Mobile, Email } from 'app/models/contact';
 import { ContactService } from '../contact.service';
 import { NotificationService } from 'app/shared/services/notification.service';
-import { ContactType, AddressType, DealOn, ContactTitle } from 'app/shared/constants';
-
+import { ContactType, AddressType, DealOn, ContactTitle, NoImagePath } from 'app/shared/constants';
 @Component({
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html'
@@ -23,7 +22,7 @@ export class ContactDetailComponent implements OnInit {
   cities: any[] = [];
   companies: any[] = [];
   fileToUpload: File = null;
-  url: any;
+  url: any = NoImagePath;
   addressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
   officeAddressSet = [{ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: true, IsDeleted: false }];
   emailSet = [{ Id: undefined, EmailId: '', IsPrimary: true, IsDeleted: false }];
@@ -385,6 +384,23 @@ export class ContactDetailComponent implements OnInit {
       } else {
         this.validFileType = false;
       }
+    }
+  }
+
+  deletePhoto() {
+    if (this.paramId !== "new") {
+      this.contactService.deleteContactPhoto(this.paramId).subscribe(response => {
+        if (response) {
+          this._notify.success("Photo deleted successfullyodal")
+          this.url = NoImagePath;
+          this.fileToUpload = null;
+        }
+      }, error => {
+        this._notify.error(error.result);
+      });
+    } else {
+      this.url = NoImagePath;
+      this.fileToUpload = null;
     }
   }
 }

@@ -114,7 +114,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseId">Profile Image</label>
-                  <div>
+                  <div class="img-wrap">
+                      <span class="delete-photo-icon" (click)="deletePhoto()"></span>
                     <img [src]="url" class="contact-image-preview">
                   </div>
                   <div>{{fileToUpload?.name || 'Select Image'}}</div>

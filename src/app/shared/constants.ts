@@ -1,3 +1,4 @@
+
 import { DropDownModel } from "../models/dropDownModel";
 
 export const httpResponseTypes = {
@@ -103,3 +104,5 @@ export const ContactTitle = [{
 }]
 
 export const ComplainStatus = [{ Id: "Open", Name: "Open" },{ Id: "Close", Name: "Close" }];
+
+export const NoImagePath: string = "../../assets/images/no-image.png"

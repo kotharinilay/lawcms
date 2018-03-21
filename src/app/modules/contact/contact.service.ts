@@ -300,4 +300,15 @@ export class ContactService {
     });
   }
 
+  deleteContactPhoto(id: number) {
+    return this.httpService.get(`Contact/DeletePhoto/${id}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
 }
