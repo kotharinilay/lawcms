@@ -61,7 +61,6 @@ export class ContactDetailComponent implements OnInit {
     if (this.paramId.toString() != "new") {
       this.contactService.getContactById(this.paramId).subscribe(
         response => {
-          debugger;
           this.model = <Contact>response;
           if (this.model.Address.some(x => x.AddressType === AddressType.Home)) {
             this.addressSet = [];
@@ -255,7 +254,6 @@ export class ContactDetailComponent implements OnInit {
   }
 
   save() {
-    debugger;
     this.validations();
     this.isLoading = true;
     this.addressSet.forEach(address => {

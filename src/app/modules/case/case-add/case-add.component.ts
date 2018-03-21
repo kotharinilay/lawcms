@@ -54,7 +54,6 @@ export class CaseAddComponent implements OnInit {
       this._notify.error(err.Result);
     });
     this.caseService.getJudgesDD().subscribe(res => {
-      debugger;
       res.forEach(element => {
         this.judges.push({ id: element.Id, itemName: element.FirstName + ' ' + element.LastName });
       });
@@ -65,7 +64,6 @@ export class CaseAddComponent implements OnInit {
     if (this.paramId.toString() != "new") {
       this.caseService.getCaseById(this.paramId).subscribe(
         response => {
-          debugger;
           this.model = <Case>response;
           this.OpponentContactId = response.OpponentContactName;
           this.OppnentAdvocateId = response.OppnentAdvocateName;

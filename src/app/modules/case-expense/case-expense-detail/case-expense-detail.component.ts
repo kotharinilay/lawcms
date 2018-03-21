@@ -40,9 +40,7 @@ export class CaseExpenseDetailComponent implements OnInit {
     if (this.paramId.toString() != "new") {
       this.caseExpenseService.getCaseExpenseById(this.paramId).subscribe(
         response => {
-          debugger;
           this.model = <CaseExpense>response;
-          debugger
           this.AssociateContactId = response.AssociateContactName;
           if (this.model.BillDocument) {
             this.caseExpenseService.getBillDocument(this.model.Id).subscribe(res => {
@@ -69,7 +67,6 @@ export class CaseExpenseDetailComponent implements OnInit {
   }
 
   onSelectContact(item: any) {
-    debugger;
     if (item) {
       this.model.AssociateContactId = item.Id;
     } else {
@@ -78,7 +75,6 @@ export class CaseExpenseDetailComponent implements OnInit {
   }
 
   save() {
-    debugger;
     this.isLoading = true;
     this.caseExpenseService.addOrUpdate(this.model).subscribe(
       response => {
@@ -114,7 +110,6 @@ export class CaseExpenseDetailComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    debugger;
     const target = event.target || event.srcElement;
     const files: FileList = target.files;
     if (files.length > 0) {
