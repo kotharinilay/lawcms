@@ -6,6 +6,8 @@ import { Contact, Address, Mobile, Email } from 'app/models/contact';
 import { ContactService } from '../contact.service';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { ContactType, AddressType, DealOn, ContactTitle, NoImagePath } from 'app/shared/constants';
+import { Overlay } from 'ngx-modialog';
+import { Modal } from 'ngx-modialog/plugins/bootstrap';
 @Component({
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html'
@@ -30,7 +32,7 @@ export class ContactDetailComponent implements OnInit {
   mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false }];
   validFileType: boolean = true;
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
-    private _notify: NotificationService) { }
+    private _notify: NotificationService, private modalDialog: Modal) { }
 
   ngOnInit() {
     this.model.ContactType = this.ContactTypeDropDown[0].Id;
@@ -389,15 +391,23 @@ export class ContactDetailComponent implements OnInit {
 
   deletePhoto() {
     if (this.paramId !== "new") {
-      this.contactService.deleteContactPhoto(this.paramId).subscribe(response => {
-        if (response) {
-          this._notify.success("Photo deleted successfullyodal")
-          this.url = NoImagePath;
-          this.fileToUpload = null;
-        }
-      }, error => {
-        this._notify.error(error.result);
-      });
+      let x = this.modalDialog.confirm()
+        .size('sm')
+        .title('Delete Contact Photo')
+        .body(`Are you sure want to delete Contact Photo?`)
+        .open().result.then(result => {
+          if (result === true) {
+            this.contactService.deleteContactPhoto(this.paramId).subscribe(response => {
+              if (response) {
+                this._notify.success("Photo deleted successfullyodal")
+                this.url = NoImagePath;
+                this.fileToUpload = null;
+              }
+            }, error => {
+              this._notify.error(error.result);
+            });
+          }
+        });
     } else {
       this.url = NoImagePath;
       this.fileToUpload = null;

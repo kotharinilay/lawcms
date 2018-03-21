@@ -9,12 +9,15 @@ import { AddressComponent } from './address/address.component';
 import { ContactDashboardComponent } from './contact-dashboard/contact-dashboard.component';
 
 import { ContactGridComponent } from './contact-grid/contact-grid.component';
-
+import { ModalModule } from 'ngx-modialog';
+import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap'
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    contactRouting
+    contactRouting,
+    ModalModule.forRoot(),
+    BootstrapModalModule
   ],
   declarations: [
     ContactListComponent,
