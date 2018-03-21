@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'case-expense',
         loadChildren: './modules/case-expense/case-expense.module#CaseExpenseModule'
+      },
+      {
+        path: 'complain',
+        loadChildren: './modules/complain/complain.module#ComplainModule'
       }
     ]
   },

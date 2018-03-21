@@ -1,0 +1,44 @@
+<div class=panel>
+  <div class="panel-heading border">
+    <span class="pull-left">Complains</span>
+    <div class="pb30">
+      <button type="button" class="btn btn-success pull-right" kendoButton (click)="router.navigate(['/complain/new'])">Create</button>
+    </div>
+
+  </div>
+  <div class=panel-body>
+    <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
+      [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Complain Date" sortable="true" prop="ComplainDate">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value | date: 'dd/MM/yyyy'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Complain By" sortable="true" prop="ComplainBy">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Complain Of" sortable="true" prop="ComplainOf">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Status" sortable="true" prop="ComplainStatus">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" sortable="false" prop="Id">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button (click)="editClick(value)" md-icon-button>
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteClick(value)" md-icon-button>
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

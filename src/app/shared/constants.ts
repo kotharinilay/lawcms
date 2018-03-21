@@ -101,3 +101,5 @@ export const ContactTitle = [{
 {
     Id: "Mrs.", Name: "Mrs."
 }]
+
+export const ComplainStatus = [{ Id: "Open", Name: "Open" },{ Id: "Close", Name: "Close" }];
