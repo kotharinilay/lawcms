@@ -97,12 +97,16 @@ export const ContactTitle = [{
     Id: "Mr.", Name: "Mr."
 },
 {
-    Id: "Miss", Name: "Miss"
+    Id: "Ms.", Name: "Ms."
 },
 {
     Id: "Mrs.", Name: "Mrs."
-}]
+},
+{
+    Id: "Dr.", Name: "Dr."
+}
+]
 
-export const ComplainStatus = [{ Id: "Open", Name: "Open" },{ Id: "Close", Name: "Close" }];
+export const ComplainStatus = [{ Id: "Open", Name: "Open" }, { Id: "Close", Name: "Close" }];
 
 export const NoImagePath: string = "../../assets/images/no-image.png"

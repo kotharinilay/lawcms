@@ -7,7 +7,6 @@ export class Case {
     CaseAppealType: number;
     City: string;
     CourtId: number;
-    //JudgeId: number;
     Description: string;
     AppearedFor: string;
     OpponentContactId: number;
@@ -35,6 +34,7 @@ export class Case {
     BillingFrequency: string;
     BillingDate: Date;
     TrustAccount: number;
+    JudgeIds: number[];
 }
 
 export class CaseStatus {

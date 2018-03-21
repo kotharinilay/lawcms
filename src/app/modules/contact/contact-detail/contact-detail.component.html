@@ -1,7 +1,8 @@
 <div>
   <div class="panel mb25">
     <div class="panel-heading border">
-      <div> {{ (paramId !='new') ? 'Modify':'Add' }} Contact
+      <div>
+        <b> {{ (paramId !='new') ? 'Modify':'Add' }} Contact</b>
         <span class="pull-right pointer-cursor" (click)="toggleIsImportant()">
           <i class="big-icon fa {{ (model.IsImportant) ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
         </span>
@@ -115,7 +116,7 @@
                 <div class="form-group">
                   <label for="CaseId">Profile Image</label>
                   <div class="img-wrap">
-                      <span class="delete-photo-icon" (click)="deletePhoto()"></span>
+                    <span class="delete-photo-icon" (click)="deletePhoto()"></span>
                     <img [src]="url" class="contact-image-preview">
                   </div>
                   <div>{{fileToUpload?.name || 'Select Image'}}</div>
@@ -164,8 +165,8 @@
                     <a *ngIf="!mobileControl.IsPrimary" (click)="mobileControl.IsDeleted = true">
                       <i class="fa fa-times-circle pull-right"></i>
                     </a>
-                    <input type="text" id="MobileNumber{{i}}" name="MobileNumber{{i}}" maxlength="25" class="form-control" [(ngModel)]="mobileControl.MobileNumber"
-                    />
+                    <input type="text" (keypress)="_keyPress($event)" id="MobileNumber{{i}}" name="MobileNumber{{i}}" maxlength="10" class="form-control"
+                      [(ngModel)]="mobileControl.MobileNumber" />
                   </div>
                 </div>
               </div>

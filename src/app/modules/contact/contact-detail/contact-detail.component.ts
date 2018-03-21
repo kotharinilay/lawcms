@@ -149,23 +149,114 @@ export class ContactDetailComponent implements OnInit {
   }
 
   addAddress() {
-    this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false });
+    let isEmpty = false;
+    this.addressSet.forEach(element => {
+      if (!element.Address1 && !element.IsDeleted) {
+        isEmpty = true;
+      }
+    });
+    if (!isEmpty) {
+      this.addressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, PostCode: '', Country: undefined, IsPrimary: false, IsDeleted: false });
+    } else {
+      this._notify.error('Please fill all added address');
+    }
   }
 
   addOfficeAddress() {
-    this.officeAddressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, Country: undefined, PostCode: '', IsPrimary: false, IsDeleted: false });
+    let isEmpty = false;
+    this.addressSet.forEach(element => {
+      if (!element.Address1 && !element.IsDeleted) {
+        isEmpty = true;
+      }
+    });
+    if (!isEmpty) {
+      this.officeAddressSet.push({ Id: undefined, Address1: '', State: undefined, City: undefined, Country: undefined, PostCode: '', IsPrimary: false, IsDeleted: false });
+    } else {
+      this._notify.error('Please fill all added office address');
+    }
   }
 
   addEmail() {
-    this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false });
+    let isEmpty = false;
+    this.emailSet.forEach(element => {
+      if (!element.EmailId && !element.IsDeleted) {
+        isEmpty = true;
+      }
+    });
+    if (!isEmpty) {
+      this.emailSet.push({ Id: undefined, EmailId: '', IsPrimary: false, IsDeleted: false });
+    } else {
+      this._notify.error('Please fill all added email');
+    }
   }
 
   addMobile() {
-    this.mobileSet.push({ Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false });
+    let isEmpty = false;
+    this.mobileSet.forEach(element => {
+      if (!element.MobileNumber && !element.IsDeleted) {
+        isEmpty = true;
+      }
+    });
+    if (!isEmpty) {
+      this.mobileSet.push({ Id: undefined, MobileNumber: '', IsPrimary: false, IsDeleted: false });
+    } else {
+      this._notify.error('Please fill all added mobile');
+    }
+  }
+
+  _keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+  }
+
+  validations() {
+    let isEmpty = false;
+    this.mobileSet.forEach(element => {
+      if (!element.MobileNumber && !element.IsDeleted) {
+        isEmpty = true;
+      }
+    });
+    if (isEmpty) {
+      this._notify.error('Please fill all added mobile');
+      return;
+    }
+    this.emailSet.forEach(element => {
+      if (!element.EmailId && !element.IsDeleted) {
+        isEmpty = true;
+      }
+    });
+    if (isEmpty) {
+      this._notify.error('Please fill all added email');
+      return;
+    }
+    this.addressSet.forEach(element => {
+      if (!element.Address1 && !element.IsDeleted) {
+        isEmpty = true;
+      }
+    });
+    if (isEmpty) {
+      this._notify.error('Please fill all added address');
+      return;
+    }
+    this.officeAddressSet.forEach(element => {
+      if (!element.Address1 && !element.IsDeleted) {
+        isEmpty = true;
+      }
+    });
+    if (isEmpty) {
+      this._notify.error('Please fill all added office address');
+      return;
+    }
   }
 
   save() {
     debugger;
+    this.validations();
     this.isLoading = true;
     this.addressSet.forEach(address => {
       if (address.Id) {

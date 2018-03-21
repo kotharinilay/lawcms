@@ -1,7 +1,7 @@
 <div>
   <div class="panel mb25">
     <div class="panel-heading border">
-      {{ (paramId !='new') ? 'Modify':'Add' }} Case
+      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Case</b>
     </div>
     <div class=panel-body>
       <div class="row no-margin">
@@ -90,13 +90,8 @@
                       {{judge.FirstName}} {{judge.LastName}}
                     </option>
                   </select> -->
-                  <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [settings]="settings" (onSelect)="onJudgeSelect($event)"
-                    (onDeSelect)="OnJudgeDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
-                    <c-badge>
-                      <ng-template let-item="item">
-                        <span>{{item.FirstName}} {{item.LastName}}</span>
-                      </ng-template>
-                    </c-badge>
+                  <angular2-multiselect [data]="judges" [(ngModel)]="selectedJudges" [settings]="settings" class="form-control" #JudgeId="ngModel"
+                    name="JudgeId" id="JudgeId" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
                   </angular2-multiselect>
                 </div>
               </div>

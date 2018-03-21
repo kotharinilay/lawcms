@@ -55,7 +55,10 @@ export class CaseAddComponent implements OnInit {
     });
     this.caseService.getJudgesDD().subscribe(res => {
       debugger;
-      this.judges = res;
+      res.forEach(element => {
+        this.judges.push({ id: element.Id, itemName: element.FirstName + ' ' + element.LastName });
+      });
+
     }, err => {
       this._notify.error(err.Result);
     });
@@ -68,6 +71,7 @@ export class CaseAddComponent implements OnInit {
           this.OppnentAdvocateId = response.OppnentAdvocateName;
           this.WitnessContactId = response.WitnessContactName;
           this.JugmentFavourId = response.JugmentFavourToName;
+          // this.selectedJudges.p
           if (this.model.ClientId) {
             this.contactService.getContactById(this.model.ClientId).subscribe(res => {
               this.ClientId = res.FirstName + ' ' + res.LastName;
@@ -104,13 +108,11 @@ export class CaseAddComponent implements OnInit {
   }
 
   onSelectClient(item: any) {
-    debugger;
     if (item) {
       this.model.ClientId = item.Id;
     } else {
       this.model.ClientId = undefined;
     }
-
   }
 
   onSelectOponent(item: any) {
@@ -145,17 +147,6 @@ export class CaseAddComponent implements OnInit {
     }
   }
 
-  onJudgeSelect(item: any) {
-    // console.log(item);
-    // console.log(this.selectedItems);
-    //debugger;
-    //this.selectedJudges.push(item);
-  }
-  OnJudgeDeSelect(item: any) {
-    // console.log(item);
-    // console.log(this.selectedItems);
-    this.selectedJudges.splice(this.selectedJudges.indexOf(item), 1);
-  }
   onSelectAll(items: any) {
     console.log(items);
   }
@@ -164,8 +155,11 @@ export class CaseAddComponent implements OnInit {
   }
 
   save() {
-    debugger;
     this.isLoading = true;
+    this.model.JudgeIds = [];
+    this.selectedJudges.forEach(element => {
+      this.model.JudgeIds.push(element.id);
+    });
     this.caseService.addOrUpdate(this.model).subscribe(
       response => {
         this.isLoading = false;

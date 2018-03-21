@@ -1,7 +1,7 @@
 <div>
   <div class="panel mb25">
     <div class="panel-heading border">
-      {{ (paramId !='new') ? 'Modify':'Add' }} Complain
+      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Complain</b>
     </div>
     <div class=panel-body>
       <div class="row no-margin">
@@ -24,7 +24,7 @@
                   <input ngui-auto-complete class="form-control" [(ngModel)]="ComplainById" name="ComplainById" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainBy($event)"
                     value-property-name="Id" display-property-name="Name" />
-                  <label *ngIf="complainForm.submitted && !model.ComplainById" class="err-label">
+                  <label *ngIf="complainForm.submitted && !model.ComplainBy" class="err-label">
                     Please select valid Complain By.
                   </label>
                 </div>
@@ -37,7 +37,7 @@
                   <input ngui-auto-complete class="form-control" [(ngModel)]="ComplainOfId" name="ComplainOfId" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainOf($event)"
                     value-property-name="Id" display-property-name="Name" />
-                  <label *ngIf="complainForm.submitted && !model.ComplainOfId" class="err-label">
+                  <label *ngIf="complainForm.submitted && !model.ComplainOf" class="err-label">
                     Please select valid Complain Of.
                   </label>
                 </div>
