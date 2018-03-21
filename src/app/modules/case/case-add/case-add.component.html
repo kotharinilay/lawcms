@@ -311,25 +311,6 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CourtFees">Court Fees</label>
-                  <input class="form-control" type="number" id="CourtFees" name="CourtFees" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.CourtFees"
-                    #CourtFees="ngModel" />
-                  <label *ngIf="(caseForm.submitted || CourtFees.dirty) && CourtFees.errors && CourtFees.errors['pattern']" class="err-label">
-                    Enter Valid Court Fees</label>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="BillingFrequency">Billing Frequency</label>
-                  <input class="form-control" [(ngModel)]="model.BillingFrequency" name="BillingFrequency" id="BillingFrequency" #BillingFrequency="ngModel"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
                   <label for="BillingDate">Billing Date</label>
                   <input class="form-control" [(ngModel)]="model.BillingDate" ngui-datetime-picker date-only="true" name="BillingDate" id="BillingDate"
                     #BillingDate="ngModel" />
