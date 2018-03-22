@@ -8,6 +8,7 @@ import { NotificationService } from 'app/shared/services/notification.service';
 import { ContactType, AddressType, DealOn, ContactTitle, NoImagePath } from 'app/shared/constants';
 import { Overlay } from 'ngx-modialog';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-contact-detail',
   templateUrl: './contact-detail.component.html'
@@ -31,8 +32,9 @@ export class ContactDetailComponent implements OnInit {
   visibleEmail: number = 0;
   mobileSet = [{ Id: undefined, MobileNumber: '', IsPrimary: true, IsDeleted: false }];
   validFileType: boolean = true;
+  CompanyId;
   constructor(private route: ActivatedRoute, private contactService: ContactService, private router: Router,
-    private _notify: NotificationService, private modalDialog: Modal) { }
+    private _notify: NotificationService, private modalDialog: Modal, private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.model.ContactType = this.ContactTypeDropDown[0].Id;
@@ -62,6 +64,7 @@ export class ContactDetailComponent implements OnInit {
       this.contactService.getContactById(this.paramId).subscribe(
         response => {
           this.model = <Contact>response;
+          this.CompanyId = response.CompanyName;
           if (this.model.Address.some(x => x.AddressType === AddressType.Home)) {
             this.addressSet = [];
           }
@@ -400,36 +403,6 @@ export class ContactDetailComponent implements OnInit {
             });
           }
           if (this.paramId === 'new') {
-            // this.addressSet.forEach(address => {
-            //   const addressModel: Address = {
-            //     Id: undefined,
-            //     Address1: address.Address1,
-            //     City: address.City,
-            //     ContactId: response.Id,
-            //     IsPrimary: address.IsPrimary,
-            //     State: address.State,
-            //     PostCode: address.PostCode,
-            //     AddressType: AddressType.Home
-            //   }
-            //   if (addressModel.Address1 && addressModel.State) {
-            //     this.model.Address.push(addressModel);
-            //   }
-            //});
-            // this.officeAddressSet.forEach(address => {
-            //   const addressModel: Address = {
-            //     Id: undefined,
-            //     Address1: address.Address1,
-            //     City: address.City,
-            //     ContactId: response.Id,
-            //     IsPrimary: address.IsPrimary,
-            //     State: address.State,
-            //     PostCode: address.PostCode,
-            //     AddressType: AddressType.Office
-            //   }
-            //   if (addressModel.Address1 && addressModel.State) {
-            //     this.model.Address.push(addressModel);
-            //   }
-            // });
             this._notify.success("Contact added successfully.");
           }
           else {
@@ -451,6 +424,23 @@ export class ContactDetailComponent implements OnInit {
 
   toggleIsImportant() {
     this.model.IsImportant = !this.model.IsImportant;
+  }
+
+  companySearch(term: string) {
+    return this.contactService.companySearch(term);
+  }
+
+  autocompleListFormatter = (data: any) => {
+    let html = `<span>${data.CompanyName}</span>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  onSelectCompany(item: any) {
+    if (item) {
+      this.model.CompanyId = item.Id;
+    } else {
+      this.model.CompanyId = undefined;
+    }
   }
 
   onFileChange(event: any) {

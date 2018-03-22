@@ -1,6 +1,8 @@
 <div class=panel>
   <div class="panel-heading border">
-    <span class="pull-left">Case Expenses</span>
+    <span class="pull-left">
+      <b>Case Expenses</b>
+    </span>
     <div class="pb30">
       <button type="button" class="btn btn-success pull-right" kendoButton (click)="router.navigate(['/case-expense/new'])">Create</button>
     </div>
@@ -9,6 +11,11 @@
   <div class=panel-body>
     <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
       [rowHeight]="'auto'" [columnMode]="'force'">
+      <ngx-datatable-column name="Case Number" sortable="true" prop="CaseNo">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column name="Expense Name" sortable="true" prop="ExpenseName">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
@@ -19,7 +26,7 @@
           {{value | date: 'dd/MM/yyyy'}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Category" sortable="true" prop="Category">
+      <ngx-datatable-column name="Category" sortable="true" prop="CategoryName">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>

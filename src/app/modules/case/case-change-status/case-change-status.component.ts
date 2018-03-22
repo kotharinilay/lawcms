@@ -19,10 +19,12 @@ export class CaseChangeStatusComponent implements OnInit, OnDestroy, CloseGuard,
 
   constructor(public dialog: DialogRef<BSModalContext>, private caseService: CaseService) {
     dialog.context.dialogClass = "modal-dialog modal-lg";
+
   }
   model: CaseStatus = new CaseStatus();
 
   ngOnInit() {
+    this.model.CaseId = this.dialog.context.caseRow.Id;
     this.caseService.getCases().subscribe(res => {
       this.cases = res;
     });

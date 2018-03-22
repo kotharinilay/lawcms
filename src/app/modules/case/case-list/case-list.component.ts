@@ -45,7 +45,7 @@ export class CaseListComponent implements OnInit {
     }
   }
 
-  changeStatus() {
-    this.modal.open(CaseChangeStatusComponent, overlayConfigFactory({}, BSModalContext));
+  changeStatus(rowData) {
+    this.modal.open(CaseChangeStatusComponent, overlayConfigFactory({ caseRow: rowData }, BSModalContext));
   }
 }

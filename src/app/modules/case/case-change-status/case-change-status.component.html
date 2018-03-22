@@ -8,20 +8,6 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="CaseId">Case</label>
-          <select class="form-control" required [(ngModel)]="model.CaseId" id="CaseId" name="CaseId" #CaseId="ngModel">
-            <option [value]='undefined'>Select Case</option>
-            <option *ngFor="let case of cases" value={{case.Id}}>
-              {{case.CaseNo}}
-            </option>
-          </select>
-          <label *ngIf="changeStatusForm.submitted && !CaseId.valid" class="err-label">
-            Please enter Case
-          </label>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group">
           <label for="StageID">Stage</label>
           <select class="form-control" [(ngModel)]="model.StageID" id="StageID" name="StageID" #StageID="ngModel">
             <option [value]='undefined'>Select Stage</option>
@@ -31,9 +17,6 @@
           </select>
         </div>
       </div>
-    </div>
-
-    <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="CourtId">Court</label>
@@ -45,6 +28,9 @@
           </select>
         </div>
       </div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="HearingDate">Hearing Date</label>
@@ -52,9 +38,6 @@
             #HearingDate="ngModel" />
         </div>
       </div>
-    </div>
-
-    <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="NextDate">Next Date</label>
@@ -62,6 +45,9 @@
             #NextDate="ngModel" />
         </div>
       </div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="Description">Description</label>
@@ -69,9 +55,6 @@
             #Description="ngModel" />
         </div>
       </div>
-    </div>
-
-    <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="DefendantRemark">Defendant Remark</label>
@@ -79,6 +62,9 @@
             #DefendantRemark="ngModel" />
         </div>
       </div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="NextActivity">Next Activity</label>

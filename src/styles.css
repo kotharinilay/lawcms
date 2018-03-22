@@ -32,7 +32,7 @@
 .empty-row {text-align: center; padding:10px; font-weight: bold;}
 .big-icon { font-size:25px;}
 .pointer-cursor {cursor: pointer;}
-.contact-image-preview { height:100px; width: 100px;}
+.contact-image-preview { height:150px; width: 110px;}
 .img-wrap { width: 100px; position: relative;}
 .delete-photo-icon { 
     background-image: url("/assets/images/close-cancel.png");

@@ -16,15 +16,18 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="Title">Title</label>
-                  <select class="form-control" required [(ngModel)]="model.Title" id="Title" name="Title" #Title="ngModel">
-                    <option *ngFor="let title of TitleDropDown" value={{title.Id}}>
-                      {{title.Name}}
-                    </option>
-                  </select>
-                  <label *ngIf="contactForm.submitted && !Title.valid" class="err-label">
-                    Please enter Title
-                  </label>
+                  <label for="CaseId">Profile Image</label>
+                  <div class="img-wrap">
+                    <span class="delete-photo-icon" (click)="deletePhoto()"></span>
+                    <img [src]="url" class="contact-image-preview">
+                  </div>
+                  <div>{{fileToUpload?.name || 'Select Image'}}</div>
+                  <div *ngIf="!validFileType">
+                    <label class="err-label"> Invalid File Type </label>
+                  </div>
+                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
+                  <input type="file" class="fileUpload" accept="image/*" #fileUpload style="display:none" #fileUpload style="display:none"
+                    (change)="onFileChange($event)" />
                 </div>
               </div>
               <div class="col-sm-6">
@@ -37,8 +40,19 @@
                   </select>
                 </div>
               </div>
-            </div>
-            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Title">Title</label>
+                  <select class="form-control" required [(ngModel)]="model.Title" id="Title" name="Title" #Title="ngModel">
+                    <option *ngFor="let title of TitleDropDown" value={{title.Id}}>
+                      {{title.Name}}
+                    </option>
+                  </select>
+                  <label *ngIf="contactForm.submitted && !Title.valid" class="err-label">
+                    Please enter Title
+                  </label>
+                </div>
+              </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="FirstName">First Name</label>
@@ -61,15 +75,22 @@
               </div>
             </div>
             <div class="row">
+
+
+            </div>
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CompanyId">Company</label>
-                  <select class="form-control" [(ngModel)]="model.CompanyId" id="CompanyId" name="CompanyId">
+                  <!-- <select class="form-control" [(ngModel)]="model.CompanyId" id="CompanyId" name="CompanyId">
                     <option [value]='undefined'>Select Company</option>
                     <option *ngFor="let company of companies" [value]='company.Id'>
                       {{company.CompanyName}}
                     </option>
-                  </select>
+                  </select> -->
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="CompanyId" name="CompanyId" [source]="companySearch.bind(this)"
+                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCompany($event)"
+                    value-property-name="Id" display-property-name="CompanyName" />
                 </div>
               </div>
               <div class="col-sm-6">
@@ -112,22 +133,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="CaseId">Profile Image</label>
-                  <div class="img-wrap">
-                    <span class="delete-photo-icon" (click)="deletePhoto()"></span>
-                    <img [src]="url" class="contact-image-preview">
-                  </div>
-                  <div>{{fileToUpload?.name || 'Select Image'}}</div>
-                  <div *ngIf="!validFileType">
-                    <label class="err-label"> Invalid File Type </label>
-                  </div>
-                  <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
-                  <input type="file" class="fileUpload" accept="image/*" #fileUpload style="display:none" #fileUpload style="display:none"
-                    (change)="onFileChange($event)" />
-                </div>
-              </div>
+
             </div>
 
             <div class="panel-heading border">

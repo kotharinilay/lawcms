@@ -1,72 +1,12 @@
 <div>
   <div class="panel mb25">
     <div class="panel-heading border">
-      {{ (paramId !='new') ? 'Modify':'Add' }} Case Expense
+      <b>{{ (paramId !='new') ? 'Modify':'Add' }} Case Expense</b>
     </div>
     <div class=panel-body>
       <div class="row no-margin">
         <div class=col-lg-12>
           <form name="caseExpenseForm" (ngSubmit)="caseExpenseForm.form.valid && save()" #caseExpenseForm="ngForm" novalidate>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="ExpenseName">Expense Name</label>
-                  <input type="text" maxlength="250" id="ExpenseName" name="ExpenseName" required class="form-control" [(ngModel)]="model.ExpenseName"
-                    #ExpenseName="ngModel" />
-                  <label *ngIf="caseExpenseForm.submitted && !ExpenseName.valid" class="err-label">
-                    Please enter Expense Name
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="ExpenseDate">Expense Date</label>
-                  <input class="form-control" [(ngModel)]="model.ExpenseDate" ngui-datetime-picker date-only="true" name="ExpenseDate" id="ExpenseDate"
-                    #OpenDate="ngModel" />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Category">Category</label>
-                  <select class="form-control" [(ngModel)]="model.Category" id="Category" name="Category" #Category="ngModel">
-                    <option [value]='undefined'>Select Expense Category</option>
-                    <option *ngFor="let category of CategoryDropDown" value={{category.Id}}>
-                      {{category.ExpenseTypeName}}
-                    </option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Description">Description</label>
-                  <input type="text" maxlength="250" name="Description" class="form-control" [(ngModel)]="model.Description" #Description="ngModel"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Amount">Amount</label>
-                  <input class="form-control" type="number" id="Amount" name="Amount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Amount"
-                    #Amount="ngModel" required />
-                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['required']" class="err-label">
-                    Please enter Amount</label>
-                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['pattern']" class="err-label">
-                    Enter Valid Amount</label>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="AssociateContactId">Associate Contact</label>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="AssociateContactId" name="AssociateContactId" [source]="contactSearch.bind(this)"
-                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectContact($event)"
-                    value-property-name="Id" display-property-name="Name" />
-                </div>
-              </div>
-            </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
@@ -81,15 +21,72 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="ExpenseName">Expense Name</label>
+                  <input type="text" maxlength="250" id="ExpenseName" name="ExpenseName" required class="form-control" [(ngModel)]="model.ExpenseName"
+                    #ExpenseName="ngModel" />
+                  <label *ngIf="caseExpenseForm.submitted && !ExpenseName.valid" class="err-label">
+                    Please enter Expense Name
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ExpenseDate">Expense Date</label>
+                  <input class="form-control" [(ngModel)]="model.ExpenseDate" ngui-datetime-picker date-only="true" name="ExpenseDate" id="ExpenseDate"
+                    #OpenDate="ngModel" />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Category">Category</label>
+                  <select class="form-control" [(ngModel)]="model.Category" id="Category" name="Category" #Category="ngModel">
+                    <option [value]='undefined'>Select Expense Category</option>
+                    <option *ngFor="let category of CategoryDropDown" value={{category.Id}}>
+                      {{category.ExpenseTypeName}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Description">Description</label>
+                  <input type="text" maxlength="250" name="Description" class="form-control" [(ngModel)]="model.Description" #Description="ngModel"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Amount">Amount</label>
+                  <input class="form-control" type="number" id="Amount" name="Amount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Amount"
+                    #Amount="ngModel" required />
+                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['required']" class="err-label">
+                    Please enter Amount</label>
+                  <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['pattern']" class="err-label">
+                    Enter Valid Amount</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="AssociateContactId">Associate Contact</label>
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="AssociateContactId" name="AssociateContactId" [source]="contactSearch.bind(this)"
+                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectContact($event)"
+                    value-property-name="Id" display-property-name="Name" />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
                   <label for="CaseId">Bill Document</label>
                   <div>{{fileToUpload?.name || 'Select File'}}
-                     <!-- <button *ngIf="url!== null && url!== undefined" (click)="showDocument()" class="btn btn-primary" style="
-                    margin-left: 5px;">See Document</button> -->
                   </div>
                   <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
-                  <input type="file" class="fileUpload" #fileUpload style="display:none" accept=
-                  ".doc, application/pdf, image/jpg, image/jpeg, image/png" #fileUpload style="display:none" (change)="onFileChange($event)"
-                  />
+                  <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png"
+                    #fileUpload style="display:none" (change)="onFileChange($event)" />
                 </div>
               </div>
             </div>

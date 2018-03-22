@@ -1,28 +1,23 @@
 <ngx-datatable class="bootstrap" [rows]="_data" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
   [rowHeight]="'auto'" [columnMode]="'force'">
-  <ngx-datatable-column name="Title" sortable="true" prop="Title">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
   <ngx-datatable-column name="Contact Type" sortable="true" prop="ContactType">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
       {{value}}
     </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="First Name" sortable="true" prop="FirstName">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value}}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Last Name" sortable="true" prop="LastName">
-    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-      {{value}}
+  <ngx-datatable-column name="Name" sortable="true">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.Title}} {{row.FirstName}} {{row.LastName}}
     </ng-template>
   </ngx-datatable-column>
 
-  <ngx-datatable-column *ngIf="showAction" name="Actions" sortable="false" prop="Id">
+  <ngx-datatable-column name="Important Contact" sortable="true" prop="IsImportant">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <i class="big-icon fa {{ value ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Actions" sortable="false" prop="Id">
     <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
       <button (click)="editClick(value)" md-icon-button>
         <i class="fa fa-edit"></i>
