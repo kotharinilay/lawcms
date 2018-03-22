@@ -222,7 +222,7 @@ export class ContactDetailComponent implements OnInit {
     });
     if (isEmpty) {
       this._notify.error('Please fill all added mobile');
-      return;
+      return false;
     }
     this.emailSet.forEach(element => {
       if (!element.EmailId && !element.IsDeleted) {
@@ -231,7 +231,7 @@ export class ContactDetailComponent implements OnInit {
     });
     if (isEmpty) {
       this._notify.error('Please fill all added email');
-      return;
+      return false;
     }
     this.addressSet.forEach(element => {
       if (!element.Address1 && !element.IsDeleted) {
@@ -240,7 +240,7 @@ export class ContactDetailComponent implements OnInit {
     });
     if (isEmpty) {
       this._notify.error('Please fill all added address');
-      return;
+      return false;
     }
     this.officeAddressSet.forEach(element => {
       if (!element.Address1 && !element.IsDeleted) {
@@ -249,12 +249,15 @@ export class ContactDetailComponent implements OnInit {
     });
     if (isEmpty) {
       this._notify.error('Please fill all added office address');
-      return;
+      return false;
     }
+    return true;
   }
 
   save() {
-    this.validations();
+    if (!this.validations()) {
+      return;
+    }
     this.isLoading = true;
     this.addressSet.forEach(address => {
       if (address.Id) {
