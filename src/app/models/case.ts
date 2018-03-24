@@ -51,3 +51,16 @@ export class CaseStatus {
     IsActive: boolean;
     UpdatedTime: Date;
 }
+
+export class CaseCommunication {
+    Id: number;
+    CaseId: number;
+    CommunicateDate: Date;
+    CommunicationType: string;
+    CommunicateTo: number;
+    CommunicateFrom: number;
+    Summary: string;
+    CommunicationDetails: string;
+    IsActive: boolean;
+    UpdatedTime: Date;
+}

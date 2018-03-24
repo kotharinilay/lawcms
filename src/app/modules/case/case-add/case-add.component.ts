@@ -69,7 +69,13 @@ export class CaseAddComponent implements OnInit {
           this.OppnentAdvocateId = response.OppnentAdvocateName;
           this.WitnessContactId = response.WitnessContactName;
           this.JugmentFavourId = response.JugmentFavourToName;
-          // this.selectedJudges.p
+
+          this.judges.forEach(element => {
+            if (response.JudgeIds.indexOf(element.id) != -1) {
+              this.selectedJudges.push(element);
+            }
+          });
+
           if (this.model.ClientId) {
             this.contactService.getContactById(this.model.ClientId).subscribe(res => {
               this.ClientId = res.FirstName + ' ' + res.LastName;
@@ -181,5 +187,9 @@ export class CaseAddComponent implements OnInit {
 
   onCancelClick() {
     this.router.navigate(['/case']);
+  }
+
+  addCommunication() {
+    this.router.navigate(['/case/' + this.model.Id + '/communication/new']);
   }
 }

@@ -10,6 +10,8 @@ import { ContactService } from '../contact/contact.service';
 import { CaseChangeStatusComponent } from './case-change-status/case-change-status.component';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
+import { CommunicationListComponent } from './case-communication/communication-list/communication-list.component';
+import { CommunicationDetailComponent } from './case-communication/communication-detail/communication-detail.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
     CaseListComponent,
     CaseDetailComponent,
     CaseAddComponent,
-    CaseChangeStatusComponent
+    CaseChangeStatusComponent,
+    CommunicationListComponent,
+    CommunicationDetailComponent
   ],
   providers: [
     CaseService,

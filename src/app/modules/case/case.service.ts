@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Case, CaseStatus } from 'app/models/case';
+import { Case, CaseStatus, CaseCommunication } from 'app/models/case';
 
 @Injectable()
 export class CaseService {
@@ -144,5 +144,69 @@ export class CaseService {
         throw err;
       })
     }
+  }
+
+  getCommunicationById(id: number) {
+    return this.httpService.get('CaseCommunication/GetCaseCommunicationById/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  getCommunicationByCaseId(caseId: number) {
+    return this.httpService.get('CaseCommunication/GetCaseCommunicationByCaseId?caseid=' + caseId).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  addOrUpdateCommunication(communicationModel: CaseCommunication) {
+    let url = ''
+    if (communicationModel.Id) {
+      url = 'CaseCommunication/update';
+      return this.httpService.put(url, communicationModel).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    } else {
+      url = 'CaseCommunication/Create';
+      return this.httpService.post(url, communicationModel).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    }
+  }
+
+  deleteCommunication(id: number) {
+    return this.httpService.delete('CaseCommunication/Delete/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
   }
 }

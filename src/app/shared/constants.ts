@@ -110,3 +110,10 @@ export const ContactTitle = [{
 export const ComplainStatus = [{ Id: "Open", Name: "Open" }, { Id: "Close", Name: "Close" }];
 
 export const NoImagePath: string = "../../assets/images/no-image.png"
+
+export const CommunicationType = [
+    { Id: "Phone Call", Name: "Phone Call" },
+    { Id: "Email", Name: "Email" },
+    { Id: "Fax", Name: "Fax" },
+    { Id: "Message", Name: "Message" }
+]
