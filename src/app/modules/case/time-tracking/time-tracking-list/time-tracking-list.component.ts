@@ -21,7 +21,7 @@ export class TimeTrackingListComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(param => this.CaseId = param['caseId']);
-    this.caseService.getTaskTrackerById(this.CaseId).subscribe(
+    this.caseService.getTimeTrackingByCaseId(this.CaseId).subscribe(
       response => {
         this.rows = response;
         setTimeout(() => { this.loadingIndicator = false; });
@@ -31,7 +31,7 @@ export class TimeTrackingListComponent implements OnInit {
   }
 
   editClick(id) {
-    this.router.navigateByUrl('/case/' + this.CaseId + id);
+    this.router.navigateByUrl(`/case/${this.CaseId}/time-tracking/${id}`);
   }
 
   deleteClick(id) {

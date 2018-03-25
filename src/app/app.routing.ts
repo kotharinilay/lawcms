@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '', component: LayoutComponent, canActivate: [AuthGuard],
     children: [
       {
-        path: 'home', redirectTo: 'contact',
+        path: 'home',
         loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
       },
       {

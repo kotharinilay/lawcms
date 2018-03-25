@@ -48,3 +48,4 @@
     box-shadow:none !important;
     padding: 5px !important;
 }
+.panel-heading.border { min-height: 50px;}
