@@ -263,6 +263,17 @@ export class CaseService {
     });
   }
 
+  searchAssociateName(term: string) {
+    return this.httpService.get(`Contact/GetAssociates?search=${term}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
   deleteTaskTimeTracking(id: number) {
     return this.httpService.delete('TaskTimeTracker/Delete/' + id).map((res: any) => {
       if (res.Success) {

@@ -198,7 +198,7 @@ export class CaseAddComponent implements OnInit {
 
   addTimeTrackingDetails() {
     // this.router.navigate([`/case/${this.model.Id}/time-tracking/${this.taskTimeTrackingId || 'new'}`]);
-    this.router.navigate([`/case/${this.model.Id}/time-tracking/new}`]);
+    this.router.navigate([`/case/${this.model.Id}/time-tracking/new`]);
   }
 
 }

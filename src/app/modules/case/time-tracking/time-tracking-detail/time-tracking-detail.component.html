@@ -11,12 +11,10 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="AssociateName">Associate Name</label>
-                  <select class="form-control" required [(ngModel)]="model.AssociateId" #AssociateName="ngModel" id="AssociateName" name="AssociateName">
-                    <option>Select Associate Name</option>
-                    <option *ngFor="let associate of AssociatesDropDown" value={{associate.Id}}>
-                      {{associate.Name}}
-                    </option>
-                  </select>
+                  <input ngui-auto-complete class="form-control" id="AssociateName" [(ngModel)]="model.AssociateId" name="AssociateName" [source]="associateNameSearch.bind(this)"
+                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
+                    (valueChanged)="onSelectAssociateName($event)" display-property-name="Name" required #AssociateName="ngModel"
+                  />
                   <label *ngIf="timeTrackingForm.submitted && !AssociateName.valid" class="err-label">
                     Please select Associate Name.
                   </label>
@@ -36,11 +34,9 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="TaskCategory">Task Category</label>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="model.TaskCategoryName" name="TaskCategory"
-                   [source]="taskCategorySearch.bind(this)"
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="model.TaskCategoryName" name="TaskCategory" [source]="taskCategorySearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
-                    (valueChanged)="onSelectTaskCategory($event)"
-                    display-property-name="Name" />
+                    (valueChanged)="onSelectTaskCategory($event)" display-property-name="Name" />
                 </div>
               </div>
               <div class="col-sm-6">
@@ -81,8 +77,7 @@
               <div class="col-sm-6">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input type="checkbox" id="DontBill" name="DontBill" [(ngModel)]="model.DontBill" #DontBill="ngModel">
-                    Do Not bill
+                    <input type="checkbox" id="DontBill" name="DontBill" [(ngModel)]="model.DontBill" #DontBill="ngModel"> Do Not bill
                   </div>
                 </div>
               </div>

@@ -31,17 +31,32 @@ export class TimeTrackingDetailComponent implements OnInit {
           this._notify.error(err.Result);
         });
     } else {
-      this.model.AssociateId = +Associates[0].Id;
+      // this.model.AssociateId = +Associates[0].Id;
     }
   }
 
   taskCategorySearch(term) {
+    console.log(TaskCategory.filter(x => x.Name.indexOf(term) > -1));
     return Observable.of(TaskCategory.filter(x => x.Name.indexOf(term) > -1));
   }
 
-  onSelectTaskCategory(associate: any) {
+  onSelectTaskCategory(taskCategory: any) {
+    if (taskCategory) {
+      this.model.TaskCategory = taskCategory.Id;
+      this.model.TaskCategoryName = taskCategory.Name;
+    } else {
+      this.model.TaskCategory = undefined;
+      this.model.TaskCategoryName = undefined;
+    }
+  }
+
+  associateNameSearch(term: string) {
+    return this.caseService.searchAssociateName(term);
+  }
+
+  onSelectAssociateName(associate: DropDownModel) {
     if (associate) {
-      this.model.TaskCategory = associate.Id;
+      this.model.TaskCategory = +associate.Id;
       this.model.TaskCategoryName = associate.Name;
     } else {
       this.model.TaskCategory = undefined;
