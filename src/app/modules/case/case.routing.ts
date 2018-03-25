@@ -5,13 +5,17 @@ import { CaseListComponent } from 'app/modules/case/case-list/case-list.componen
 import { CaseAddComponent } from './case-add/case-add.component';
 import { CommunicationListComponent } from './case-communication/communication-list/communication-list.component';
 import { CommunicationDetailComponent } from './case-communication/communication-detail/communication-detail.component';
-
+import { TimeTrackingListComponent } from './time-tracking/time-tracking-list/time-tracking-list.component';
+import { TimeTrackingDetailComponent } from 'app/modules/case/time-tracking/time-tracking-detail/time-tracking-detail.component';
 
 const routes: Routes = [
     { path: '', component: CaseListComponent },
     { path: ':id', component: CaseAddComponent },
     { path: ':caseId/communication', component: CommunicationListComponent },
-    { path: ':caseId/communication/:id', component: CommunicationDetailComponent }
+    { path: ':caseId/communication/:id', component: CommunicationDetailComponent },
+    { path: ':caseId/time-tracking', component: TimeTrackingListComponent },
+    { path: ':caseId/time-tracking/:id', component: TimeTrackingDetailComponent }
+
 ];
 
 export const caseRouting: ModuleWithProviders = RouterModule.forChild(routes);

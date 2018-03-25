@@ -64,3 +64,19 @@ export class CaseCommunication {
     IsActive: boolean;
     UpdatedTime: Date;
 }
+
+
+export class TimeTracking {
+    Id: number;
+    CaseId: number;
+    AssociateId: number
+    TaskDate: string;
+    TaskCategory: number;
+    WorkedHours: number;
+    BilledHours: number;
+    Rate: number;
+    Details: string;
+    DontBill: boolean;
+    TaskCategoryName: string;
+    ContactName: string
+}

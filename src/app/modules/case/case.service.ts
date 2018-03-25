@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Case, CaseStatus, CaseCommunication } from 'app/models/case';
+import { Case, CaseStatus, CaseCommunication, TimeTracking } from 'app/models/case';
 
 @Injectable()
 export class CaseService {
@@ -209,4 +209,69 @@ export class CaseService {
       throw err;
     });
   }
+
+  addOrUpdateTimeTracker(model: TimeTracking) {
+    let url = ''
+    if (model.Id) {
+      url = 'TaskTimeTracker/update';
+      return this.httpService.put(url, model).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    } else {
+      url = 'TaskTimeTracker/Create';
+      return this.httpService.post(url, model).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    }
+  }
+
+  getTaskTrackerById(id: number) {
+    return this.httpService.get('TaskTimeTracker/GetTaskTimeTrackerById/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  getTimeTrackingByCaseId(caseId: number) {
+    return this.httpService.get(`TaskTimeTracker/GetTaskTimeTrackerByCaseId?caseid=${caseId}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  deleteTaskTimeTracking(id: number) {
+    return this.httpService.delete('TaskTimeTracker/Delete/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
 }

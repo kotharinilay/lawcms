@@ -117,3 +117,21 @@ export const CommunicationType = [
     { Id: "Fax", Name: "Fax" },
     { Id: "Message", Name: "Message" }
 ]
+
+export const TaskCategory = [
+    { Id: 1, Name: "Plan and prepare for Case" }, { Id: 2, Name: "Research" }, { Id: 3, Name: "Drafting" },
+    { Id: 4, Name: 'Documentation' }, { Id: 5, Name: "Notice" }, { Id: 6, Name: "Review/analyze" },
+    { Id: 7, Name: "meeting / Communicate inside the firm" }, { Id: 8, Name: "Meeting / Communicate with client" },
+    { Id: 9, Name: "Meeting / Communicate with outside counsel" },
+    { Id: 10, Name: "Meeting / Communicate with other external resources" },
+    { Id: 11, Name: "Appear for Case" },
+    { Id: 12, Name: "Manage data / files" },
+    { Id: 13, Name: "Travel" }
+]
+
+export const Associates = [
+    { Id: "1", Name: "Associate1" },
+    { Id: "2", Name: "Associate2" },
+    { Id: "3", Name: "Associate3" },
+    { Id: "4", Name: "Associate4" }
+]

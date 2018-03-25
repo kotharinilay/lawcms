@@ -28,9 +28,7 @@ export class CaseAddComponent implements OnInit {
   ClientId; OpponentContactId; OppnentAdvocateId; WitnessContactId; JugmentFavourId;
   isLoading: boolean = false;
   settings = {};
-
-
-
+  taskTimeTrackingId: number;
   constructor(private route: ActivatedRoute, private caseService: CaseService, private _notify: NotificationService,
     private contactService: ContactService, private _sanitizer: DomSanitizer, private router: Router) { }
 
@@ -85,6 +83,11 @@ export class CaseAddComponent implements OnInit {
           this._notify.error(err.Result);
         });
     }
+    this.caseService.getTimeTrackingByCaseId(this.paramId).subscribe(response => {
+      this.taskTimeTrackingId = response.length ? response[response.length - 1].Id : undefined;
+    }, error => {
+      this._notify.error(error.Result);
+    })
   }
 
   autocompleListFormatter = (data: any) => {
@@ -190,6 +193,12 @@ export class CaseAddComponent implements OnInit {
   }
 
   addCommunication() {
-    this.router.navigate(['/case/' + this.model.Id + '/communication/new']);
+    this.router.navigate([`/case/${this.model.Id}/communication/new`]);
   }
+
+  addTimeTrackingDetails() {
+    // this.router.navigate([`/case/${this.model.Id}/time-tracking/${this.taskTimeTrackingId || 'new'}`]);
+    this.router.navigate([`/case/${this.model.Id}/time-tracking/new}`]);
+  }
+
 }
