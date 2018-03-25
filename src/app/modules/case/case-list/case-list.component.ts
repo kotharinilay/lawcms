@@ -45,7 +45,11 @@ export class CaseListComponent implements OnInit {
     }
   }
 
-  changeStatus(rowData) {
+  changeStatus(rowData: any) {
     this.modal.open(CaseChangeStatusComponent, overlayConfigFactory({ caseRow: rowData }, BSModalContext));
+  }
+
+  showCommunication(rowData: any) {
+    this.router.navigateByUrl('/case/' + rowData.Id + '/communication');
   }
 }
