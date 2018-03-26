@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'complain',
         loadChildren: './modules/complain/complain.module#ComplainModule'
+      },
+      {
+        path: 'expense-type',
+        loadChildren: './modules/expense-type/expense-type.module#ExpenseTypeModule'
       }
     ]
   },
