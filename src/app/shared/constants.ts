@@ -18,7 +18,6 @@ export const ContactType = [
     { Id: "Client", Name: "Client" },
     { Id: "Advocate", Name: "Advocate" },
     { Id: "Contact", Name: "Contact" },
-    { Id: "Company", Name: "Company" },
     { Id: "Witness", Name: "Witness" },
     { Id: "Opponent", Name: "Opponent" },
     { Id: "Associates", Name: "Associates" }

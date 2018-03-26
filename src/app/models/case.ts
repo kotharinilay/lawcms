@@ -65,7 +65,6 @@ export class CaseCommunication {
     UpdatedTime: Date;
 }
 
-
 export class TimeTracking {
     Id: number;
     CaseId: number;
@@ -79,4 +78,16 @@ export class TimeTracking {
     DontBill: boolean;
     TaskCategoryName: string;
     ContactName: string
+}
+
+export class CaseNote {
+    Id: number;
+    NotesBy: number;
+    Subject: Date;
+    Description: string;
+    NoteDate: Date;
+    CaseId: number;
+    IsActive: boolean;
+    UpdatedDate: Date;
+    IsImportant: boolean;
 }

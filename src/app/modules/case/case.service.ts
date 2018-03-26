@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Case, CaseStatus, CaseCommunication, TimeTracking } from 'app/models/case';
+import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote } from 'app/models/case';
 
 @Injectable()
 export class CaseService {
@@ -285,4 +285,67 @@ export class CaseService {
     });
   }
 
+  getNoteById(id: number) {
+    return this.httpService.get('notes/GetNotesById/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  getNoteByCaseId(caseId: number) {
+    return this.httpService.get('notes/GetNotesByCaseId?caseid=' + caseId).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  addOrUpdateNote(noteModel: CaseNote) {
+    let url = ''
+    if (noteModel.Id) {
+      url = 'notes/update';
+      return this.httpService.put(url, noteModel).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    } else {
+      url = 'notes/Create';
+      return this.httpService.post(url, noteModel).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    }
+  }
+
+  deleteNote(id: number) {
+    return this.httpService.delete('notes/Delete/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
 }
