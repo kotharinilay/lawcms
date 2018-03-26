@@ -50,7 +50,7 @@ export class CaseListComponent implements OnInit {
   }
 
   showCommunication(rowData: any) {
-    this.router.navigateByUrl('/case/' + rowData.Id + '/communication');
+    this.router.navigateByUrl('/case/' + rowData.Id + '/communication/dashboard');
   }
   ShowTimeTracker(rowData: any) {
     this.router.navigateByUrl(`/case/${rowData.Id}/time-tracking`);

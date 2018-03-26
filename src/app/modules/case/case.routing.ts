@@ -9,11 +9,13 @@ import { TimeTrackingListComponent } from './time-tracking/time-tracking-list/ti
 import { TimeTrackingDetailComponent } from 'app/modules/case/time-tracking/time-tracking-detail/time-tracking-detail.component';
 import { NoteListComponent } from './case-note/note-list/note-list.component';
 import { NoteDetailComponent } from './case-note/note-detail/note-detail.component';
+import { CommunicationDashboardComponent } from './case-communication/communication-dashboard/communication-dashboard.component';
 
 const routes: Routes = [
     { path: '', component: CaseListComponent },
     { path: ':id', component: CaseAddComponent },
     { path: ':caseId/communication', component: CommunicationListComponent },
+    { path: ':caseId/communication/dashboard', component: CommunicationDashboardComponent },
     { path: ':caseId/communication/:id', component: CommunicationDetailComponent },
     { path: ':caseId/time-tracking', component: TimeTrackingListComponent },
     { path: ':caseId/time-tracking/:id', component: TimeTrackingDetailComponent },
