@@ -23,7 +23,8 @@ import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
     ReactiveFormsModule,
     NgxDatatableModule,
     NguiAutoCompleteModule,
-    NguiDatetimePickerModule
+    NguiDatetimePickerModule,
+    OrderByPipe
   ]
 })
 export class SharedModule { }

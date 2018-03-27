@@ -44,18 +44,18 @@
     </div>
   </div>
   <div class="col-sm-9">
-    <section class="profile-timeline" *ngFor="let communication of caseCommunications">
-      <div class="profile-timeline-header">
-        <!-- <a href=javascript:; class="profile-timeline-user">
-          <img [src]="url" alt="" class="img-circle">
+    <section class="profile-timeline" *ngFor="let communication of caseCommunications | orderBy : 'CommunicateDate': true">
+      <div class="profile-timeline-header ">
+        <!-- <a href=javascript:; class="profile-timeline-user ">
+          <img [src]="url " alt=" " class="img-circle ">
         </a> -->
-        <div class="profile-timeline-user-details">
-          <a href=javascript:; class="bold">{{communication.Summary}}</a>
+        <div class="profile-timeline-user-details ">
+          <a href=javascript:; class="bold ">{{communication.Summary}}</a>
           <br>
-          <em class="text-success small">{{communication.CommunicateDate | date: 'dd/MM/yyyy'}}</em>
+          <em class="text-success small ">{{communication.CommunicateDate | date: 'dd/MM/yyyy'}}</em>
         </div>
       </div>
-      <div class="profile-timeline-content">
+      <div class="profile-timeline-content ">
         <p>
           {{communication.CommunicationDetails}}
         </p>

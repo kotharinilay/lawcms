@@ -48,6 +48,7 @@ import { SidebarComponent } from './containers/layout/components/sidebar/sidebar
 import { NavbarComponent } from './containers/layout/components/navbar/navbar.component';
 import { FooterComponent } from 'app/containers/layout/components/footer/footer.component';
 import { HeaderComponent } from 'app/containers/layout/components/header/header.component';
+import { SuggestionComponent } from './components/suggestion/suggestion.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { HeaderComponent } from 'app/containers/layout/components/header/header.
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    SuggestionComponent
   ],
   imports: [
     BrowserModule,

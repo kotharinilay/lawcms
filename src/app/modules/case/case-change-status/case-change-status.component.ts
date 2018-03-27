@@ -11,7 +11,7 @@ import { CaseService } from '../case.service';
 })
 export class CaseChangeStatusComponent implements OnInit, OnDestroy, CloseGuard, ModalComponent<BSModalContext> {
   context: BSModalContext;
-  loading: boolean = false;
+
   cases: any[] = [];
   stages: any[] = [];
   courts: any[] = [];
