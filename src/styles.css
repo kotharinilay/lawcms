@@ -52,3 +52,4 @@
 
 .datatable-row-odd {background-color: rgba(0, 0, 0, 0.05)}
 .ngx-datatable.material .datatable-footer {background: #424242; color: #ededed;}
+.column-filter-input { width:100%;height:27px;border:1px solid gray; padding: 5px; border-radius: 4px;}

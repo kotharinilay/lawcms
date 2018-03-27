@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CaseExpenseService } from '../case-expense.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'app/shared/services/notification.service';
@@ -13,7 +13,10 @@ export class CaseExpenseListComponent implements OnInit {
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
   page: Page = new Page();
+  @ViewChild('grid') grid: ElementRef;
   sorting: Sorting = new Sorting();
+  allRows = [];
+  filter: { columnName: string, value: string }[] = [];
   constructor(private caseExpenseService: CaseExpenseService, private router: Router, private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
@@ -48,6 +51,7 @@ export class CaseExpenseListComponent implements OnInit {
       this.page.totalElements = pagedData.TotalNumberOfRecords;
       this.page.totalPages = pagedData.TotalNumberOfPages;
       this.page.pageNumber = pagedData.PageNumber;
+      this.allRows = pagedData.Results;
       this.rows = pagedData.Results;
     });
   }
@@ -66,6 +70,21 @@ export class CaseExpenseListComponent implements OnInit {
         }, err => {
           this._notify.error(err.Result);
         });
+    }
+  }
+
+  filterData(event) {
+    const target = event.target;
+    if (target.value.length >= 2) {
+      const index = this.filter.findIndex(x => x.columnName === target.dataset.columnName);
+      if (index > -1) {
+        this.filter[index].value = target.value;
+      } else {
+        this.filter.push({ columnName: target.dataset.columnName, value: target.value });
+      }
+      this.rows = this.allRows.filter(x => x[target.dataset.columnName].toLowerCase().indexOf(target.value) > -1);
+    } else {
+      this.rows = Object.assign([], this.allRows);
     }
   }
 }
