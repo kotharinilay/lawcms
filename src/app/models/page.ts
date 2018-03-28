@@ -21,3 +21,8 @@ export class Sorting {
     dir: boolean;
     columnName: string;
 }
+
+export class FilterModel {
+    columnName: string;
+    value: string;
+}

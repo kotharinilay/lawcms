@@ -106,9 +106,12 @@ export class CaseExpenseService {
 
   }
 
-  getCaseExpensesPageData(page: Page, sort: Sorting) {
-
-    return this.httpService.get(`CaseExpense/GetAllFilter?page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}`).map((res: any) => {
+  getCaseExpensesPageData(page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
+    let filter = '';
+    if (filterColumn) {
+      filter += '&' + filterColumn + filterValue;
+    }
+    return this.httpService.get(`CaseExpense/GetAllFilter?page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }

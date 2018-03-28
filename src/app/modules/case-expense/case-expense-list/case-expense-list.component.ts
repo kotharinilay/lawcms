@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CaseExpenseService } from '../case-expense.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'app/shared/services/notification.service';
-import { Page, Sorting } from 'app/models/page';
+import { Page, Sorting, FilterModel } from 'app/models/page';
 
 @Component({
   selector: 'app-case-expense-list',
@@ -16,7 +16,15 @@ export class CaseExpenseListComponent implements OnInit {
   @ViewChild('grid') grid: ElementRef;
   sorting: Sorting = new Sorting();
   allRows = [];
-  filter: { columnName: string, value: string }[] = [];
+  filterModel: FilterModel[] = [{
+    columnName: 'ExpenseName',
+    value: ''
+  },
+  {
+    columnName: 'CategoryName',
+    value: ''
+  },
+  ];
   constructor(private caseExpenseService: CaseExpenseService, private router: Router, private _notify: NotificationService) {
     this.page.pageNumber = 0;
     this.page.size = 5;
@@ -45,8 +53,8 @@ export class CaseExpenseListComponent implements OnInit {
     return this.getDataSource();
   }
 
-  getDataSource() {
-    this.caseExpenseService.getCaseExpensesPageData(this.page, this.sorting).subscribe(pagedData => {
+  getDataSource(filterColumn?: string, filterValue?: string) {
+    this.caseExpenseService.getCaseExpensesPageData(this.page, this.sorting, filterColumn, filterValue).subscribe(pagedData => {
       this.loadingIndicator = false;
       this.page.totalElements = pagedData.TotalNumberOfRecords;
       this.page.totalPages = pagedData.TotalNumberOfPages;
@@ -75,16 +83,19 @@ export class CaseExpenseListComponent implements OnInit {
 
   filterData(event) {
     const target = event.target;
-    if (target.value.length >= 2) {
-      const index = this.filter.findIndex(x => x.columnName === target.dataset.columnName);
-      if (index > -1) {
-        this.filter[index].value = target.value;
-      } else {
-        this.filter.push({ columnName: target.dataset.columnName, value: target.value });
-      }
-      this.rows = this.allRows.filter(x => x[target.dataset.columnName].toLowerCase().indexOf(target.value) > -1);
+    let filter = this.filterModel.filter(x => x.value.length >= 2);
+    if (filter.length) {
+      let filterColumnString = 'columnName=';
+      let searchValue = '&searchValue='
+      filter.forEach((model) => {
+        filterColumnString += model.columnName + ",";
+        searchValue += model.value + ",";
+      });
+      filterColumnString = filterColumnString.substring(0, filterColumnString.length - 1);
+      searchValue = searchValue.substring(0, searchValue.length - 1);
+      this.getDataSource(filterColumnString, searchValue);
     } else {
-      this.rows = Object.assign([], this.allRows);
+      this.getDataSource();
     }
   }
 }

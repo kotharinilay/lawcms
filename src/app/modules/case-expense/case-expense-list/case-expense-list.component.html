@@ -19,9 +19,11 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="Expense Name" sortable="true" prop="ExpenseName">
         <ng-template let-column="column" height="40" ngx-datatable-header-template>
-          <label style="height:10px;cursor:pointer">Expense Name</label>
+          <label class="column-filter-label">Expense Name</label>
           <br/>
-          <input type='text' id="id" class="column-filter-input form-control" data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)"/>
+          <input type='text' id="id" name="expense-name-filter"  class="column-filter-input form-control"
+          [(ngModel)]= "filterModel[0].value"
+          data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)"/>
         </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
@@ -33,6 +35,13 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Category" sortable="true" prop="CategoryName">
+          <ng-template let-column="CategoryName" height="40" ngx-datatable-header-template>
+              <label class="column-filter-label">Category Name</label>
+              <br/>
+              <input type='text' id="id" name="expense-name-filter"  class="column-filter-input form-control"
+              [(ngModel)]= "filterModel[1].value"
+              data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)"/>
+            </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
