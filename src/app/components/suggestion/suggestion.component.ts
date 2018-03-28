@@ -11,7 +11,7 @@ import { CommonService } from 'app/shared/services/common.service';
 export class SuggestionComponent implements OnInit, OnDestroy, CloseGuard, ModalComponent<BSModalContext> {
   context: BSModalContext;
   isLoading: boolean = false;
-  model: any;
+  model: any = {};
 
   constructor(public dialog: DialogRef<BSModalContext>, private commonServeice: CommonService) {
     dialog.context.dialogClass = "modal-dialog modal-lg";

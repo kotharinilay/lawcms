@@ -15,6 +15,7 @@ import { NotificationService } from './shared/services/notification.service';
 
 // Modal popup
 import { ModalModule } from 'ngx-modialog';
+import { BootstrapModalModule, Modal } from 'ngx-modialog/plugins/bootstrap';
 
 // toastr module
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
@@ -72,7 +73,8 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
     ToastModule.forRoot(),
     PerfectScrollbarModule,
     NgxDatatableModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BootstrapModalModule
   ],
   providers: [
     CommonService,
@@ -89,8 +91,10 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    Modal
   ],
+  entryComponents: [SuggestionComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
