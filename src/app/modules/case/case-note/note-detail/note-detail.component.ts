@@ -23,6 +23,7 @@ export class NoteDetailComponent implements OnInit {
     private contactService: ContactService) { }
 
   ngOnInit() {
+    this.model.IsImportant = false;
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
     if (this.paramId.toString() !== 'new') {

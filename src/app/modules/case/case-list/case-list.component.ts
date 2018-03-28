@@ -55,4 +55,7 @@ export class CaseListComponent implements OnInit {
   ShowTimeTracker(rowData: any) {
     this.router.navigateByUrl(`/case/${rowData.Id}/time-tracking`);
   }
+  ShowNotes(rowData: any) {
+    this.router.navigateByUrl(`/case/${rowData.Id}/note`);
+  }
 }
