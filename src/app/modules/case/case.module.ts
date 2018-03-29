@@ -17,6 +17,8 @@ import { TimeTrackingDetailComponent } from './time-tracking/time-tracking-detai
 import { NoteListComponent } from './case-note/note-list/note-list.component';
 import { NoteDetailComponent } from './case-note/note-detail/note-detail.component';
 import { CommunicationDashboardComponent } from './case-communication/communication-dashboard/communication-dashboard.component';
+import { DocumentListComponent } from './case-document/document-list/document-list.component';
+import { DocumentDetailComponent } from './case-document/document-detail/document-detail.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { CommunicationDashboardComponent } from './case-communication/communicat
     TimeTrackingListComponent,
     NoteListComponent,
     NoteDetailComponent,
-    CommunicationDashboardComponent
+    CommunicationDashboardComponent,
+    DocumentListComponent,
+    DocumentDetailComponent
   ],
   providers: [
     CaseService,

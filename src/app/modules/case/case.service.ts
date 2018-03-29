@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
-import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote } from 'app/models/case';
+import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document } from 'app/models/case';
 
 @Injectable()
 export class CaseService {
@@ -347,5 +347,91 @@ export class CaseService {
     }).catch((err: any) => {
       throw err;
     });
+  }
+
+  uploadCaseDocument(id: number, caseId: number, formData: FormData) {
+    return this.httpService.postFormData(`Document/UploadDocument/${id}?caseId=${caseId}`, formData).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  getCaseDocument(id: number) {
+    return this.httpService.get(`Document/DownloadDocument/${id}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  deleteCaseDocument(id: number) {
+    return this.httpService.delete('Document/Delete/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
+  addOrUpdateCaseDocument(documentModel: Document) {
+    let url = ''
+    if (documentModel.Id) {
+      url = 'document/update';
+      return this.httpService.put(url, documentModel).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    } else {
+      url = 'document/create';
+      return this.httpService.post(url, documentModel).map((res: any) => {
+        if (res.Success) {
+          return res.Result;
+        }
+        else {
+          throw 'We are facing some issue with server, Plesae try after some time.';
+        }
+
+      }).catch((err: any) => {
+        throw err;
+      })
+    }
+  }
+
+  getCaseDocumentById(id: number) {
+    return this.httpService.get('Document/GetDocumentById/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err.detail;
+    });
+  }
+
+  getCaseDocumentsByCaseId(caseId: number, category: string) {
+    return this.httpService.get(`Document/GetDocumentsByCategoryAndCase?caseId=${caseId}&DocumentCategory=${category}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    })
   }
 }

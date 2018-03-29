@@ -91,3 +91,14 @@ export class CaseNote {
     UpdatedDate: Date;
     IsImportant: boolean;
 }
+
+export class Document {
+    Id: number;
+    CaseId: number;
+    DocumentName: string;
+    DocumentCategory: string;
+    FileType: string;
+    IsActive: boolean;
+    UpdatedTime: Date;
+    FileName: string;
+}

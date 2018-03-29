@@ -134,3 +134,12 @@ export const Associates = [
     { Id: "3", Name: "Associate3" },
     { Id: "4", Name: "Associate4" }
 ]
+
+export const DocumentCategory = [
+    { Id: "Agreement", Name: "Agreement" },
+    { Id: "Answer", Name: "Answer" },
+    { Id: "Briefs", Name: "Briefs" },
+    { Id: "Closing", Name: "Closing" },
+    { Id: "Communication", Name: "Communication" },
+    { Id: "Notice", Name: "Notice" }
+]
