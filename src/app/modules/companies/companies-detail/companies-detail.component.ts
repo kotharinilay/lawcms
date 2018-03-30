@@ -28,7 +28,7 @@ export class CompaniesDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => this.paramId = params["id"]);
     this.conmapiesService.getAllContacts().subscribe((response) => {
       response.forEach((element) => {
-        this.contacts.push({ id: element.Id, itemName: element.FirstName });
+        this.contacts.push({ id: element.Id, itemName: element.FirstName + " " + element.LastName });
       });
     }, error => {
       this._notify.error(error);
@@ -36,8 +36,9 @@ export class CompaniesDetailComponent implements OnInit {
     if (this.paramId !== 'new') {
       this.conmapiesService.getCompanyById(this.paramId).subscribe(response => {
         this.model = response;
+        this.selectedContacts = [];
         response.Contacts.forEach(element => {
-          this.selectedContacts.push({ id: element.Id, itemName: element.FirstName });
+          this.selectedContacts.push({ id: element.Id, itemName: element.Name });
         });
       }, error => {
       });

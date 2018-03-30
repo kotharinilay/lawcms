@@ -67,7 +67,6 @@ export class CaseAddComponent implements OnInit {
           this.OppnentAdvocateId = response.OppnentAdvocateName;
           this.WitnessContactId = response.WitnessContactName;
           this.JugmentFavourId = response.JugmentFavourToName;
-
           this.judges.forEach(element => {
             if (response.JudgeIds.indexOf(element.id) != -1) {
               this.selectedJudges.push(element);
