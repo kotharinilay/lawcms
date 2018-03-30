@@ -23,6 +23,7 @@ export class CaseExpenseDetailComponent implements OnInit {
   isLoading: boolean = false;
   fileToUpload: File = null;
   AssociateContactId;
+  fileName: string;
   constructor(private route: ActivatedRoute, private caseExpenseService: CaseExpenseService, private _notify: NotificationService,
     private _sanitizer: DomSanitizer, private contactService: ContactService, private caseService: CaseService,
     private router: Router) { }
@@ -43,13 +44,7 @@ export class CaseExpenseDetailComponent implements OnInit {
           this.model = <CaseExpense>response;
           this.AssociateContactId = response.AssociateContactName;
           if (this.model.BillDocument) {
-            this.caseExpenseService.getBillDocument(this.model.Id).subscribe(res => {
-              if (res && res !== "No Data Found") {
-                this.url = res;
-              }
-            }, error => {
-              this._notify.error(error.result);
-            })
+            this.fileName = this.model.BillDocument.toString();
           }
         }, err => {
           this._notify.error(err.Result);
@@ -120,6 +115,7 @@ export class CaseExpenseDetailComponent implements OnInit {
       }
 
       this.fileToUpload = files[0];
+      this.fileName = this.fileToUpload.name;
       var reader = new FileReader();
       reader.onload = (event: any) => {
         this.url = event.target.result;
@@ -144,5 +140,23 @@ export class CaseExpenseDetailComponent implements OnInit {
   showDocument() {
     var win = window.open();
     win.document.write('<iframe src="' + this.url + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>')
+  }
+
+  downloadDocument() {
+    if (this.paramId !== 'new') {
+      this.caseExpenseService.downloadDocument(this.paramId);
+    }
+  }
+
+  deleteDocument() {
+    if (this.paramId !== 'new') {
+      this.caseExpenseService.deleteDocument(this.paramId).subscribe(response => {
+        this._notify.success("Bill Document deleted successfully.");
+        this.fileToUpload = null;
+        this.fileName = null;
+      }, error => {
+        this._notify.error(error);
+      });
+    }
   }
 }

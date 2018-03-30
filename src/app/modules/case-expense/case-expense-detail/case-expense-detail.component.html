@@ -82,9 +82,11 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseId">Bill Document</label>
-                  <div>{{fileToUpload?.name || 'Select File'}}
+                  <div>{{ fileName || 'Select File'}}
                   </div>
                   <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
+                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="downloadDocument()">Download</a>
+                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="deleteDocument()">Delete</a>
                   <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png"
                     #fileUpload style="display:none" (change)="onFileChange($event)" />
                 </div>

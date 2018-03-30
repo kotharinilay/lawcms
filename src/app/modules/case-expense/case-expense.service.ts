@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
 import { CaseExpense } from '../../models/case-expense';
 import { Page, Sorting } from 'app/models/page';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class CaseExpenseService {
@@ -118,7 +119,21 @@ export class CaseExpenseService {
       throw 'We are facing some issue with server, Plesae try after some time.';
     }).catch((err: any) => {
       throw err;
-    })
+    });
   }
 
+  downloadDocument(id) {
+    window.open(`${environment.origin}CaseExpense/GetBillDocument/${id}`, '_blank');
+  }
+
+  deleteDocument(id) {
+    return this.httpService.delete(`CaseExpense/Delete/${id}`).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
 }
