@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from 'app/lib/http/http-client.service';
 import { Case, CaseStatus, CaseCommunication, TimeTracking, CaseNote, Document } from 'app/models/case';
+import { Page, Sorting } from 'app/models/page';
 
 @Injectable()
 export class CaseService {
@@ -382,6 +383,17 @@ export class CaseService {
     });
   }
 
+  deleteCaseDocumentFile(id: number) {
+    return this.httpService.delete('Document/DeleteDocumentFile/' + id).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
+
   addOrUpdateCaseDocument(documentModel: Document) {
     let url = ''
     if (documentModel.Id) {
@@ -424,14 +436,18 @@ export class CaseService {
     });
   }
 
-  getCaseDocumentsByCaseId(caseId: number, category: string) {
-    return this.httpService.get(`Document/GetDocumentsByCategoryAndCase?caseId=${caseId}&DocumentCategory=${category}`).map((res: any) => {
+  getCaseDocumentsByCaseId(caseId: number, page: Page, sort: Sorting, filterColumn?: string, filterValue?: string) {
+    let filter = '';
+    if (filterColumn) {
+      filter += '&' + filterColumn + filterValue;
+    }
+    return this.httpService.get(`Document/GetAllFilter?caseId=${caseId}&page=${page.pageNumber}&pageSize=${page.size}&orderBy=${sort.columnName}&ascending=${sort.dir}${filter}`).map((res: any) => {
       if (res.Success) {
         return res.Result;
       }
       throw 'We are facing some issue with server, Plesae try after some time.';
     }).catch((err: any) => {
       throw err;
-    })
+    });
   }
 }

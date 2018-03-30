@@ -25,6 +25,7 @@ export class DocumentDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param["id"]);
     this.route.params.subscribe(param => this.caseId = param["caseId"]);
+    this.model.CaseId = this.caseId;
     if (this.paramId.toString() != "new") {
       this.caseService.getCaseDocumentById(this.paramId).subscribe(
         response => {
@@ -49,29 +50,29 @@ export class DocumentDetailComponent implements OnInit {
     this.caseService.addOrUpdateCaseDocument(this.model).subscribe(
       response => {
         this.isLoading = false;
-
+        debugger;
         if (response) {
           if (this.paramId === 'new' && this.fileToUpload && this.fileToUpload.name) {
             const formData = new FormData();
-            formData.append("Caseexpense", this.fileToUpload);
-            return this.caseService.uploadCaseDocument(response.Id, this.model.CaseId, formData).subscribe(res => {
-              this._notify.success(`Case Expense  ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
+            formData.append("Document", this.fileToUpload);
+            return this.caseService.uploadCaseDocument(response.Id, this.caseId, formData).subscribe(res => {
+              this._notify.success(`Case Document  ${this.paramId === 'new' ? 'added' : 'updated'} successfully.`);
               if (this.paramId !== "new") {
                 setTimeout(() => {
-                  this.router.navigate(['/case-expense']);
+                  this.router.navigate(['/case/' + this.caseId]);
                 });
               }
             }, error => {
               this._notify.error(error.Result);
             });
           } else if (this.paramId === 'new') {
-            this._notify.success("Case Expense added successfully.");
+            this._notify.success("Case Document added successfully.");
           }
           else {
-            this._notify.success("Case Expense updated successfully.");
+            this._notify.success("Case Document updated successfully.");
           }
           setTimeout(() => {
-            this.router.navigate(['/case-expense']);
+            this.router.navigate(['/case/' + this.caseId]);
           });
         }
       }, err => {
@@ -98,7 +99,7 @@ export class DocumentDetailComponent implements OnInit {
       if (this.paramId !== "new") {
         const formData = new FormData();
         formData.append("Document", this.fileToUpload);
-        this.caseService.uploadCaseDocument(this.paramId, this.model.CaseId, formData).subscribe(response => {
+        this.caseService.uploadCaseDocument(this.paramId, this.caseId, formData).subscribe(response => {
           if (response) {
             this._notify.success("Case Document uploaded successfully");
           }
@@ -108,7 +109,7 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['/case-expense']);
+    this.router.navigate(['/case/' + this.caseId]);
   }
 
   showDocument() {

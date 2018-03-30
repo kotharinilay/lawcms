@@ -205,4 +205,8 @@ export class CaseAddComponent implements OnInit {
     this.router.navigate([`/case/${this.model.Id}/note/new`]);
   }
 
+  addDocument() {
+    this.router.navigate([`/case/${this.model.Id}/document/new`]);
+  }
+
 }

@@ -4,7 +4,7 @@
       <b>Case Expenses</b>
     </span>
     <div class="pb30">
-      <button type="button" class="btn btn-success pull-right" kendoButton (click)="router.navigate(['/case-expense/new'])">Create</button>
+      <button type="button" class="btn btn-success pull-right" (click)="router.navigate(['/case-expense/new'])">Create</button>
     </div>
 
   </div>
@@ -21,9 +21,8 @@
         <ng-template let-column="column" height="40" ngx-datatable-header-template>
           <label class="column-filter-label">Expense Name</label>
           <br/>
-          <input type='text' id="id" name="expense-name-filter"  class="column-filter-input form-control"
-          [(ngModel)]= "filterModel[0].value"
-          data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)"/>
+          <input type='text' id="id" name="expense-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value"
+            data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)" />
         </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
@@ -35,13 +34,12 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Category" sortable="true" prop="CategoryName">
-          <ng-template let-column="CategoryName" height="40" ngx-datatable-header-template>
-              <label class="column-filter-label">Category Name</label>
-              <br/>
-              <input type='text' id="id" name="expense-name-filter"  class="column-filter-input form-control"
-              [(ngModel)]= "filterModel[1].value"
-              data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)"/>
-            </ng-template>
+        <ng-template let-column="CategoryName" height="40" ngx-datatable-header-template>
+          <label class="column-filter-label">Category Name</label>
+          <br/>
+          <input type='text' id="id" name="expense-name-filter" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value"
+            data-column-name="ExpenseName" #expenseNameSearch placeholder='Filter...' (keyup)="filterData($event)" />
+        </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>

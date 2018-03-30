@@ -36,8 +36,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Category">Category</label>
-                  <input type="text" maxlength="50" id="Category" name="Category" class="form-control" [(ngModel)]="model.Category"
-                    #Category="ngModel" />
+                  <input type="text" maxlength="50" id="Category" name="Category" class="form-control" [(ngModel)]="model.Category" #Category="ngModel"
+                  />
                   <label *ngIf="companyForm.submitted && !Category.valid" class="err-label">
                     Please enter Category
                   </label>
@@ -47,8 +47,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CompanySize">CompanySize</label>
-                  <input type="number" pattern="^\d+(\.\d{1,2})?$" step="1" id="CompanySize" name="CompanySize" class="form-control"
-                    [(ngModel)]="model.CompanySize" #CompanySize="ngModel" />
+                  <input type="number" pattern="^\d+(\.\d{1,2})?$" step="1" id="CompanySize" name="CompanySize" class="form-control" [(ngModel)]="model.CompanySize"
+                    #CompanySize="ngModel" />
                   <label *ngIf="companyForm.submitted && !CompanySize.valid" class="err-label">
                     Please enter CompanySize
                   </label>
@@ -60,8 +60,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Website">Website</label>
-                  <input type="text" maxlength="100" id="Website" name="Website" class="form-control" [(ngModel)]="model.Website"
-                    #Website="ngModel" />
+                  <input type="text" maxlength="100" id="Website" name="Website" class="form-control" [(ngModel)]="model.Website" #Website="ngModel"
+                  />
                   <label *ngIf="companyForm.submitted && !Website.valid" class="err-label">
                     Please enter Website
                   </label>
@@ -97,7 +97,7 @@
               </div>
             </div>
             <div class="row">
-              <button type="button" class="btn btn-default" kendoButton (click)="onCancleClick()">Cancel</button>
+              <button type="button" class="btn btn-default" (click)="onCancleClick()">Cancel</button>
               <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
             </div>
           </form>
