@@ -35,6 +35,10 @@ const routes: Routes = [
       {
         path: 'expense-type',
         loadChildren: './modules/expense-type/expense-type.module#ExpenseTypeModule'
+      },
+      {
+        path: 'companies',
+        loadChildren: './modules/companies/companies.module#CompaniesModule'
       }
     ]
   },
