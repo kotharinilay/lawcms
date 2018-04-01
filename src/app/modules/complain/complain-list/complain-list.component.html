@@ -9,24 +9,44 @@
 
   </div>
   <div class=panel-body>
-    <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
-      [rowHeight]="'auto'" [columnMode]="'force'">
+    <ngx-datatable class="material" [rows]="rows" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
+      [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
+
       <ngx-datatable-column name="Complain Date" sortable="true" prop="ComplainDate">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value | date: 'dd/MM/yyyy'}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Complain By" sortable="true" prop="ComplainByName">
+        <ng-template let-column="column" height="40" ngx-datatable-header-template>
+          <label class="complainBy-name">ComplainBy Name</label>
+          <br/>
+          <input type='text' name="complain-name" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value" data-column-name="ComplainByName"
+            #ComplainByName placeholder='Filter...' (keyup)="filterData($event)" />
+        </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Complain Of" sortable="true" prop="ComplainOfName">
+        <ng-template let-column="column" height="40" ngx-datatable-header-template>
+          <label class="complain-of">ComplainBy Name</label>
+          <br/>
+          <input type='text' name="complain-of" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value" data-column-name="ComplainOfName"
+            #ComplainOfName placeholder='Filter...' (keyup)="filterData($event)" />
+        </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Status" sortable="true" prop="ComplainStatus">
+        <ng-template let-column="column" height="40" ngx-datatable-header-template>
+          <label class="complain-status">ComplainBy Name</label>
+          <br/>
+          <input type='text' name="complain-status" class="column-filter-input form-control" [(ngModel)]="filterModel[2].value" data-column-name="ComplainStatus"
+            #ComplainStatus placeholder='Filter...' (keyup)="filterData($event)" />
+        </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
