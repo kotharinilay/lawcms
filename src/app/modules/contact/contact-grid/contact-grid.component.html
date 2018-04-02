@@ -1,11 +1,20 @@
-<ngx-datatable class="bootstrap" [rows]="_data" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
-  [rowHeight]="'auto'" [columnMode]="'force'">
+<!-- <ngx-datatable class="bootstrap" [rows]="_data" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
+  [rowHeight]="'auto'" [columnMode]="'force'"> -->
+<ngx-datatable class="material" [rows]="_data" #grid [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+  [limit]="page.size" (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [headerHeight]="70" [footerHeight]="40"
+  [loadingIndicator]="loadingIndicator" [rowHeight]="'auto'" [columnMode]="'force'">
   <ngx-datatable-column name="Contact Type" sortable="true" prop="ContactType">
+    <ng-template let-column="column" height="40" ngx-datatable-header-template>
+      <label class="ContactType">Contact Type</label>
+      <br/>
+      <input type='text' name="ContactType" class="column-filter-input form-control" [(ngModel)]="filterModel[0].value" data-column-name="ContactType"
+        #ContactType placeholder='Filter...' (keyup)="filterData($event)" />
+    </ng-template>
     <ng-template let-value="value" ngx-datatable-cell-template>
       {{value}}
     </ng-template>
   </ngx-datatable-column>
-  <ngx-datatable-column name="Name" sortable="true">
+  <ngx-datatable-column name="Name" sortable="true" prop="Title">
     <ng-template let-row="row" ngx-datatable-cell-template>
       {{row.Title}} {{row.FirstName}} {{row.LastName}}
     </ng-template>

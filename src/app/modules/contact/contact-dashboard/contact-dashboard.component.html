@@ -72,20 +72,25 @@
         </li>
       </ul>
       <div class=tab-content>
-        <div class="tab-pane active in" id='new'>
-          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+        <div class="tab-pane active in" *ngIf=" contactType=== 'NewlyAdded'" id='new'>
+          <app-contact-grid class="p10" [page]="page" [loadingIndicator]="loadingIndicator" (onFilter)="onFilter($event)" [filterModel]="filterModel" (onSortChange)="onSort($event)" (getPageData)="setPage($event)"
+            [data]="rows" [showAction]="false"></app-contact-grid>
         </div>
         <div class=tab-pane id='client'>
-          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+          <app-contact-grid class="p10" *ngIf="contactType=== 'Client'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)" [filterModel]="filterModel" (onFilter)="onFilter($event)"
+            [page]="page" (getPageData)="setPage($event)" [data]="rows" [showAction]="false"></app-contact-grid>
         </div>
         <div class=tab-pane id='advocate'>
-          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+          <app-contact-grid class="p10" [page]="page" (getPageData)="setPage($event)" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)" [filterModel]="filterModel" (onFilter)="onFilter($event)"
+            *ngIf="contactType=== 'Advocate'" [data]="rows" [showAction]="false"></app-contact-grid>
         </div>
         <div class=tab-pane id='law'>
-          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+          <app-contact-grid class="p10" [page]="page" *ngIf="contactType=== 'LawFirm'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)" [filterModel]="filterModel" (onFilter)="onFilter($event)"
+            (getPageData)="setPage($event)" [data]="rows" [showAction]="false"></app-contact-grid>
         </div>
         <div class=tab-pane id='other'>
-          <app-contact-grid class="p10" [data]="rows" [showAction]="false"></app-contact-grid>
+          <app-contact-grid class="p10" [page]="page" *ngIf="contactType=== 'Other'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
+            (getPageData)="setPage($event)" [data]="rows" [showAction]="false"></app-contact-grid>
         </div>
       </div>
     </div>
