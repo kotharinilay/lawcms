@@ -13,11 +13,15 @@ export class ContactDashboardComponent implements OnInit {
 
   dashboardData: any = {};
   rows = [];
+  newlyAddedData = [];
   public page: Page = new Page();
   filterModel: FilterModel[] = [{
     columnName: 'ContactType',
     value: ''
-  }];
+  }, {
+    columnName: 'Title',
+    value: ''
+  },];
   loadingIndicator: boolean = false;
   contactType: string = contactDashboardTab[0];
   sorting: Sorting = new Sorting();
@@ -44,11 +48,12 @@ export class ContactDashboardComponent implements OnInit {
   }
 
   onFilter($event) {
-    if(this.contactType === contactDashboardTab[0]) {
-      // this.rows =
+    debugger
+    let filter = this.filterModel.filter(x => x.value.length >= 2);
+    if (this.contactType === contactDashboardTab[0]) {
+      return false;
     }
     const target = event.target;
-    let filter = this.filterModel.filter(x => x.value.length >= 2);
     if (filter.length) {
       let filterColumnString = 'columnName=';
       let searchValue = '&searchValue='
@@ -101,6 +106,7 @@ export class ContactDashboardComponent implements OnInit {
       this.page.totalElements = 10;
       this.page.totalPages = 1;
       this.page.pageNumber = 1;
+      this.newlyAddedData = Object.assign([], res);
       this.rows = res;
       this.loadingIndicator = false;
     }, err => {

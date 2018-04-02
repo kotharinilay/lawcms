@@ -13,6 +13,7 @@ export class ContactGridComponent implements OnInit {
   @Input() showAction: boolean;
   @Input() page: Page;
   @Input() filterModel: FilterModel[];
+  @Input() cType: string;
   @Input() loadingIndicator: boolean;
   @Output() getPageData: EventEmitter<any> = new EventEmitter<any>();
   @Output() onSortChange: EventEmitter<any> = new EventEmitter<any>();
