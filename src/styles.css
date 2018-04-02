@@ -48,7 +48,6 @@
     box-shadow:none !important;
     padding: 5px !important;
 }
-.panel-heading.border { min-height: 50px;}
 
 .datatable-row-odd {background-color: rgba(0, 0, 0, 0.05)}
 .ngx-datatable.material .datatable-footer {background: #424242; color: #ededed;}
@@ -57,3 +56,18 @@
 .c-btn {box-shadow: none !important;}
 .important-icon {cursor: pointer;}
 .btn-create{background: #09a287; color: #FFFFFF;}
+
+.btn-cancel{
+    color: #fff !important;
+    background-color: rgb(117, 117, 117) !important;
+    border-color: rgb(117, 117, 117) !important;
+}
+
+.pt15 {
+    padding-top: 15px;
+}
+
+.panel-heading.border { 
+    min-height: 50px;
+    border-bottom: 2px solid #495469;
+}

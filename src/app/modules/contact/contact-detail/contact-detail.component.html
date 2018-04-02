@@ -138,8 +138,11 @@
 
             <div class="panel-heading border">
               <b>Email Addresses</b>
+              <button class="btn btn-create pull-right" (click)="addEmail()">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add Email
+              </button>
             </div>
-            <div class="row">
+            <div class="row pt15">
               <div class="col-sm-6" *ngFor="let emailControl of emailSet let i = index; let j;">
                 <div *ngIf="!emailControl.IsDeleted">
                   <div class="form-group">
@@ -153,18 +156,14 @@
                 </div>
               </div>
             </div>
-            <hr>
-            <div class="form-group row text-right">
-              <div class="col-sm-12 add-form">
-                <button class="btn btn-create" (click)="addEmail()">
-                  <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-              </div>
-            </div>
 
             <div class="panel-heading border">
               <b>Mobile Numbers</b>
+              <button class="btn btn-create pull-right" (click)="addMobile()">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add Mobile
+              </button>
             </div>
-            <div class="row">
+            <div class="row pt15">
               <div class="col-sm-6" *ngFor="let mobileControl of mobileSet let i = index">
                 <div *ngIf="!mobileControl.IsDeleted">
                   <div class="form-group">
@@ -178,16 +177,11 @@
                 </div>
               </div>
             </div>
-            <hr>
-            <div class="form-group row text-right">
-              <div class="col-sm-12 add-form">
-                <button class="btn btn-create" (click)="addMobile()">
-                  <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-              </div>
-            </div>
-
             <div class="panel-heading border mb20">
               <b>Home Addresses</b>
+              <button class="btn btn-create pull-right" (click)="addAddress()">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add Address
+              </button>
             </div>
             <div class="row" *ngFor="let control of addressSet let i = index">
               <div *ngIf="!control.IsDeleted">
@@ -243,18 +237,13 @@
                     </div>
                   </div>
                 </div>
-                <hr>
               </div>
             </div>
-            <div class="form-group row text-right" style="margin: 0;">
-              <div class="col-sm-12 add-form">
-                <button class="btn btn-create" (click)="addAddress()">
-                  <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-              </div>
-            </div>
-
             <div class="panel-heading border mb20">
               <b>Office Addresses</b>
+              <button class="btn btn-create pull-right" (click)="addOfficeAddress()">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add Office Address
+              </button>
             </div>
             <div class="row" *ngFor="let control of officeAddressSet let i = index">
               <div *ngIf="!control.IsDeleted">
@@ -313,21 +302,16 @@
                     </div>
                   </div>
                 </div>
-                <hr>
               </div>
             </div>
-            <div class="form-group row text-right" style="margin: 0;">
-
-              <div class="col-sm-12 add-form">
-                <button class="btn btn-create" (click)="addOfficeAddress()">
-                  <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
-              </div>
-            </div>
-
 
             <div class="row">
-              <button type="button" class="btn btn-default" kendoButton (click)="onCancleClick()">Cancel</button>
-              <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+              <a href=javascript:; (click)="onCancleClick()" class="btn btn-default btn-cancel mr5">
+                <i class="fa fa-times-circle mr5"></i> Cancel
+              </a>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+              </button>
             </div>
           </form>
         </div>

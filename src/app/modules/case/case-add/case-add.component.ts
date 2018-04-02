@@ -38,7 +38,8 @@ export class CaseAddComponent implements OnInit {
       text: "Select Judges",
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      badgeShowLimit: 3
+      badgeShowLimit: 3,
+      enableSearchFilter: true,
     }
     this.route.params.subscribe(param => this.paramId = param["id"]);
     this.model.NotifyMe = true;

@@ -33,6 +33,22 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="NickName">Nick Name</label>
+                  <input type="text" maxlength="100" id="NickName" name="NickName" class="form-control" [(ngModel)]="model.NickName" #NickName="ngModel"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="DoctNumber">Doct Number</label>
+                  <input type="text" maxlength="100" id="DoctNumber" name="DoctNumber" class="form-control" [(ngModel)]="model.DoctNumber"
+                    #DoctNumber="ngModel" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
                   <label for="CaseType">Case Type</label>
                   <select class="form-control" [(ngModel)]="model.CaseType" id="CaseType" name="CaseType" #CaseType="ngModel">
                     <option [value]='undefined'>Select Case Type</option>
@@ -107,8 +123,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Description">Description</label>
-                  <input type="text" id="Description" name="Description" maxlength="250" class="form-control" [(ngModel)]="model.Description"
-                    #Description="ngModel" />
+                  <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description"
+                    #Description="ngModel"></textarea>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -233,7 +249,7 @@
                   </label>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-6" *ngIf="model.IsClose">
                 <div class="form-group">
                   <label for="CloseDate">Close Date</label>
                   <input class="form-control" [(ngModel)]="model.CloseDate" ngui-datetime-picker date-only="true" name="CloseDate" id="CloseDate"
@@ -243,7 +259,7 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-6" *ngIf="model.IsClose">
                 <div class="form-group">
                   <label for="JugmentFavourTo">Jugment Favour To</label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="JugmentFavourId" name="JugmentFavourId" [source]="contactSearch.bind(this)"
@@ -261,14 +277,14 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-6" *ngIf="model.IsClose">
                 <div class="checkbox">
                   <label>
                     <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel"> Notify Me
                   </label>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-6" *ngIf="model.NotifyMe && model.IsClose">
                 <div class="form-group">
                   <label for="NotifyMeWhen">NotifyMe When</label>
                   <input class="form-control" [(ngModel)]="model.NotifyMeWhen" name="NotifyMeWhen" id="NotifyMeWhen" #NotifyMeWhen="ngModel"
@@ -334,12 +350,16 @@
             </div>
 
             <div class="row">
-              <button type="button" class="btn btn-default" (click)="onCancelClick()">Cancel</button>
-              <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
-              <button type="button" class="btn btn-success" (click)="addCommunication()">Add Communication</button>
-              <button type="button" class="btn btn-success" (click)="addTimeTrackingDetails()">Add Time</button>
-              <button type="button" class="btn btn-success" (click)="addNote()">Add Note</button>
-              <button type="button" class="btn btn-success" (click)="addDocument()">Add Document</button>
+              <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+                <i class="fa fa-times-circle mr5"></i> Cancel
+              </a>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+              </button>
+              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addCommunication()">Add Communication</button>
+              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addTimeTrackingDetails()">Add Time</button>
+              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addNote()">Add Note</button>
+              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addDocument()">Add Document</button>
             </div>
           </form>
         </div>

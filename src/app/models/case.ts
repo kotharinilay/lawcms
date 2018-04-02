@@ -1,6 +1,8 @@
 export class Case {
     Id: number;
     CaseNo: string;
+    NickName: string;
+    DoctNumber: string;
     ClientId: number;
     CaseType: string;
     CaseYear: number;
