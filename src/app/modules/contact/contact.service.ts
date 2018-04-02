@@ -337,4 +337,14 @@ export class ContactService {
       throw err;
     });
   }
+  toggleImportant(id) {
+    return this.httpService.post(`Contact/MarkImportantContact/${id}`, {}).map((res: any) => {
+      if (res.Success) {
+        return res.Result;
+      }
+      throw 'We are facing some issue with server, Plesae try after some time.';
+    }).catch((err: any) => {
+      throw err;
+    });
+  }
 }

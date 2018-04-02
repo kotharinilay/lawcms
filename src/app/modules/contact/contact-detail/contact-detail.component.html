@@ -95,6 +95,15 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
+                  <label for="Reference">Reference</label>
+                  <input type="text" maxlength="250" id="Reference" name="Reference" class="form-control" [(ngModel)]="model.Reference" #Reference="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6" *ngIf="model.ContactType ==='Advocate' || model.ContactType ==='Associates'">
+                <div class="form-group">
                   <label for="PriceRate">Price Rate</label>
                   <input class="form-control" type="number" id="PriceRate" name="PriceRate" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.PriceRate"
                     #PriceRate="ngModel" />
@@ -102,22 +111,13 @@
                     Enter Valid Price Rate</label>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-6" *ngIf="model.ContactType ==='Advocate' || model.ContactType ==='Associates'">
                 <div class="form-group">
                   <label for="BasePrice">Base Price</label>
                   <input class="form-control" type="number" id="BasePrice" name="BasePrice" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.BasePrice"
                     #BasePrice="ngModel" />
                   <label *ngIf="(contactForm.submitted || BasePrice.dirty) && BasePrice.errors && BasePrice.errors['pattern']" class="err-label">
                     Enter Valid Base Price</label>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="Reference">Reference</label>
-                  <input type="text" maxlength="250" id="Reference" name="Reference" class="form-control" [(ngModel)]="model.Reference" #Reference="ngModel"
-                  />
                 </div>
               </div>
             </div>
@@ -139,7 +139,7 @@
             <div class="panel-heading border">
               <b>Email Addresses</b>
             </div>
-            <div class="row bottom-border">
+            <div class="row">
               <div class="col-sm-6" *ngFor="let emailControl of emailSet let i = index; let j;">
                 <div *ngIf="!emailControl.IsDeleted">
                   <div class="form-group">
@@ -153,17 +153,18 @@
                 </div>
               </div>
             </div>
-            <div class="form-group row text-right" style="margin: 0;">
+            <hr>
+            <div class="form-group row text-right">
               <div class="col-sm-12 add-form">
-                <a (click)="addEmail()">
-                  <i>+</i> Add Email</a>
+                <button class="btn btn-create" (click)="addEmail()">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
               </div>
             </div>
 
             <div class="panel-heading border">
               <b>Mobile Numbers</b>
             </div>
-            <div class="row bottom-border">
+            <div class="row">
               <div class="col-sm-6" *ngFor="let mobileControl of mobileSet let i = index">
                 <div *ngIf="!mobileControl.IsDeleted">
                   <div class="form-group">
@@ -177,10 +178,11 @@
                 </div>
               </div>
             </div>
-            <div class="form-group row text-right" style="margin: 0;">
+            <hr>
+            <div class="form-group row text-right">
               <div class="col-sm-12 add-form">
-                <a (click)="addMobile()">
-                  <i>+</i> Add Mobile</a>
+                <button class="btn btn-create" (click)="addMobile()">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
               </div>
             </div>
 
@@ -246,8 +248,8 @@
             </div>
             <div class="form-group row text-right" style="margin: 0;">
               <div class="col-sm-12 add-form">
-                <a (click)="addAddress()">
-                  <i>+</i> Add Address</a>
+                <button class="btn btn-create" (click)="addAddress()">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
               </div>
             </div>
 
@@ -317,9 +319,8 @@
             <div class="form-group row text-right" style="margin: 0;">
 
               <div class="col-sm-12 add-form">
-
-                <a (click)="addOfficeAddress()">
-                  <i>+</i> Add Office Address</a>
+                <button class="btn btn-create" (click)="addOfficeAddress()">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
               </div>
             </div>
 

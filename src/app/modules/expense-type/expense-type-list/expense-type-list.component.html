@@ -4,12 +4,13 @@
       <b>Expense Types</b>
     </span>
     <div class="pb30">
-      <button type="button" class="btn btn-success pull-right" kendoButton (click)="router.navigate(['/expense-type/new'])">Create</button>
+      <button type="button" class="btn btn-create pull-right" kendoButton (click)="router.navigate(['/expense-type/new'])">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
     </div>
 
   </div>
   <div class=panel-body>
-    <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
+    <ngx-datatable class="material" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"
       [rowHeight]="'auto'" [columnMode]="'force'">
       <ngx-datatable-column name="Expense Type Name" sortable="true" prop="ExpenseTypeName">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>

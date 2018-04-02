@@ -55,3 +55,5 @@
 .column-filter-input { width:100%;height:27px;border:1px solid gray; padding: 5px; border-radius: 4px;}
 .column-filter-label{height:10px;cursor:pointer;}
 .c-btn {box-shadow: none !important;}
+.important-icon {cursor: pointer;}
+.btn-create{background: #09a287; color: #FFFFFF;}

@@ -3,6 +3,8 @@ import { ContactService } from 'app/modules/contact/contact.service';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { Router } from '@angular/router';
 import { Page, Sorting, FilterModel } from '../../../models/page';
+import { Overlay } from 'ngx-modialog';
+import { Modal } from 'ngx-modialog/plugins/bootstrap';
 
 @Component({
   selector: 'app-contact-grid',
@@ -20,7 +22,8 @@ export class ContactGridComponent implements OnInit {
   @Output() onFilter: EventEmitter<any> = new EventEmitter<any>();
   _data: any[];
 
-  constructor(private contactService: ContactService, private router: Router, private _notify: NotificationService) { }
+  constructor(private contactService: ContactService, private router: Router, private _notify: NotificationService,
+    private modalDialog: Modal) { }
 
   ngOnChanges(changes: SimpleChanges) {
     const data: SimpleChange = changes.data;
@@ -28,6 +31,7 @@ export class ContactGridComponent implements OnInit {
   }
 
   onSort(event) {
+
     debugger
     this.onSortChange.emit(event);
   }
@@ -49,16 +53,32 @@ export class ContactGridComponent implements OnInit {
   }
 
   deleteClick(id) {
-    if (confirm('Are you sure you want to delete contact?')) {
-      this.contactService.deleteContact(id).subscribe(
-        response => {
-          this._data = this.data.filter(row => {
-            return row.Id != id;
-          });
-        }, err => {
-          this._notify.error(err.Result);
-        });
-    }
+    let x = this.modalDialog.confirm()
+      .size('sm')
+      .title('Delete Contact')
+      .body(`Are you sure want to delete Contact ?`).open()
+      .result.then(result => {
+        if (result === true) {
+          this.contactService.deleteContact(id).subscribe(
+            response => {
+              this._data = this.data.filter(row => {
+                return row.Id != id;
+              });
+            }, err => {
+              this._notify.error(err.Result);
+            });
+        }
+      });
+  }
+  toggleImportant(row) {
+    this.loadingIndicator = true;
+    this.contactService.toggleImportant(row.Id).subscribe(response => {
+      row.IsImportant = !row.IsImportant;
+      this.loadingIndicator = false;
+    }, error => {
+      this.loadingIndicator = false;
+      this._notify.error(error.detail);
+    });
   }
 
 }

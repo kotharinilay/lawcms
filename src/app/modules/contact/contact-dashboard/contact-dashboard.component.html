@@ -1,54 +1,63 @@
 <div class="p10 clearfix">
-  <button type="button" class="btn btn-default pull-right ml5" kendoButton (click)='router.navigate(["/contact/list"])'>Goto List</button>
-  <button type="button" class="btn btn-success pull-right" (click)='router.navigate(["/contact/new"])'>Add Contact</button>
+  <!-- <button type="button" class="btn btn-default pull-right ml5" kendoButton (click)='router.navigate(["/contact/list"])'>Goto List</button> -->
+  <button type="button" class="btn btn-create pull-right" (click)='router.navigate(["/contact/new"])'>
+    <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
 </div>
 <div class="row">
-  <div class=col-md-2>
-
-    <div class="widget bg-primary overflow-hidden">
+  <div class="col-md-2">
+    <section class="widget bg-brown text-center">
       <div class="widget-details">
-        <h4 class="no-margin">{{dashboardData.TotalContact}}</h4>
-        <span>Total Contact</span>
+        <h2 class="no-margin bold">{{dashboardData.TotalContact}}</h2>
+        <small class="text-uppercase">Total Contacts</small>
       </div>
-    </div>
-    <!-- <div class="widget bg-white">
-      <div class=overflow-hidden>
-        <span class=widget-title>{{dashboardData.TotalContact}}</span>
-        <span class=widget-subtitle>Total Contact</span>
+      <div class="widget-details">
+        <div class="climacon hail sun fa-4x"></div>
       </div>
-    </div> -->
+    </section>
   </div>
   <div class=col-md-2>
-    <div class="widget bg-success overflow-hidden">
+    <section class="widget bg-success text-center">
       <div class="widget-details">
-        <h4 class="no-margin">{{dashboardData.TotalAdvocate}}</h4>
-        <span>Total Advocate</span>
+        <h2 class="no-margin bold">{{dashboardData.TotalAdvocate}}</h2>
+        <small class="text-uppercase">Total Advocate</small>
       </div>
-    </div>
+      <div class="widget-details">
+        <div class="climacon hail sun fa-4x"></div>
+      </div>
+    </section>
   </div>
   <div class=col-md-2>
-    <div class="widget bg-warning overflow-hidden">
+    <section class="widget bg-warning text-center">
       <div class="widget-details">
-        <h4 class="no-margin">{{dashboardData.TotalClient}}</h4>
-        <span>Total Client</span>
+        <h2 class="no-margin bold">{{dashboardData.TotalClient}}</h2>
+        <small class="text-uppercase">Total Client</small>
       </div>
-    </div>
+      <div class="widget-details">
+        <div class="climacon hail sun fa-4x"></div>
+      </div>
+    </section>
   </div>
   <div class=col-md-2>
-    <div class="widget bg-brown overflow-hidden">
+    <section class="widget bg-lightgreen text-center">
       <div class="widget-details">
-        <h4 class="no-margin">{{dashboardData.TotalLawFirm}}</h4>
-        <span>Total Law Firm</span>
+        <h2 class="no-margin bold">{{dashboardData.TotalLawFirm}}</h2>
+        <small class="text-uppercase">Total Law Firm</small>
       </div>
-    </div>
+      <div class="widget-details">
+        <div class="climacon hail sun fa-4x"></div>
+      </div>
+    </section>
   </div>
   <div class=col-md-2>
-    <div class="widget bg-lightblue overflow-hidden">
+    <section class="widget bg-lightblue text-center">
       <div class="widget-details">
-        <h4 class="no-margin">{{dashboardData.TotalOther}}</h4>
-        <span>Total Other</span>
+        <h2 class="no-margin bold">{{dashboardData.TotalOther}}</h2>
+        <small class="text-uppercase">Total Other</small>
       </div>
-    </div>
+      <div class="widget-details">
+        <div class="climacon hail sun fa-4x"></div>
+      </div>
+    </section>
   </div>
 </div>
 <div class="row mb25">
