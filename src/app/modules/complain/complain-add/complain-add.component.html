@@ -12,7 +12,8 @@
                 <div class="form-group">
                   <label for="ComplainDate">Complain Date</label>
                   <input class="form-control" [(ngModel)]="model.ComplainDate" ngui-datetime-picker date-only="true" #ComplainDate="ngModel"
-                    required name="ComplainDate" id="ComplainDate" />
+                    required name="ComplainDate" id="ComplainDate" [class.inValidField]="complainForm.submitted && !ComplainDate.valid"
+                  />
                   <label *ngIf="complainForm.submitted && !ComplainDate.valid" class="err-label">
                     Please select Complain Date.
                   </label>
@@ -23,7 +24,8 @@
                   <label for="ComplainById">Complain By</label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="ComplainById" name="ComplainById" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainBy($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                    value-property-name="Id" display-property-name="Name" [class.inValidField]="complainForm.submitted && !model.ComplainBy"
+                  />
                   <label *ngIf="complainForm.submitted && !model.ComplainBy" class="err-label">
                     Please select valid Complain By.
                   </label>
@@ -36,7 +38,8 @@
                   <label for="ComplainOfId">Complain Of</label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="ComplainOfId" name="ComplainOfId" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectComplainOf($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                    value-property-name="Id" display-property-name="Name" [class.inValidField]="complainForm.submitted && !model.ComplainOf"
+                  />
                   <label *ngIf="complainForm.submitted && !model.ComplainOf" class="err-label">
                     Please select valid Complain Of.
                   </label>
@@ -45,8 +48,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Description">Description</label>
-                  <input type="text" id="Description" name="Description" maxlength="250" class="form-control" [(ngModel)]="model.Description"
-                    required #Description="ngModel" />
+                  <input type="text" id="Description" name="Description" maxlength="250" [class.inValidField]="complainForm.submitted && !model.Description"
+                    class="form-control" [(ngModel)]="model.Description" required #Description="ngModel" />
                   <label *ngIf="complainForm.submitted && !Description.valid" class="err-label">
                     Please enter Description.
                   </label>

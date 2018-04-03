@@ -14,7 +14,7 @@
                   <input ngui-auto-complete class="form-control" id="AssociateName" [(ngModel)]="model.AssociateId" name="AssociateName" [source]="associateNameSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
                     (valueChanged)="onSelectAssociateName($event)" display-property-name="Name" required #AssociateName="ngModel"
-                  />
+                    [class.inValidField]="timeTrackingForm.submitted && !AssociateName.valid" />
                   <label *ngIf="timeTrackingForm.submitted && !AssociateName.valid" class="err-label">
                     Please select Associate Name.
                   </label>

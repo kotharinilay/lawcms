@@ -72,3 +72,4 @@
     min-height: 50px;
     border-bottom: 2px solid #495469;
 }
+.inValidField {border-color: red;}

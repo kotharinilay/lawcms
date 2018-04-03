@@ -11,8 +11,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="expenseType">Expense Type Name</label>
-                  <input class="form-control" [(ngModel)]="model.ExpenseTypeName" type="text" #expenseType="ngModel" required name="expenseType"
-                    id="expenseType" />
+                  <input class="form-control" [(ngModel)]="model.ExpenseTypeName" type="text" [class.inValidField]="expenseTypeForm.submitted && !expenseType.valid"
+                    #expenseType="ngModel" required name="expenseType" id="expenseType" />
                   <label *ngIf="expenseTypeForm.submitted && !expenseType.valid" class="err-label">
                     Please enter Expense Type Name.
                   </label>
@@ -22,7 +22,8 @@
                 <div class="form-group">
                   <label for="basicPrice">Basic Price</label>
                   <input class="form-control" [(ngModel)]="model.BasicPrice" type="number" pattern="^\d+(\.\d{1,2})?$" step="0.1" #basicPrice="ngModel"
-                    required name="basicPrice" id="basicPrice" />
+                    required name="basicPrice" id="basicPrice" [class.inValidField]="expenseTypeForm.submitted && !basicPrice.valid"
+                  />
                   <label *ngIf="expenseTypeForm.submitted && !basicPrice.valid" class="err-label">
                     Please enter Basic Price.
                   </label>

@@ -12,8 +12,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CompanyName">Company Name</label>
-                  <input type="text" maxlength="50" id="CompanyName" name="CompanyName" required class="form-control" [(ngModel)]="model.CompanyName"
-                    #CompanyName="ngModel" />
+                  <input type="text" maxlength="50" id="CompanyName" name="CompanyName" required class="form-control"
+                    [(ngModel)]="model.CompanyName" #CompanyName="ngModel" />
                   <label *ngIf="companyForm.submitted && !CompanyName.valid" class="err-label">
                     Please enter Company Name
                   </label>
@@ -23,8 +23,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="InsdustrySection">Insdustry Section</label>
-                  <input type="text" maxlength="50" id="InsdustrySection" name="InsdustrySection" class="form-control" [(ngModel)]="model.InsdustrySection"
-                    #InsdustrySection="ngModel" />
+                  <input type="text" maxlength="50" id="InsdustrySection" name="InsdustrySection" class="form-control" [class.inValidField]="companyForm.submitted && !InsdustrySection.valid"
+                    [(ngModel)]="model.InsdustrySection" #InsdustrySection="ngModel" />
                   <label *ngIf="companyForm.submitted && !InsdustrySection.valid" class="err-label">
                     Please enter Insdustry Section
                   </label>

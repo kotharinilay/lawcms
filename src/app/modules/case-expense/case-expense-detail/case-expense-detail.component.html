@@ -22,7 +22,7 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="ExpenseName">Expense Name</label>
-                  <input type="text" maxlength="250" id="ExpenseName" name="ExpenseName" required class="form-control" [(ngModel)]="model.ExpenseName"
+                  <input type="text" maxlength="250" id="ExpenseName" [class.inValidField]="caseExpenseForm.submitted && !ExpenseName.valid" name="ExpenseName" required class="form-control" [(ngModel)]="model.ExpenseName"
                     #ExpenseName="ngModel" />
                   <label *ngIf="caseExpenseForm.submitted && !ExpenseName.valid" class="err-label">
                     Please enter Expense Name
@@ -61,7 +61,9 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Amount">Amount</label>
-                  <input class="form-control" type="number" id="Amount" name="Amount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Amount"
+                  <input class="form-control" type="number" 
+                  [class.inValidField]="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors"
+                   id="Amount" name="Amount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.Amount"
                     #Amount="ngModel" required />
                   <label *ngIf="(caseExpenseForm.submitted || Amount.dirty) && Amount.errors && Amount.errors['required']" class="err-label">
                     Please enter Amount</label>

@@ -15,7 +15,7 @@
                 <div class="form-group">
                   <label for="NoteDate">Note Date</label>
                   <input class="form-control" [(ngModel)]="model.NoteDate" ngui-datetime-picker date-only="true" #NoteDate="ngModel" required
-                    name="NoteDate" id="NoteDate" />
+                    name="NoteDate" id="NoteDate" [class.inValidField]="noteForm.submitted && !NoteDate.CommunicateToId"/>
                   <label *ngIf="noteForm.submitted && !NoteDate.valid" class="err-label">
                     Please select Note Date.
                   </label>
@@ -26,7 +26,7 @@
                   <label for="NotesById">Notes By</label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="NotesById" name="NotesById" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectNotesBy($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                    value-property-name="Id" display-property-name="Name" [class.inValidField]="noteForm.submitted && !model.NotesBy"/>
                   <label *ngIf="noteForm.submitted && !model.NotesBy" class="err-label">
                     Please select valid Notes By.
                   </label>

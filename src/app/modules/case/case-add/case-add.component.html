@@ -11,8 +11,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseNo">Case No</label>
-                  <input type="text" maxlength="50" id="CaseNo" name="CaseNo" required class="form-control" [(ngModel)]="model.CaseNo" #CaseNo="ngModel"
-                  />
+                  <input type="text" maxlength="50" id="CaseNo" name="CaseNo" [class.inValidField]="caseForm.submitted && !CaseNo.valid" required
+                    class="form-control" [(ngModel)]="model.CaseNo" #CaseNo="ngModel" />
                   <label *ngIf="caseForm.submitted && !CaseNo.valid" class="err-label">
                     Please enter Case number
                   </label>
@@ -21,9 +21,10 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="ClientId">Client</label>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="ClientId" name="ClientId" [source]="contactSearch.bind(this)"
-                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectClient($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="ClientId" [class.inValidField]="caseForm.submitted && !model.ClientId"
+                    name="ClientId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
+                    [accept-user-input]="false" (valueChanged)="onSelectClient($event)" value-property-name="Id" display-property-name="Name"
+                  />
                   <label *ngIf="caseForm.submitted && !model.ClientId" class="err-label">
                     Please select valid Client
                   </label>
@@ -50,7 +51,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CaseType">Case Type</label>
-                  <select class="form-control" [(ngModel)]="model.CaseType" id="CaseType" name="CaseType" #CaseType="ngModel">
+                  <select class="form-control" [(ngModel)]="model.CaseType" id="CaseType" [class.inValidField]="caseForm.submitted && !model.CaseType"
+                    name="CaseType" #CaseType="ngModel">
                     <option [value]='undefined'>Select Case Type</option>
                     <option *ngFor="let caseType of CaseTypeDropDown" value={{caseType.Id}}>
                       {{caseType.Name}}
@@ -92,7 +94,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CourtId">Court</label>
-                  <select class="form-control" required [(ngModel)]="model.CourtId" id="CourtId" name="CourtId" #CourtId="ngModel">
+                  <select class="form-control" required [(ngModel)]="model.CourtId" [class.inValidField]="caseForm.submitted && !model.CourtId"
+                    id="CourtId" name="CourtId" #CourtId="ngModel">
                     <option [value]='undefined'>Select Court</option>
                     <option *ngFor="let court of courts" [value]='court.Id'>
                       {{court.CourtName}}
@@ -140,9 +143,10 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="OpponentContactId">Opponent Contact</label>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="OpponentContactId" name="OpponentContactId" [source]="contactSearch.bind(this)"
-                    min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectOponent($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="OpponentContactId" [class.inValidField]="caseForm.submitted && !model.OpponentContactId"
+                    name="OpponentContactId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
+                    [accept-user-input]="false" (valueChanged)="onSelectOponent($event)" value-property-name="Id" display-property-name="Name"
+                  />
                   <label *ngIf="caseForm.submitted && !model.OpponentContactId" class="err-label">
                     Please select valid Opponent
                   </label>

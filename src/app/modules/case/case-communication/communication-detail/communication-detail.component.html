@@ -12,7 +12,7 @@
                 <div class="form-group">
                   <label for="CommunicateDate">Communicate Date</label>
                   <input class="form-control" [(ngModel)]="model.CommunicateDate" ngui-datetime-picker date-only="true" #CommunicateDate="ngModel"
-                    required name="CommunicateDate" id="CommunicateDate" />
+                    required name="CommunicateDate" id="CommunicateDate" [class.inValidField]="communicationForm.submitted && !CommunicateDate.valid"/>
                   <label *ngIf="communicationForm.submitted && !CommunicateDate.valid" class="err-label">
                     Please select Communicate Date.
                   </label>
@@ -36,7 +36,7 @@
                   <label for="CommunicateFromId">Communicate From</label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="CommunicateFromId" name="CommunicateFromId" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCommunicateFrom($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                    value-property-name="Id" display-property-name="Name" [class.inValidField]="communicationForm.submitted && !CommunicateDate.CommunicateFromId"/>
                   <label *ngIf="communicationForm.submitted && !model.CommunicateFromId" class="err-label">
                     Please select valid Complain By.
                   </label>
@@ -47,7 +47,7 @@
                   <label for="CommunicateToId">Communicate To</label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="CommunicateToId" name="CommunicateToId" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCommunicateTo($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                    value-property-name="Id" display-property-name="Name" [class.inValidField]="communicationForm.submitted && !CommunicateDate.CommunicateToId"/>
                   <label *ngIf="communicationForm.submitted && !model.CommunicateToId" class="err-label">
                     Please select valid Complain Of.
                   </label>

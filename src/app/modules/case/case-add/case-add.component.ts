@@ -193,21 +193,21 @@ export class CaseAddComponent implements OnInit {
   }
 
   addCommunication() {
-    this.router.navigate([`/case/${this.model.Id}/communication/new`]);
+    this.router.navigate([`/case/${this.paramId}/communication/new`]);
   }
 
   addTimeTrackingDetails() {
     // this.router.navigate([`/case/${this.model.Id}/time-tracking/${this.taskTimeTrackingId || 'new'}`]);
-    this.router.navigate([`/case/${this.model.Id}/time-tracking/new`]);
+    this.router.navigate([`/case/${this.paramId}/time-tracking/new`]);
   }
 
   addNote() {
     // this.router.navigate([`/case/${this.model.Id}/time-tracking/${this.taskTimeTrackingId || 'new'}`]);
-    this.router.navigate([`/case/${this.model.Id}/note/new`]);
+    this.router.navigate([`/case/${this.paramId}/note/new`]);
   }
 
   addDocument() {
-    this.router.navigate([`/case/${this.model.Id}/document/new`]);
+    this.router.navigate([`/case/${this.paramId}/document/new`]);
   }
 
 }
