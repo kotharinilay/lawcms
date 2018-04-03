@@ -25,13 +25,13 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Case Type" sortable="true" prop="CaseType">
-        <ng-template let-column="column" height="40" ngx-datatable-header-template>
-          <label class="case-no">Case Type</label>
+        <ng-template let-row="row" let-column="column" height="40" let-sort="sortFn" ngx-datatable-header-template>
+          <label class="case-no" (click)="sort()">Case Type</label>
           <br/>
           <input type='text' name="CaseType" class="column-filter-input form-control" [(ngModel)]="filterModel[1].value" data-column-name="CaseType"
             #CaseNo placeholder='Filter...' (keyup)="filterData($event)" />
         </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
           {{value}}
         </ng-template>
       </ngx-datatable-column>
