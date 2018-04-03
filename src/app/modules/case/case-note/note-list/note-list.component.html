@@ -27,7 +27,7 @@
           <i class="big-icon fa {{ value ? 'fa-star' : 'fa-star-o' }}" aria-hidden="true"></i>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Actions" sortable="false" prop="Id">
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="Id">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <button (click)="editClick(value)" md-icon-button>
             <i class="fa fa-edit"></i>
