@@ -48,7 +48,6 @@ export class ContactDashboardComponent implements OnInit {
   }
 
   onFilter($event) {
-    debugger
     let filter = this.filterModel.filter(x => x.value.length >= 2);
     if (this.contactType === contactDashboardTab[0]) {
       return false;
@@ -71,7 +70,6 @@ export class ContactDashboardComponent implements OnInit {
 
 
   onSort(sort: any) {
-    debugger
     if (sort && sort.sorts[0]) {
       this.sorting = {
         columnName: sort.sorts[0].prop,
@@ -82,7 +80,6 @@ export class ContactDashboardComponent implements OnInit {
   }
 
   getDataSource(filterColumn?: string, filterValue?: string) {
-    debugger
     this.loadingIndicator = true;
     if (this.contactType === contactDashboardTab[0]) {
       this.page.pageNumber = 0;
@@ -90,7 +87,6 @@ export class ContactDashboardComponent implements OnInit {
       this.getNewlyAddedData();
     } else {
       this.contactService.getContactPageData(this.contactType, this.page, this.sorting, filterColumn, filterValue).subscribe(pagedData => {
-        debugger
         this.page.totalElements = pagedData.TotalNumberOfRecords;
         this.page.totalPages = pagedData.TotalNumberOfPages;
         this.page.pageNumber = pagedData.PageNumber;

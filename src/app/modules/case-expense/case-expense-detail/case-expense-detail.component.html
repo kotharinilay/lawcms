@@ -85,16 +85,22 @@
                   <div>{{ fileName || 'Select File'}}
                   </div>
                   <a href="javascript:void(0);" class="change btn btn-primary" (click)="fileUpload.click()">Browse</a>
-                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="downloadDocument()">Download</a>
-                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="deleteDocument()">Delete</a>
+                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="downloadDocument()">
+                      <i class="fa fa-cloud-download mr5" aria-hidden="true"></i>Download</a>
+                  <a href="javascript:void(0);" class="change btn btn-primary" *ngIf="fileName" (click)="deleteDocument()">
+                      <i class="fa fa-trash mr5" aria-hidden="true"></i>Delete</a>
                   <input type="file" class="fileUpload" #fileUpload style="display:none" accept=".doc, application/pdf, image/jpg, image/jpeg, image/png"
                     #fileUpload style="display:none" (change)="onFileChange($event)" />
                 </div>
               </div>
             </div>
             <div class="row">
-              <button type="button" class="btn btn-default" (click)="onCancelClick()">Cancel</button>
-              <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+              <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+                <i class="fa fa-times-circle mr5"></i> Cancel
+              </a>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+              </button>
             </div>
           </form>
         </div>

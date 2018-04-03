@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Page, Sorting, FilterModel } from '../../../models/page';
 import { Overlay } from 'ngx-modialog';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
-
+import swal from 'sweetalert2'
 @Component({
   selector: 'app-contact-grid',
   templateUrl: './contact-grid.component.html'
@@ -31,8 +31,6 @@ export class ContactGridComponent implements OnInit {
   }
 
   onSort(event) {
-
-    debugger
     this.onSortChange.emit(event);
   }
 
@@ -41,7 +39,6 @@ export class ContactGridComponent implements OnInit {
   }
 
   setPage(event) {
-    debugger
     this.getPageData.emit(event);
   }
 
@@ -53,22 +50,42 @@ export class ContactGridComponent implements OnInit {
   }
 
   deleteClick(id) {
-    let x = this.modalDialog.confirm()
-      .size('sm')
-      .title('Delete Contact')
-      .body(`Are you sure want to delete Contact ?`).open()
-      .result.then(result => {
-        if (result === true) {
-          this.contactService.deleteContact(id).subscribe(
-            response => {
-              this._data = this.data.filter(row => {
-                return row.Id != id;
-              });
-            }, err => {
-              this._notify.error(err.Result);
+    swal({
+      title: 'Delete Contact',
+      text: "Are you sure want to delete this Contact?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: true,
+      reverseButtons: false,
+    }).then((result) => {
+      if (result.value) {
+        this.loadingIndicator = true;
+        this.contactService.deleteContact(id).subscribe(
+          response => {
+            swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Contact deleted successfully',
+              showConfirmButton: false,
+              timer: 3000
             });
-        }
-      });
+            const pageNumber = (this._data.length === 1 ? this.page.pageNumber - 1 : this.page.pageNumber);
+            if (this._data.length === 1 && this.page.pageNumber === 0) {
+              this._data = this._data.filter(x => x.Id !== id);
+              this.loadingIndicator = false;
+              this.page.totalElements = 0;
+            } else {
+              this.getPageData.emit({ offset: pageNumber });
+            }
+          }, err => {
+            this._notify.error(err.Result);
+          });
+      }
+    });
   }
   toggleImportant(row) {
     this.loadingIndicator = true;

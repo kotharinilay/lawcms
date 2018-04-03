@@ -11,8 +11,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="expenseType">Expense Type Name</label>
-                  <input class="form-control" [(ngModel)]="model.ExpenseTypeName" type="text" #expenseType="ngModel"
-                    required name="expenseType" id="expenseType" />
+                  <input class="form-control" [(ngModel)]="model.ExpenseTypeName" type="text" #expenseType="ngModel" required name="expenseType"
+                    id="expenseType" />
                   <label *ngIf="expenseTypeForm.submitted && !expenseType.valid" class="err-label">
                     Please enter Expense Type Name.
                   </label>
@@ -21,8 +21,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="basicPrice">Basic Price</label>
-                  <input class="form-control" [(ngModel)]="model.BasicPrice" type="number" pattern="^\d+(\.\d{1,2})?$" step="0.1" #basicPrice="ngModel" required
-                    name="basicPrice" id="basicPrice" />
+                  <input class="form-control" [(ngModel)]="model.BasicPrice" type="number" pattern="^\d+(\.\d{1,2})?$" step="0.1" #basicPrice="ngModel"
+                    required name="basicPrice" id="basicPrice" />
                   <label *ngIf="expenseTypeForm.submitted && !basicPrice.valid" class="err-label">
                     Please enter Basic Price.
                   </label>
@@ -30,8 +30,12 @@
               </div>
             </div>
             <div class="row">
-              <button type="button" class="btn btn-default" (click)="onCancelClick()">Cancel</button>
-              <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+              <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+                <i class="fa fa-times-circle mr5"></i> Cancel
+              </a>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+              </button>
             </div>
           </form>
         </div>

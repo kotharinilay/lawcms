@@ -3,6 +3,7 @@ import { CaseExpenseService } from '../case-expense.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { Page, Sorting, FilterModel } from 'app/models/page';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-case-expense-list',
@@ -69,16 +70,42 @@ export class CaseExpenseListComponent implements OnInit {
   }
 
   deleteClick(id) {
-    if (confirm('Are you sure you want to delete case expense?')) {
-      this.caseExpenseService.deleteCaseExpense(id).subscribe(
-        response => {
-          this.rows = this.rows.filter(row => {
-            return row.Id != id;
+    swal({
+      title: 'Delete Case Expense',
+      text: "Are you sure want to delete this Case Expense?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: true,
+      reverseButtons: false,
+    }).then((result) => {
+      if (result.value) {
+        this.loadingIndicator = true;
+        this.caseExpenseService.deleteCaseExpense(id).subscribe(
+          response => {
+            const pageNumber = (this.rows.length === 1 ? this.page.pageNumber - 1 : this.page.pageNumber);
+            if (this.rows.length === 1 && this.page.pageNumber === 0) {
+              this.rows = this.rows.filter(x => x.Id !== id);
+              this.loadingIndicator = false;
+              this.page.totalElements = 0;
+            } else {
+              this.setPage({ offset: pageNumber });
+            }
+            swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Case Expense deleted successfully',
+              showConfirmButton: false,
+              timer: 3000
+            });
+          }, err => {
+            this._notify.error(err.Result);
           });
-        }, err => {
-          this._notify.error(err.Result);
-        });
-    }
+      }
+    });
   }
 
   filterData(event) {

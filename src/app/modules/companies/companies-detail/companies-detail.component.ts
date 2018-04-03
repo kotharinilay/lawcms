@@ -20,7 +20,7 @@ export class CompaniesDetailComponent implements OnInit {
   validFileType: boolean = true;
   url: string = NoImagePath;
   selectedContacts: any[] = [];
-  settings: {};
+  settings = { enableSearchFilter: true };
   constructor(private conmapiesService: CompaniesService, private _notify: NotificationService,
     private activatedRoute: ActivatedRoute, private router: Router, private modalDialog: Modal) { }
 

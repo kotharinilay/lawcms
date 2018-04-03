@@ -50,7 +50,6 @@ export class DocumentDetailComponent implements OnInit {
     this.caseService.addOrUpdateCaseDocument(this.model).subscribe(
       response => {
         this.isLoading = false;
-        debugger;
         if (response) {
           if (this.paramId === 'new' && this.fileToUpload && this.fileToUpload.name) {
             const formData = new FormData();

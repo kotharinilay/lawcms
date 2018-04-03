@@ -6,6 +6,7 @@ import { BSModalContext, Modal } from 'ngx-modialog/plugins/bootstrap';
 import { CaseChangeStatusComponent } from '../case-change-status/case-change-status.component';
 import { overlayConfigFactory } from 'ngx-modialog';
 import { Page, Sorting, FilterModel } from 'app/models/page';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-case-list',
@@ -91,16 +92,42 @@ export class CaseListComponent implements OnInit {
   }
 
   deleteClick(id) {
-    if (confirm('Are you sure you want to delete case?')) {
-      this.caseService.deleteCase(id).subscribe(
-        response => {
-          this.rows = this.rows.filter(row => {
-            return row.Id != id;
+    swal({
+      title: 'Delete Case',
+      text: "Are you sure want to delete this Case?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: true,
+      reverseButtons: false,
+    }).then((result) => {
+      if (result.value) {
+        this.loadingIndicator = true;
+        this.caseService.deleteCase(id).subscribe(
+          response => {
+            swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Case deleted successfully',
+              showConfirmButton: false,
+              timer: 3000
+            });
+            const pageNumber = (this.rows.length === 1 ? this.page.pageNumber - 1 : this.page.pageNumber);
+            if (this.rows.length === 1 && this.page.pageNumber === 0) {
+              this.rows = this.rows.filter(x => x.Id !== id);
+              this.loadingIndicator = false;
+              this.page.totalElements = 0;
+            } else {
+              this.setPage({ offset: pageNumber });
+            }
+          }, err => {
+            this._notify.error(err.Result);
           });
-        }, err => {
-          this._notify.error(err.Result);
-        });
-    }
+      }
+    });
   }
 
   changeStatus(rowData: any) {
