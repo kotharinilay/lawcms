@@ -3,6 +3,10 @@
     <span class="pull-left">
       <b>Time Tracking for Case</b>
     </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right" kendoButton (click)="createNewTimeTracking()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+    </div>
   </div>
   <div class=panel-body>
     <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"

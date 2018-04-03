@@ -10,7 +10,7 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="AssociateName">Associate Name</label>
+                  <label for="AssociateName">Associate Name <span class="req">*</span></label>
                   <input ngui-auto-complete class="form-control" id="AssociateName" [(ngModel)]="model.AssociateId" name="AssociateName" [source]="associateNameSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" value-property-name="Id"
                     (valueChanged)="onSelectAssociateName($event)" display-property-name="Name" required #AssociateName="ngModel"
@@ -84,8 +84,12 @@
             </div>
 
             <div class="row">
-              <button type="button" class="btn btn-default" (click)="onCancelClick()">Cancel</button>
-              <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+              <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+                <i class="fa fa-times-circle mr5"></i> Cancel
+              </a>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+              </button>
             </div>
           </form>
         </div>

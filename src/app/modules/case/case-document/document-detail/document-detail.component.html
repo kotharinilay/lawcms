@@ -10,9 +10,10 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="DocumentName">Document Name</label>
+                                    <label for="DocumentName">Document Name <span class="req">*</span></label>
                                     <input type="text" maxlength="150" id="DocumentName" name="DocumentName" required class="form-control" [(ngModel)]="model.DocumentName"
-                                        #DocumentName="ngModel" [class.inValidField]="caseDocumentForm.submitted && !DocumentName.valid"/>
+                                        #DocumentName="ngModel" [class.inValidField]="caseDocumentForm.submitted && !DocumentName.valid"
+                                    />
                                     <label *ngIf="caseDocumentForm.submitted && !DocumentName.valid" class="err-label">
                                         Please enter Document Name
                                     </label>
@@ -43,8 +44,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn btn-default" (click)="onCancelClick()">Cancel</button>
-                            <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+                            <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+                                <i class="fa fa-times-circle mr5"></i> Cancel
+                            </a>
+                            <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+                            </button>
                         </div>
                     </form>
                 </div>

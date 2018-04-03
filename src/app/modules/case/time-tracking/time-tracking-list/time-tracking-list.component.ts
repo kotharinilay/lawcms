@@ -46,4 +46,9 @@ export class TimeTrackingListComponent implements OnInit {
         });
     }
   }
+
+  createNewTimeTracking() {
+    debugger
+    this.router.navigate([`/case/${this.CaseId}/time-tracking/new`]);
+  }
 }

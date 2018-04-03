@@ -13,9 +13,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="NoteDate">Note Date</label>
+                  <label for="NoteDate">Note Date <span class="req">*</span></label>
                   <input class="form-control" [(ngModel)]="model.NoteDate" ngui-datetime-picker date-only="true" #NoteDate="ngModel" required
-                    name="NoteDate" id="NoteDate" [class.inValidField]="noteForm.submitted && !NoteDate.CommunicateToId"/>
+                    name="NoteDate" id="NoteDate" [class.inValidField]="noteForm.submitted && !NoteDate.CommunicateToId" />
                   <label *ngIf="noteForm.submitted && !NoteDate.valid" class="err-label">
                     Please select Note Date.
                   </label>
@@ -23,10 +23,11 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="NotesById">Notes By</label>
+                  <label for="NotesById">Notes By <span class="req">*</span></label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="NotesById" name="NotesById" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectNotesBy($event)"
-                    value-property-name="Id" display-property-name="Name" [class.inValidField]="noteForm.submitted && !model.NotesBy"/>
+                    value-property-name="Id" display-property-name="Name" [class.inValidField]="noteForm.submitted && !model.NotesBy"
+                  />
                   <label *ngIf="noteForm.submitted && !model.NotesBy" class="err-label">
                     Please select valid Notes By.
                   </label>
@@ -51,8 +52,12 @@
               </div>
             </div>
             <div class="row">
-              <button type="button" class="btn btn-default" (click)="onCancelClick()">Cancel</button>
-              <button type="submit" [disabled]="isLoading" class="btn btn-primary">{{ isLoading == true ? 'Saving...' : 'Save' }}</button>
+              <a href=javascript:; (click)="onCancelClick()" class="btn btn-default btn-cancel mr5">
+                <i class="fa fa-times-circle mr5"></i> Cancel
+              </a>
+              <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
+                <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
+              </button>
             </div>
           </form>
         </div>
