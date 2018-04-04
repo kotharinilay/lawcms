@@ -143,4 +143,7 @@ export class CaseListComponent implements OnInit {
   ShowNotes(rowData: any) {
     this.router.navigateByUrl(`/case/${rowData.Id}/note`);
   }
+  ShowCommunications(rowData: any) {
+    this.router.navigateByUrl(`/case/${rowData.Id}/communication`);
+  }
 }

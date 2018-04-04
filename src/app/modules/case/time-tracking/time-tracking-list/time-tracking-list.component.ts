@@ -5,8 +5,7 @@ import { NotificationService } from 'app/shared/services/notification.service';
 
 @Component({
   selector: 'app-time-tracking-list',
-  templateUrl: './time-tracking-list.component.html',
-  styleUrls: ['./time-tracking-list.component.css']
+  templateUrl: './time-tracking-list.component.html'
 })
 export class TimeTrackingListComponent implements OnInit {
 

@@ -9,8 +9,7 @@ import { CaseService } from 'app/modules/case/case.service';
 
 @Component({
   selector: 'app-time-tracking-detail',
-  templateUrl: './time-tracking-detail.component.html',
-  styleUrls: ['./time-tracking-detail.component.css']
+  templateUrl: './time-tracking-detail.component.html'
 })
 export class TimeTrackingDetailComponent implements OnInit {
   model: TimeTracking = new TimeTracking();
@@ -87,6 +86,6 @@ export class TimeTrackingDetailComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.router.navigate(['/case/' + this.model.CaseId]);
+    this.router.navigate(['/case/' + this.model.CaseId + '/time-tracking']);
   }
 }

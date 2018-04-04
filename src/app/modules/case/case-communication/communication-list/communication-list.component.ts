@@ -28,6 +28,10 @@ export class CommunicationListComponent implements OnInit {
       });
   }
 
+  addClick() {
+    this.router.navigateByUrl(`/case/${this.CaseId}/communication/new`);
+  }
+
   editClick(id) {
     this.router.navigateByUrl(`/case/${this.CaseId}/communication/${id}`);
   }

@@ -10,7 +10,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CaseNo">Case No <span class="req">*</span></label>
+                  <label for="CaseNo">Case No
+                    <span class="req">*</span>
+                  </label>
                   <input type="text" maxlength="50" id="CaseNo" name="CaseNo" [class.inValidField]="caseForm.submitted && !CaseNo.valid" required
                     class="form-control" [(ngModel)]="model.CaseNo" #CaseNo="ngModel" />
                   <label *ngIf="caseForm.submitted && !CaseNo.valid" class="err-label">
@@ -20,7 +22,9 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="ClientId">Client <span class="req">*</span></label>
+                  <label for="ClientId">Client
+                    <span class="req">*</span>
+                  </label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="ClientId" [class.inValidField]="caseForm.submitted && !model.ClientId"
                     name="ClientId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectClient($event)" value-property-name="Id" display-property-name="Name"
@@ -50,7 +54,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CaseType">Case Type <span class="req">*</span></label>
+                  <label for="CaseType">Case Type
+                    <span class="req">*</span>
+                  </label>
                   <select class="form-control" [(ngModel)]="model.CaseType" id="CaseType" [class.inValidField]="caseForm.submitted && !model.CaseType"
                     name="CaseType" #CaseType="ngModel">
                     <option [value]='undefined'>Select Case Type</option>
@@ -93,7 +99,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CourtId">Court <span class="req">*</span></label>
+                  <label for="CourtId">Court
+                    <span class="req">*</span>
+                  </label>
                   <select class="form-control" required [(ngModel)]="model.CourtId" [class.inValidField]="caseForm.submitted && !model.CourtId"
                     id="CourtId" name="CourtId" #CourtId="ngModel">
                     <option [value]='undefined'>Select Court</option>
@@ -142,7 +150,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="OpponentContactId">Opponent Contact <span class="req">*</span></label>
+                  <label for="OpponentContactId">Opponent Contact
+                    <span class="req">*</span>
+                  </label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="OpponentContactId" [class.inValidField]="caseForm.submitted && !model.OpponentContactId"
                     name="OpponentContactId" [source]="contactSearch.bind(this)" min-chars="2" [list-formatter]="autocompleListFormatter"
                     [accept-user-input]="false" (valueChanged)="onSelectOponent($event)" value-property-name="Id" display-property-name="Name"
@@ -360,10 +370,10 @@
               <button type="submit" [disabled]="isLoading" class="btn btn-primary mr5">
                 <i class="fa fa-check mr5"></i> {{ isLoading == true ? 'Saving...' : 'Save' }}
               </button>
-              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addCommunication()">Add Communication</button>
+              <!-- <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addCommunication()">Add Communication</button>
               <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addTimeTrackingDetails()">Add Time</button>
               <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addNote()">Add Note</button>
-              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addDocument()">Add Document</button>
+              <button type="button" *ngIf="paramId !== 'new'" class="btn btn-success" (click)="addDocument()">Add Document</button> -->
             </div>
           </form>
         </div>
