@@ -71,9 +71,14 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CaseYear">Case Year</label>
+                  <label for="CaseYear">Case Year
+                    <span class="req">*</span>
+                  </label>
                   <input type="text" maxlength="4" name="CaseYear" id="CaseYear" class="form-control" [(ngModel)]="model.CaseYear" #CaseYear="ngModel"
-                  />
+                    [class.inValidField]="caseForm.submitted && !model.CaseYear" required />
+                  <label *ngIf="caseForm.submitted && !model.CaseYear" class="err-label">
+                    Please enter Case Year
+                  </label>
                 </div>
               </div>
             </div>
@@ -254,31 +259,12 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-sm-6">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" #IsClose="ngModel"> Is Close
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-6" *ngIf="model.IsClose">
                 <div class="form-group">
-                  <label for="CloseDate">Close Date</label>
-                  <input class="form-control" [(ngModel)]="model.CloseDate" ngui-datetime-picker date-only="true" name="CloseDate" id="CloseDate"
-                    #CloseDate="ngModel" />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6" *ngIf="model.IsClose">
-                <div class="form-group">
-                  <label for="JugmentFavourTo">Jugment Favour To</label>
-                  <input ngui-auto-complete class="form-control" [(ngModel)]="JugmentFavourId" name="JugmentFavourId" [source]="contactSearch.bind(this)"
-                    min-chars="3" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectJugmentFavourTo($event)"
-                    value-property-name="Id" display-property-name="Name" />
+                  <label for="BillingDate">Billing Date</label>
+                  <input class="form-control" [(ngModel)]="model.BillingDate" ngui-datetime-picker date-only="true" name="BillingDate" id="BillingDate"
+                    #BillingDate="ngModel" />
                 </div>
               </div>
               <div class="col-sm-6">
@@ -289,30 +275,12 @@
                 </div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-sm-6" *ngIf="model.IsClose">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel"> Notify Me
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-6" *ngIf="model.NotifyMe && model.IsClose">
-                <div class="form-group">
-                  <label for="NotifyMeWhen">NotifyMe When</label>
-                  <input class="form-control" [(ngModel)]="model.NotifyMeWhen" name="NotifyMeWhen" id="NotifyMeWhen" #NotifyMeWhen="ngModel"
-                  />
-                </div>
-              </div>
-            </div>
-
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="AdvanceFees">Advance Fees</label>
                   <input class="form-control" type="number" id="AdvanceFees" name="AdvanceFees" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.AdvanceFees"
-                    #AdvanceFees="ngModel" />
+                    (keypress)="_keyPress($event)" #AdvanceFees="ngModel" />
                   <label *ngIf="(caseForm.submitted || AdvanceFees.dirty) && AdvanceFees.errors && AdvanceFees.errors['pattern']" class="err-label">
                     Enter Valid Advance Fees</label>
                 </div>
@@ -338,8 +306,14 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="BillingFrequency">Billing Frequency</label>
-                  <input class="form-control" [(ngModel)]="model.BillingFrequency" name="BillingFrequency" id="BillingFrequency" #BillingFrequency="ngModel"
-                  />
+                  <!-- <input class="form-control" [(ngModel)]="model.BillingFrequency" name="BillingFrequency" id="BillingFrequency" #BillingFrequency="ngModel"
+                  /> -->
+                  <select class="form-control" [(ngModel)]="model.BillingFrequency" id="BillingFrequency" name="BillingFrequency" #BillingFrequency="ngModel">
+                    <option [value]='undefined'>Select Billing Frequency</option>
+                    <option *ngFor="let billFrq of BillingFrequencyDropDown" [value]='billFrq.Id'>
+                      {{billFrq.Name}}
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -347,18 +321,52 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="BillingDate">Billing Date</label>
-                  <input class="form-control" [(ngModel)]="model.BillingDate" ngui-datetime-picker date-only="true" name="BillingDate" id="BillingDate"
-                    #BillingDate="ngModel" />
+                  <label for="TrustAccount">Trust Account</label>
+                  <input class="form-control" type="number" id="TrustAccount" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.TrustAccount"
+                    (keypress)="_keyPress($event)" #TrustAccount="ngModel" />
+                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="err-label">
+                    Enter Valid Trust Account</label>
                 </div>
               </div>
               <div class="col-sm-6">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="IsClose" [(ngModel)]="model.IsClose" #IsClose="ngModel"> Is Close
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6" *ngIf="model.IsClose">
                 <div class="form-group">
-                  <label for="TrustAccount">Trust Account</label>
-                  <input class="form-control" type="number" id="TrustAccount" name="TrustAccount" pattern="^\d+(\.\d{1,2})?$" step="0.01" [(ngModel)]="model.TrustAccount"
-                    #TrustAccount="ngModel" />
-                  <label *ngIf="(caseForm.submitted || TrustAccount.dirty) && TrustAccount.errors && TrustAccount.errors['pattern']" class="err-label">
-                    Enter Valid Trust Account</label>
+                  <label for="JugmentFavourTo">Jugment Favour To</label>
+                  <input ngui-auto-complete class="form-control" [(ngModel)]="JugmentFavourId" name="JugmentFavourId" [source]="contactSearch.bind(this)"
+                    min-chars="3" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectJugmentFavourTo($event)"
+                    value-property-name="Id" display-property-name="Name" />
+                </div>
+              </div>
+              <div class="col-sm-6" *ngIf="model.IsClose">
+                <div class="form-group">
+                  <label for="CloseDate">Close Date</label>
+                  <input class="form-control" [(ngModel)]="model.CloseDate" ngui-datetime-picker date-only="true" name="CloseDate" id="CloseDate"
+                    #CloseDate="ngModel" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6" *ngIf="model.IsClose">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="NotifyMe" [(ngModel)]="model.NotifyMe" #NotifyMe="ngModel"> Notify Me
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6" *ngIf="model.NotifyMe && model.IsClose">
+                <div class="form-group">
+                  <label for="NotifyMeWhen">NotifyMe When</label>
+                  <input class="form-control" [(ngModel)]="model.NotifyMeWhen" name="NotifyMeWhen" id="NotifyMeWhen" #NotifyMeWhen="ngModel"
+                  />
                 </div>
               </div>
             </div>

@@ -14,7 +14,7 @@
     </ng-template>
   </ngx-datatable-column>
 
-  <ngx-datatable-column name="Important Contact" sortable="true" >
+  <ngx-datatable-column name="Important Contact" sortable="true">
     <ng-template let-row="row" ngx-datatable-cell-template>
       <i class="big-icon important-icon fa {{ row.IsImportant ? 'fa-star' : 'fa-star-o' }}" (click)="toggleImportant(row)" aria-hidden="true"></i>
     </ng-template>

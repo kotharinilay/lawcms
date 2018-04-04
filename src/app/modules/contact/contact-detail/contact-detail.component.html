@@ -55,9 +55,11 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="FirstName">First Name <span class="req">*</span></label>
-                  <input type="text" maxlength="50" id="FirstName" name="FirstName" [class.inValidField]="contactForm.submitted && !FirstName.valid" required class="form-control" [(ngModel)]="model.FirstName"
-                    #FirstName="ngModel" />
+                  <label for="FirstName">First Name
+                    <span class="req">*</span>
+                  </label>
+                  <input type="text" maxlength="50" id="FirstName" name="FirstName" [class.inValidField]="contactForm.submitted && !FirstName.valid"
+                    required class="form-control" [(ngModel)]="model.FirstName" #FirstName="ngModel" />
                   <label *ngIf="contactForm.submitted && !FirstName.valid" class="err-label">
                     Please enter First name
                   </label>
@@ -65,9 +67,11 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="">Last Name <span class="req">*</span></label>
-                  <input type="text" maxlength="50" name="LastName" [class.inValidField]="contactForm.submitted && !LastName.valid" required class="form-control" [(ngModel)]="model.LastName" #LastName="ngModel"
-                  />
+                  <label for="">Last Name
+                    <span class="req">*</span>
+                  </label>
+                  <input type="text" maxlength="50" name="LastName" [class.inValidField]="contactForm.submitted && !LastName.valid" required
+                    class="form-control" [(ngModel)]="model.LastName" #LastName="ngModel" />
                   <label *ngIf="contactForm.submitted && !LastName.valid" class="err-label">
                     Please enter Last name
                   </label>
@@ -82,12 +86,6 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="CompanyId">Company</label>
-                  <!-- <select class="form-control" [(ngModel)]="model.CompanyId" id="CompanyId" name="CompanyId">
-                    <option [value]='undefined'>Select Company</option>
-                    <option *ngFor="let company of companies" [value]='company.Id'>
-                      {{company.CompanyName}}
-                    </option>
-                  </select> -->
                   <input ngui-auto-complete class="form-control" [(ngModel)]="CompanyId" name="CompanyId" [source]="companySearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectCompany($event)"
                     value-property-name="Id" display-property-name="CompanyName" />
@@ -137,7 +135,9 @@
             </div>
 
             <div class="panel-heading border">
-              <b>Email Addresses <span class="req">*</span></b>
+              <b>Email Addresses
+                <span class="req">*</span>
+              </b>
               <button class="btn btn-create pull-right" (click)="addEmail()">
                 <i class="fa fa-plus" aria-hidden="true"></i> Add Email
               </button>
@@ -158,7 +158,9 @@
             </div>
 
             <div class="panel-heading border">
-              <b>Mobile Numbers <span class="req">*</span></b>
+              <b>Mobile Numbers
+                <span class="req">*</span>
+              </b>
               <button class="btn btn-create pull-right" (click)="addMobile()">
                 <i class="fa fa-plus" aria-hidden="true"></i> Add Mobile
               </button>
@@ -178,7 +180,9 @@
               </div>
             </div>
             <div class="panel-heading border mb20">
-              <b>Home Addresses <span class="req">*</span></b>
+              <b>Home Addresses
+                <span class="req">*</span>
+              </b>
               <button class="btn btn-create pull-right" (click)="addAddress()">
                 <i class="fa fa-plus" aria-hidden="true"></i> Add Address
               </button>
@@ -240,7 +244,9 @@
               </div>
             </div>
             <div class="panel-heading border mb20">
-              <b>Office Addresses <span class="req">*</span></b>
+              <b>Office Addresses
+                <span class="req">*</span>
+              </b>
               <button class="btn btn-create pull-right" (click)="addOfficeAddress()">
                 <i class="fa fa-plus" aria-hidden="true"></i> Add Office Address
               </button>

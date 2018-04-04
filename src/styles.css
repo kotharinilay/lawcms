@@ -41,13 +41,13 @@
     background-repeat: no-repeat; cursor: pointer;
 }
 
-.c-btn[_ngcontent-c1]{
+.c-btn{
     border-radius: 0px !important;
 }
 
-.selected-list[_ngcontent-c1] .c-btn[_ngcontent-c1]{
+.selected-list .c-btn{
     box-shadow:none !important;
-    padding: 5px !important;
+    padding: 4.5px !important;
 }
 
 .datatable-row-odd {background-color: rgba(0, 0, 0, 0.05)}
@@ -57,12 +57,22 @@
 .c-btn {box-shadow: none !important;}
 .important-icon {cursor: pointer;}
 .btn-create{background: #09a287; color: #FFFFFF;}
+.btn-create:hover{background: #076d5a; color: #FFFFFF;}
 
 .btn-cancel{
     color: #fff !important;
     background-color: rgb(117, 117, 117) !important;
     border-color: rgb(117, 117, 117) !important;
 }
+.btn-cancel:hover{
+    background-color: rgb(68, 68, 68) !important;
+    border-color: rgb(68, 68, 68) !important;
+}
+.btn-default::before{
+    background-color: rgb(68, 68, 68) !important;
+    border-color: rgb(68, 68, 68) !important;
+}
+
 
 .pt15 {
     padding-top: 15px;
@@ -77,4 +87,8 @@
 .custom-sort ~ .sort-btn{ float: right !important; position: relative !important;  top: -48px !important; }
 .custom-sort label {
     cursor: pointer;
+}
+
+.tab-backgroud{
+    background: #e0e8f2;
 }

@@ -143,3 +143,10 @@ export const DocumentCategory = [
     { Id: "Communication", Name: "Communication" },
     { Id: "Notice", Name: "Notice" }
 ]
+
+export const BillingFrequencies = [
+    { Id: "Hourly", Name: "Hourly" },
+    { Id: "Monthly", Name: "Monthly" },
+    { Id: "Quarterly", Name: "Quarterly" },
+    { Id: "Yearly", Name: "Yearly" }
+]

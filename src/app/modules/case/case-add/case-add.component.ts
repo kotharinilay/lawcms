@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CaseService } from '../case.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { ContactService } from '../../contact/contact.service';
-import { Case } from '../../../models/case';
+import { Case } from 'app/models/case';
 import { DropDownModel } from 'app/models/dropDownModel';
-import { CaseType, CasePriority, WorkedAs } from 'app/shared/constants';
+import { CaseType, CasePriority, WorkedAs, BillingFrequencies } from 'app/shared/constants';
 
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -25,6 +25,7 @@ export class CaseAddComponent implements OnInit {
   CaseTypeDropDown: Array<DropDownModel> = CaseType;
   PriorityDropDown: Array<DropDownModel> = CasePriority;
   WorkedAsDropDown: Array<DropDownModel> = WorkedAs;
+  BillingFrequencyDropDown: Array<DropDownModel> = BillingFrequencies;
   ClientId; OpponentContactId; OppnentAdvocateId; WitnessContactId; JugmentFavourId;
   isLoading: boolean = false;
   settings = {};
@@ -88,6 +89,16 @@ export class CaseAddComponent implements OnInit {
     }, error => {
       this._notify.error(error.Result);
     })
+  }
+
+  _keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
   }
 
   autocompleListFormatter = (data: any) => {
