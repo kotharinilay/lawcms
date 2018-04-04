@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeTracking } from 'app/models/case';
+import { TimeTracking, Case } from 'app/models/case';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskCategory, Associates } from 'app/shared/constants';
 import { DropDownModel } from 'app/models/dropDownModel';
@@ -16,6 +16,7 @@ export class TimeTrackingDetailComponent implements OnInit {
   model: TimeTracking = new TimeTracking();
   isLoading: boolean = false;
   paramId: string;
+  caseDetail: Case = new Case();
   AssociatesDropDown: Array<DropDownModel> = Associates;
   constructor(private route: ActivatedRoute, private _notify: NotificationService, private caseService: CaseService,
     private router: Router, private _sanitizer: DomSanitizer) { }
@@ -26,6 +27,11 @@ export class TimeTrackingDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
+    this.caseService.getCaseById(this.model.CaseId).subscribe(response => {
+      this.caseDetail = response;
+    }, error => {
+      this._notify.error(error.Result);
+    });
     if (this.paramId.toString() !== 'new') {
       this.caseService.getTaskTrackerById(+this.paramId).subscribe(
         response => {

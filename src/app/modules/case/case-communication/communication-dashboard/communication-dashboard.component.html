@@ -3,6 +3,13 @@
     <span class="pull-left">
       <b>Communication Dashboard</b>
     </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right mr5" kendoButton (click)="addClick()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+        <button type="button" class="btn btn-create pull-right mr5" kendoButton (click)="goTOListClick()">
+          <i class="fa fa-list-ul" aria-hidden="true"></i> Go to List</button>
+    </div>
+    
   </div>
 </div>
 <div class="row">
@@ -59,7 +66,7 @@
         <p>
           {{communication.CommunicationDetails}}
         </p>
-
+        <a class="mr15" href="javascript:;" (click)="editComment(communication.Id)"> <i class="fa fa-edit mr5"></i>Edit </a>
       </div>
     </section>
   </div>

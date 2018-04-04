@@ -36,5 +36,15 @@ export class CommunicationDashboardComponent implements OnInit {
       this._notify.error(err.Result);
     });
   }
+  editComment(id) {
+    this.router.navigate([`case/${this.CaseId}/communication/${id}`]);
+  }
 
+  goTOListClick(){
+    this.router.navigate([`case/${this.CaseId}/communication`]);
+  }
+
+  addClick() {
+    this.router.navigate([`case/${this.CaseId}/communication/new`]);    
+  }
 }
