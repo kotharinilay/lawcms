@@ -16,9 +16,6 @@ export class ContactDashboardComponent implements OnInit {
   newlyAddedData = [];
   public page: Page = new Page();
   filterModel: FilterModel[] = [{
-    columnName: 'ContactType',
-    value: ''
-  }, {
     columnName: 'Title',
     value: ''
   },];
@@ -60,8 +57,10 @@ export class ContactDashboardComponent implements OnInit {
         filterColumnString += model.columnName + ",";
         searchValue += model.value + ",";
       });
-      filterColumnString = filterColumnString.substring(0, filterColumnString.length - 1);
-      searchValue = searchValue.substring(0, searchValue.length - 1);
+      filterColumnString += "FirstName,"
+      filterColumnString += "LastName"
+      searchValue += filter[0].value + ",";
+      searchValue += filter[0].value;
       this.getDataSource(filterColumnString, searchValue);
     } else {
       this.getDataSource();
@@ -98,10 +97,12 @@ export class ContactDashboardComponent implements OnInit {
 
   getNewlyAddedData() {
     this.rows = [];
+    this.contactType = contactDashboardTab[0];
+    this.page.size = 10;
+    this.page.totalElements = 10;
+    this.page.totalPages = 1;
+    this.page.pageNumber = 0;
     this.contactService.getNewlyAddedContacts().subscribe(res => {
-      this.page.totalElements = 10;
-      this.page.totalPages = 1;
-      this.page.pageNumber = 1;
       this.newlyAddedData = Object.assign([], res);
       this.rows = res;
       this.loadingIndicator = false;

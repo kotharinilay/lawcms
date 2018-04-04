@@ -108,8 +108,8 @@
               [data]="rows" [showAction]="false"></app-contact-grid>
           </div>
           <div class=tab-pane id='other'>
-            <app-contact-grid class="p10" [page]="page" *ngIf="contactType=== 'Other'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
-              [cType]="contactType" (getPageData)="setPage($event)" [data]="rows" [showAction]="false"></app-contact-grid>
+            <app-contact-grid class="p10" [page]="page" [filterModel]="filterModel" *ngIf="contactType=== 'Other'" [loadingIndicator]="loadingIndicator" (onSortChange)="onSort($event)"
+              [cType]="contactType" (getPageData)="setPage($event)" (onFilter)="onFilter($event)" [data]="rows" [showAction]="false"></app-contact-grid>
           </div>
         </div>
       </div>

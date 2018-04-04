@@ -267,7 +267,6 @@ export class CaseService {
   searchAssociateName(term: string) {
     return this.httpService.get(`Contact/GetAssociates?search=${term}`).map((res: any) => {
       if (res.Success) {
-        debugger
         return res.Result;
       }
       throw 'We are facing some issue with server, Plesae try after some time.';

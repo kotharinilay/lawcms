@@ -6,6 +6,7 @@ import { Page, Sorting, FilterModel } from '../../../models/page';
 import { Overlay } from 'ngx-modialog';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
 import swal from 'sweetalert2'
+import { contactDashboardTab } from 'app/shared/constants';
 @Component({
   selector: 'app-contact-grid',
   templateUrl: './contact-grid.component.html'
@@ -31,6 +32,11 @@ export class ContactGridComponent implements OnInit {
   }
 
   onSort(event) {
+    if (this.cType === contactDashboardTab[0]) {
+      event.sorts[0].dir = undefined;
+      return false;
+    }
+    // event.sorts[0].prop === "ContactType" &&
     this.onSortChange.emit(event);
   }
 
