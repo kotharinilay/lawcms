@@ -74,3 +74,7 @@
 }
 .inValidField {border-color: red;}
 .req {color: red;}
+.custom-sort ~ .sort-btn{ float: right !important; position: relative !important;  top: -48px !important; }
+.custom-sort label {
+    cursor: pointer;
+}
