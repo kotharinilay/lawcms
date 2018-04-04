@@ -51,8 +51,8 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="Description">Description</label>
-          <input type="text" maxlength="250" class="form-control" [(ngModel)]="model.Description" name="Description" id="Description"
-            #Description="ngModel" />
+          <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description"
+            #Description="ngModel"></textarea>
         </div>
       </div>
       <div class="col-sm-6">

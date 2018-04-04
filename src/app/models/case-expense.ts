@@ -3,10 +3,10 @@ export class CaseExpense {
     ExpenseName: string;
     ExpenseDate: Date;
     Category: string;
-    Description: number;
+    Description: string;
     Amount: number;
-    AssociateContactId: string;
-    BillDocument: number;
+    AssociateContactId: number;
+    BillDocument: string;
     CaseId: number;
     UpdatedTime: Date;
     IsActive: boolean;

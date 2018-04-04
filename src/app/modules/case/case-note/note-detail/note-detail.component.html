@@ -13,7 +13,9 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="NoteDate">Note Date <span class="req">*</span></label>
+                  <label for="NoteDate">Note Date
+                    <span class="req">*</span>
+                  </label>
                   <input class="form-control" [(ngModel)]="model.NoteDate" ngui-datetime-picker date-only="true" #NoteDate="ngModel" required
                     name="NoteDate" id="NoteDate" [class.inValidField]="noteForm.submitted && !NoteDate.CommunicateToId" />
                   <label *ngIf="noteForm.submitted && !NoteDate.valid" class="err-label">
@@ -23,7 +25,9 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="NotesById">Notes By <span class="req">*</span></label>
+                  <label for="NotesById">Notes By
+                    <span class="req">*</span>
+                  </label>
                   <input ngui-auto-complete class="form-control" [(ngModel)]="NotesById" name="NotesById" [source]="contactSearch.bind(this)"
                     min-chars="2" [list-formatter]="autocompleListFormatter" [accept-user-input]="false" (valueChanged)="onSelectNotesBy($event)"
                     value-property-name="Id" display-property-name="Name" [class.inValidField]="noteForm.submitted && !model.NotesBy"
@@ -46,8 +50,8 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Description">Description</label>
-                  <input type="text" id="Description" name="Description" maxlength="250" class="form-control" [(ngModel)]="model.Description"
-                    #Description="ngModel" />
+                  <textarea class="form-control" rows="3" id="Description" name="Description" maxlength="250" [(ngModel)]="model.Description"
+                    #Description="ngModel"></textarea>
                 </div>
               </div>
             </div>
