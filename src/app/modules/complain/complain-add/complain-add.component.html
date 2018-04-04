@@ -51,6 +51,20 @@
                   </label>
                 </div>
               </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ComplainStatus">Status</label>
+                  <select class="form-control" [(ngModel)]="model.ComplainStatus" #ComplainStatus="ngModel" id="ComplainStatus" name="ComplainStatus">
+                    <option *ngFor="let status of ComplainStatusDropDown" value={{status.Id}}>
+                      {{status.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="Description">Description
@@ -63,19 +77,6 @@
                   <label *ngIf="complainForm.submitted && !Description.valid" class="err-label">
                     Please enter Description.
                   </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="ComplainStatus">Status</label>
-                  <select class="form-control" [(ngModel)]="model.ComplainStatus" #ComplainStatus="ngModel" id="ComplainStatus" name="ComplainStatus">
-                    <option *ngFor="let status of ComplainStatusDropDown" value={{status.Id}}>
-                      {{status.Name}}
-                    </option>
-                  </select>
                 </div>
               </div>
               <div class="col-sm-6">

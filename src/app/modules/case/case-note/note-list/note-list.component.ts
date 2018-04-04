@@ -45,4 +45,7 @@ export class NoteListComponent implements OnInit {
     }
   }
 
+  createNewNote() {
+    this.router.navigate([`/case/${this.CaseId}/note/new`]);
+  }
 }

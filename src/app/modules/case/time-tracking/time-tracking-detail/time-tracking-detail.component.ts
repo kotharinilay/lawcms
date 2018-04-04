@@ -6,6 +6,7 @@ import { DropDownModel } from 'app/models/dropDownModel';
 import { Observable } from 'rxjs/Observable';
 import { NotificationService } from 'app/shared/services/notification.service';
 import { CaseService } from 'app/modules/case/case.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-time-tracking-detail',
@@ -17,8 +18,11 @@ export class TimeTrackingDetailComponent implements OnInit {
   paramId: string;
   AssociatesDropDown: Array<DropDownModel> = Associates;
   constructor(private route: ActivatedRoute, private _notify: NotificationService, private caseService: CaseService,
-    private router: Router) { }
-
+    private router: Router, private _sanitizer: DomSanitizer) { }
+  autocompleListFormatter = (data: any) => {
+    let html = `<span>${data.Name} </span>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
+  }
   ngOnInit() {
     this.route.params.subscribe(param => this.paramId = param['id']);
     this.route.params.subscribe(param => this.model.CaseId = param['caseId']);
@@ -35,7 +39,6 @@ export class TimeTrackingDetailComponent implements OnInit {
   }
 
   taskCategorySearch(term) {
-    console.log(TaskCategory.filter(x => x.Name.indexOf(term) > -1));
     return Observable.of(TaskCategory.filter(x => x.Name.indexOf(term) > -1));
   }
 

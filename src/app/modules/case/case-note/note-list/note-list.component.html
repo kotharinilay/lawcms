@@ -1,8 +1,12 @@
 <div class=panel>
   <div class="panel-heading border">
     <span class="pull-left">
-      <b>Communication</b>
+      <b>Notes</b>
     </span>
+    <div class="pb30">
+      <button type="button" class="btn btn-create pull-right" kendoButton (click)="createNewNote()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Create New</button>
+    </div>
   </div>
   <div class=panel-body>
     <ngx-datatable class="bootstrap" [rows]="rows" [headerHeight]="40" [footerHeight]="40" [loadingIndicator]="loadingIndicator"

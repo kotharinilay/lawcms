@@ -10,13 +10,16 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="CaseId">Case</label>
-                  <select class="form-control" [(ngModel)]="model.CaseId" id="CaseId" name="CaseId" #CaseId="ngModel">
-                    <option [value]='undefined'>Select Case</option>
+                  <label for="CaseId">Case <span class="req">*</span></label>
+                  <select class="form-control" [(ngModel)]="model.CaseId" [class.inValidField]="caseExpenseForm.submitted && !model.CaseId" id="CaseId" required name="CaseId" #CaseId="ngModel">
+                    <option value="">Select Case</option>
                     <option *ngFor="let case of cases" value={{case.Id}}>
                       {{case.CaseNo}}
                     </option>
                   </select>
+                  <label *ngIf="caseExpenseForm.submitted && !model.CaseId" class="err-label">
+                    Please select case
+                  </label>
                 </div>
               </div>
               <div class="col-sm-6">
@@ -36,20 +39,27 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="ExpenseDate">Expense Date</label>
-                  <input class="form-control" [(ngModel)]="model.ExpenseDate" ngui-datetime-picker date-only="true" name="ExpenseDate" id="ExpenseDate"
-                    #OpenDate="ngModel" />
+                  <label for="ExpenseDate">Expense Date <span class="req">*</span></label>
+                  <input class="form-control" [(ngModel)]="model.ExpenseDate" required ngui-datetime-picker date-only="true" name="ExpenseDate"
+                    id="ExpenseDate" #OpenDate="ngModel"  [class.inValidField]="caseExpenseForm.submitted && !model.ExpenseDate"/>
+                  <label *ngIf="caseExpenseForm.submitted && !model.ExpenseDate" class="err-label">
+                    Please select expense date
+                  </label>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="Category">Category</label>
-                  <select class="form-control" [(ngModel)]="model.Category" id="Category" name="Category" #Category="ngModel">
-                    <option [value]='undefined'>Select Expense Category</option>
+                  <label for="Category">Category <span class="req">*</span></label>
+                  <select class="form-control" [(ngModel)]="model.Category" required id="Category" name="Category" #Category="ngModel"
+                  [class.inValidField]="caseExpenseForm.submitted && !model.Category">
+                    <option value=''>Select Expense Category</option>
                     <option *ngFor="let category of CategoryDropDown" value={{category.Id}}>
                       {{category.ExpenseTypeName}}
                     </option>
                   </select>
+                  <label *ngIf="caseExpenseForm.submitted && !model.Category" class="err-label">
+                    Please select Category
+                  </label>
                 </div>
               </div>
             </div>
