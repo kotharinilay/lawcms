@@ -50,7 +50,7 @@ import { NavbarComponent } from './containers/layout/components/navbar/navbar.co
 import { FooterComponent } from 'app/containers/layout/components/footer/footer.component';
 import { HeaderComponent } from 'app/containers/layout/components/header/header.component';
 import { SuggestionComponent } from './components/suggestion/suggestion.component';
-
+import { PopoverModule } from 'ngx-popover';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +74,8 @@ import { SuggestionComponent } from './components/suggestion/suggestion.componen
     PerfectScrollbarModule,
     NgxDatatableModule,
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
+    PopoverModule
   ],
   providers: [
     CommonService,
